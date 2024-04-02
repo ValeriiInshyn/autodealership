@@ -1,0 +1,166 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "AutoDealershipContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": true,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "OLTP_Seed",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[AutoDealerships]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Brands]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CarBodyTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CarComfortOptions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CarDelivery]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CarMultimediaOptions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Cars]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CarSafetyOptions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CarSales]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[CarTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Cities]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Colors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ComfortOptions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Conditions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Countries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Customers]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DealershipCars]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[DealershipCarStatuses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Distributors]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Employees]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Engines]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EngineTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[GearBoxTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LeaseProposalConditions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LeaseProposals]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Leases]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LeaseTypes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[MultimediaOptions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PaymentMethods]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SafetyOptions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SaleStatus]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "(localdb)\\MSSQLLocalDB.AutoDealership",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}
