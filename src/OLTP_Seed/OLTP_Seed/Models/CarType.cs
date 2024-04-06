@@ -14,6 +14,4 @@ public partial class CarType
     public DateOnly? CreateDate { get; set; }
 
     public DateOnly? UpdateDate { get; set; }
-
-    public virtual ICollection<Car> Cars { get; set; } = new List<Car>();
 }

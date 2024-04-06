@@ -7,13 +7,13 @@ namespace OLTP_Seed.Models;
 
 public partial class LeaseProposalCondition
 {
+    public int Id { get; set; }
+
     public int LeaseProposalId { get; set; }
 
     public int ConditionId { get; set; }
 
     public bool Value { get; set; }
-
-    public int Id { get; set; }
 
     public DateOnly? CreateDate { get; set; }
 

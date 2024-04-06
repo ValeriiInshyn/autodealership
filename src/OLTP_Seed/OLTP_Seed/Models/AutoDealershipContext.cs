@@ -81,12 +81,14 @@ public partial class AutoDealershipContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AutoDealership;Integrated Security=True");
+        => optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AutoDealership;Integrated Security=True;Encrypt=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AutoDealership>(entity =>
         {
+            entity.HasIndex(e => e.CityId, "IX_AutoDealerships_CityId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name)
                 .IsRequired()
@@ -105,6 +107,8 @@ public partial class AutoDealershipContext : DbContext
 
         modelBuilder.Entity<Brand>(entity =>
         {
+            entity.HasIndex(e => e.CountryId, "IX_Brands_CountryId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name)
                 .IsRequired()
@@ -119,6 +123,18 @@ public partial class AutoDealershipContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Cars__3214EC07FD549B2F");
 
+            entity.HasIndex(e => e.BodyTypeId, "IX_Cars_BodyTypeId");
+
+            entity.HasIndex(e => e.BrandId, "IX_Cars_BrandId");
+
+            entity.HasIndex(e => e.CarTypeId, "IX_Cars_CarTypeId");
+
+            entity.HasIndex(e => e.ColorId, "IX_Cars_ColorId");
+
+            entity.HasIndex(e => e.EngineId, "IX_Cars_EngineId");
+
+            entity.HasIndex(e => e.GearBoxId, "IX_Cars_GearBoxId");
+
             entity.Property(e => e.Generation).HasMaxLength(50);
             entity.Property(e => e.Model).HasMaxLength(50);
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
@@ -131,11 +147,6 @@ public partial class AutoDealershipContext : DbContext
             entity.HasOne(d => d.Brand).WithMany(p => p.Cars)
                 .HasForeignKey(d => d.BrandId)
                 .HasConstraintName("FK_Cars_Brands");
-
-            entity.HasOne(d => d.CarType).WithMany(p => p.Cars)
-                .HasForeignKey(d => d.CarTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Cars_CarTypes");
 
             entity.HasOne(d => d.Color).WithMany(p => p.Cars)
                 .HasForeignKey(d => d.ColorId)
@@ -164,6 +175,8 @@ public partial class AutoDealershipContext : DbContext
         {
             entity.HasKey(e => new { e.CarId, e.ComfortOptionId }).HasName("PK__CarComfo__812AFC7B50B373A4");
 
+            entity.HasIndex(e => e.ComfortOptionId, "IX_CarComfortOptions_ComfortOptionId");
+
             entity.HasOne(d => d.Car).WithMany(p => p.CarComfortOptions)
                 .HasForeignKey(d => d.CarId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -180,6 +193,10 @@ public partial class AutoDealershipContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__CarDeliv__626D8FCE5A2DD524");
 
             entity.ToTable("CarDelivery");
+
+            entity.HasIndex(e => e.DistributorId, "IX_CarDelivery_DistributorId");
+
+            entity.HasIndex(e => e.SaleId, "IX_CarDelivery_SaleId");
 
             entity.Property(e => e.DeliveryCost).HasColumnType("decimal(10, 2)");
 
@@ -198,6 +215,8 @@ public partial class AutoDealershipContext : DbContext
         {
             entity.HasKey(e => new { e.CarId, e.MultimediaOptionId }).HasName("PK__CarMulti__9D58B07C816F4ABB");
 
+            entity.HasIndex(e => e.MultimediaOptionId, "IX_CarMultimediaOptions_MultimediaOptionId");
+
             entity.HasOne(d => d.Car).WithMany(p => p.CarMultimediaOptions)
                 .HasForeignKey(d => d.CarId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -213,6 +232,8 @@ public partial class AutoDealershipContext : DbContext
         {
             entity.HasKey(e => new { e.CarId, e.SafetyOptionId }).HasName("PK__CarSafet__7F73AA4C10FA322A");
 
+            entity.HasIndex(e => e.SafetyOptionId, "IX_CarSafetyOptions_SafetyOptionId");
+
             entity.HasOne(d => d.Car).WithMany(p => p.CarSafetyOptions)
                 .HasForeignKey(d => d.CarId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -227,6 +248,16 @@ public partial class AutoDealershipContext : DbContext
         modelBuilder.Entity<CarSale>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__CarSales__1EE3C3FFD470F4B6");
+
+            entity.HasIndex(e => e.CustomerId, "IX_CarSales_CustomerId");
+
+            entity.HasIndex(e => e.DealershipCarId, "IX_CarSales_DealershipCarId");
+
+            entity.HasIndex(e => e.EmployeeId, "IX_CarSales_EmployeeId");
+
+            entity.HasIndex(e => e.PaymentMethodId, "IX_CarSales_PaymentMethodId");
+
+            entity.HasIndex(e => e.StatusId, "IX_CarSales_StatusId");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.CarSales)
                 .HasForeignKey(d => d.CustomerId)
@@ -261,6 +292,8 @@ public partial class AutoDealershipContext : DbContext
 
         modelBuilder.Entity<City>(entity =>
         {
+            entity.HasIndex(e => e.CountryId, "IX_Cities_CountryId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name)
                 .IsRequired()
@@ -334,6 +367,10 @@ public partial class AutoDealershipContext : DbContext
 
         modelBuilder.Entity<DealershipCar>(entity =>
         {
+            entity.HasIndex(e => e.CarStatusId, "IX_DealershipCars_CarStatusId");
+
+            entity.HasIndex(e => e.DealershipId, "IX_DealershipCars_DealershipId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.CarStatus).WithMany(p => p.DealershipCars)
@@ -366,6 +403,8 @@ public partial class AutoDealershipContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
+            entity.HasIndex(e => e.DealershipId, "IX_Employees_DealershipId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Email)
                 .IsRequired()
@@ -393,6 +432,10 @@ public partial class AutoDealershipContext : DbContext
         modelBuilder.Entity<Engine>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Engines__3214EC0762EC2A83");
+
+            entity.HasIndex(e => e.BrandId, "IX_Engines_BrandId");
+
+            entity.HasIndex(e => e.EngineTypeId, "IX_Engines_EngineTypeId");
 
             entity.Property(e => e.EngineVolume).HasColumnType("decimal(5, 2)");
 
@@ -429,6 +472,14 @@ public partial class AutoDealershipContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Lease__21FA58C149035493");
 
+            entity.HasIndex(e => e.CustomerId, "IX_Leases_CustomerId");
+
+            entity.HasIndex(e => e.DealershipCarId, "IX_Leases_DealershipCarId");
+
+            entity.HasIndex(e => e.EmployeeId, "IX_Leases_EmployeeId");
+
+            entity.HasIndex(e => e.ProposalId, "IX_Leases_ProposalId");
+
             entity.Property(e => e.LeaseUniqueNumber).HasMaxLength(20);
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
 
@@ -453,6 +504,8 @@ public partial class AutoDealershipContext : DbContext
 
         modelBuilder.Entity<LeaseProposal>(entity =>
         {
+            entity.HasIndex(e => e.LeaseTypeId, "IX_LeaseProposals_LeaseTypeId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.MonthlyPayment).HasColumnType("decimal(10, 2)");
 
@@ -464,6 +517,10 @@ public partial class AutoDealershipContext : DbContext
 
         modelBuilder.Entity<LeaseProposalCondition>(entity =>
         {
+            entity.HasIndex(e => e.ConditionId, "IX_LeaseProposalConditions_ConditionId");
+
+            entity.HasIndex(e => e.LeaseProposalId, "IX_LeaseProposalConditions_LeaseProposalId");
+
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.Condition).WithMany(p => p.LeaseProposalConditions)

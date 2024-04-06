@@ -7,9 +7,9 @@ namespace OLTP_Seed.Models;
 
 public partial class EngineType
 {
-    public string Name { get; set; }
-
     public int Id { get; set; }
+
+    public string Name { get; set; }
 
     public DateOnly? CreateDate { get; set; }
 

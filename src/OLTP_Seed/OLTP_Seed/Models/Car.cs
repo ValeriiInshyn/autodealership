@@ -63,8 +63,6 @@ public partial class Car
 
     public virtual ICollection<CarSafetyOption> CarSafetyOptions { get; set; } = new List<CarSafetyOption>();
 
-    public virtual CarType CarType { get; set; }
-
     public virtual Color Color { get; set; }
 
     public virtual Engine Engine { get; set; }

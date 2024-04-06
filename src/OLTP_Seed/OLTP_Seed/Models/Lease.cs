@@ -7,11 +7,11 @@ namespace OLTP_Seed.Models;
 
 public partial class Lease
 {
+    public int Id { get; set; }
+
     public int? EmployeeId { get; set; }
 
     public int? ProposalId { get; set; }
-
-    public int Id { get; set; }
 
     public int CustomerId { get; set; }
 

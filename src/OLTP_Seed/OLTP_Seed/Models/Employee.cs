@@ -21,6 +21,8 @@ public partial class Employee
 
     public DateOnly? CreateDate { get; set; }
 
+    public DateOnly? UpdateDate { get; set; }
+
     public virtual ICollection<CarSale> CarSales { get; set; } = new List<CarSale>();
 
     public virtual AutoDealership Dealership { get; set; }
