@@ -33,7 +33,7 @@ namespace OLTP_Seed.Generators
             return $"{random.Next(100, 999)}-{random.Next(100, 999)}-{random.Next(1000, 9999)}";
         }
 
-        private static string GenerateRandomAddress()
+        public static string GenerateRandomAddress()
         {
             return $"{random.Next(100, 999)}-{GetRandomStreet()}-{random.Next(1, 100)}-{GetRandomCity()}-{GetRandomState()}-{random.Next(10000, 99999)}";
         }

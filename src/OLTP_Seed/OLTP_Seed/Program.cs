@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OLTP_Seed.Generators;
 using OLTP_Seed.Helpers;
 using OLTP_Seed.Models;
+using System;
 using System.Globalization;
 using CsvReader = OLTP_Seed.Helpers.CsvReader;
 
@@ -298,46 +299,7 @@ using (var context = new AutoDealershipContext())
     //    }
     //    #endregion
 
-    //#region CarsInit
 
-    //var distinctCars = carSalesFromCSV
-    //    .GroupBy(c => new { c.Make, c.Model, c.Year, c.Body,c.Color })
-    //    .Select(g => g.First())
-    //    .ToList();
-
-    //i = 0;
-    //foreach (var car in distinctCars)
-    //{
-    //    var carType = context.CarTypes.FirstOrDefault(e => e.Name == car.Body);
-    //    var bodyType = context.CarBodyTypes.FirstOrDefault(e => e.Name == car.Body);
-    //    var brand = context.Brands.FirstOrDefault(e => e.Name == car.Make);
-    //    context.Cars.Add(new Car()
-    //    {
-    //        Id = ++i,
-    //        CarTypeId = carType.Id,
-    //        CarComfortOptions = new List<CarComfortOption>(),
-    //        BodyType = bodyType,
-    //        BodyTypeId = bodyType.Id,
-    //        Brand = brand,
-    //        BrandId = brand.Id,
-    //        CarMultimediaOptions = new List<CarMultimediaOption>(),
-    //        CarSafetyOptions = new List<CarSafetyOption>(),
-    //        Color = context.Colors.FirstOrDefault(e => e.Name == car.Color),
-    //        Weight = Random.Shared.Next(1500, 5000),
-    //        MaxSpeed = Random.Shared.Next(220, 350),
-    //        GearsCount = Random.Shared.Next(6, 7),
-    //        WheelsCount = 4,
-    //        Model = car.Model,
-    //        Price = int.Parse(car.Mmr),
-    //        Generation = Random.Shared.Next(1, 4).ToString(),
-    //        Width = 1.5 + Random.Shared.NextDouble() / 10,
-    //        Length = 4 + Random.Shared.NextDouble(),
-    //        Height = 1.2 + Random.Shared.NextDouble(),
-    //        FuelTankCapacity = Random.Shared.Next(40, 60)
-    //    });
-    //}
-
-    //#endregion
 
 
     //#region SaleStatusInit
@@ -560,27 +522,262 @@ using (var context = new AutoDealershipContext())
     //}
     //#endregion
 
-    #region MyRegion
+    //#region MyRegion
 
-    List<string> conditionNames = new List<string> { "Minimum Credit Score", "Maximum Mileage", "Maximum Term Length", "Down Payment Percentage", "Interest Rate" };
-    var conditionsCsv = new List<Condition>();
-   
+    //List<string> conditionNames = new List<string> { "Minimum Credit Score", "Maximum Mileage", "Maximum Term Length", "Down Payment Percentage", "Interest Rate" };
+    //var conditionsCsv = new List<Condition>();
 
-    for (int i = 0; i < conditionNames.Count; i++)
+
+    //for (int i = 0; i < conditionNames.Count; i++)
+    //{
+    //    conditionsCsv.Add(new Condition()
+    //    {
+    //        Id = i + 1,
+    //        Name = conditionNames[i],
+    //        CreateDate = DateOnly.FromDateTime(DateTime.Now),
+    //        UpdateDate = DateOnly.FromDateTime(DateTime.Now)
+    //    });
+    //}
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\conditions.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(conditionsCsv);
+    //}
+    //#endregion
+
+    //#region LeaseProposalInit
+
+    //List<LeaseProposal> leaseProposals = new List<LeaseProposal>();
+    //List<LeaseProposalCondition> proposalConditions = new List<LeaseProposalCondition>();
+
+    //for (int i = 1; i <= 2000; i++)
+    //{
+    //    LeaseProposal proposal = LeaseProposalGenerator.GenerateLeaseProposal(i);
+    //    leaseProposals.Add(proposal);
+
+    //    // Generate conditions for each proposal
+    //    for (int j = 1; j <= 3; j++) // Assuming each proposal has 3 conditions
+    //    {
+    //        proposalConditions.Add(LeaseProposalGenerator.GenerateLeaseProposalCondition(proposalConditions.Count + 1, proposal.Id));
+    //    }
+    //}
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\leaseproposals.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(leaseProposals);
+    //}
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\leaseproposalconditions.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(proposalConditions);
+    //}
+
+    //#endregion
+
+    //#region CarsInit
+
+    //var distinctCars = carSalesFromCSV
+    //    .GroupBy(c => new { c.Make, c.Model, c.Year, c.Body, c.Color })
+    //    .Select(g => g.First())
+    //    .ToList();
+    //var carsCsv = new List<Car>();
+    //int i = 0;
+    //foreach (var car in distinctCars)
+    //{
+    //    int price = 0;
+    //    bool flag = int.TryParse(car.Mmr, out price);
+    //    var carType = context.CarTypes.FirstOrDefault(e => e.Name == car.Body);
+    //    var bodyType = context.CarBodyTypes.FirstOrDefault(e => e.Name == car.Body);
+    //    var brand = context.Brands.FirstOrDefault(e => e.Name == car.Make);
+    //    if (brand is not null && bodyType is not null && carType is not null)
+    //        carsCsv.Add(new Car()
+    //        {
+    //            Id = ++i,
+    //            CarTypeId = carType.Id,
+    //            Doors = 4,
+    //            Seats = 5,
+    //            Year = car.Year,
+    //            CarComfortOptions = new List<CarComfortOption>(),
+    //            BodyType = bodyType,
+    //            BodyTypeId = bodyType.Id,
+    //            Brand = brand,
+    //            BrandId = brand.Id,
+    //            CarMultimediaOptions = new List<CarMultimediaOption>(),
+    //            CarSafetyOptions = new List<CarSafetyOption>(),
+    //            Color = context.Colors.FirstOrDefault(e => e.Name == car.Color) ?? context.Colors.FirstOrDefault(),
+    //            Weight = Random.Shared.Next(1500, 5000),
+    //            MaxSpeed = Random.Shared.Next(220, 350),
+    //            GearsCount = Random.Shared.Next(6, 7),
+    //            WheelsCount = 4,
+    //            Model = car.Model,
+    //            Price = flag ? price : 40000,
+    //            Generation = Random.Shared.Next(1, 4).ToString(),
+    //            Width = 1.5 + Random.Shared.NextDouble() / 10,
+    //            Length = 4 + Random.Shared.NextDouble(),
+    //            Height = 1.2 + Random.Shared.NextDouble(),
+    //            FuelTankCapacity = Random.Shared.Next(40, 60),
+    //            GearBoxId = (context.GearBoxTypes.FirstOrDefault(e => e.Name == car.Transmissive) ?? context.GearBoxTypes.FirstOrDefault()).Id,
+    //            CreateDate = DateOnly.FromDateTime(DateTime.Now),
+    //            UpdateDate = DateOnly.FromDateTime(DateTime.Now)
+    //        });
+    //}
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\cars.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(carsCsv);
+    //}
+    //#endregion
+
+    //#region CarsInit
+
+
+    //var dealershipcarsCsv = new List<DealershipCar>();
+    //foreach (var car in context.Cars.ToList())
+    //{
+    //    dealershipcarsCsv.Add(new DealershipCar
+    //    {
+    //        Id = car.Id,
+    //        CarsCount = 1,
+    //        CarId = car.Id,
+    //        CarStatusId = 2,
+    //        DealershipId = Random.Shared.Next(1, context.AutoDealerships.Count()),
+    //        CreateDate = DateOnly.FromDateTime(DateTime.Now),
+    //        UpdateDate = DateOnly.FromDateTime(DateTime.Now)
+    //    });
+    //}
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\dealershipcars.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(dealershipcarsCsv);
+    //}
+    //#endregion
+
+    //#region CarSalesInit
+
+    //var carSalesCsv = new List<CarSale>();
+    //var dealershipCars = context.DealershipCars.ToList();
+    //int i = 0;
+
+    //foreach (var car in dealershipCars)
+    //{
+    //    DateTime currentDate = DateTime.Today;
+
+    //    // Get a random number of days between 0 and 3 years (365 days/year)
+    //    int randomDays = Random.Shared.Next(0, 3 * 365);
+
+    //    // Subtract the random number of days from the current date to get a random date in the last 3 years
+    //    DateTime randomDate = currentDate.AddDays(-randomDays);
+    //    var employeeId = car.DealershipId;
+    //    carSalesCsv.Add(new CarSale()
+    //    {
+    //        Id = ++i,
+    //        CustomerId = ++i,
+    //        DealershipCarId = car.Id,
+    //        EmployeeId = employeeId,
+    //        SaleDate = DateOnly.FromDateTime(randomDate),
+    //        StatusId = 1,
+    //        ExpectedDeliveryDate = DateOnly.FromDateTime(randomDate),
+    //        PaymentMethodId = 1,
+    //        CreateDate = DateOnly.FromDateTime(DateTime.Now),
+    //        UpdateDate = DateOnly.FromDateTime(DateTime.Now)
+    //    });
+    //}
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\carsales.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(carSalesCsv);
+    //}
+    //#endregion
+
+    //#region DistributorsInit
+
+    //int i = 0;
+    //var brands = context.Brands.ToList();
+    //var distributorsCsv = new List<Distributor>();
+
+    //foreach (var brand in brands)
+    //{
+    //    distributorsCsv.Add(new Distributor
+    //    {
+    //        Id = brand.Id,
+    //        DistributorName = brand.Name,
+    //        DistributorAddress = CustomerGenerator.GenerateRandomAddress(),
+    //        DistributorIdentifier = Guid.NewGuid().ToString(),
+    //        CreateDate = DateOnly.FromDateTime(DateTime.Now),
+    //        UpdateDate = DateOnly.FromDateTime(DateTime.Now)
+    //    });
+    //}
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\distributors.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(distributorsCsv);
+    //}
+    //#endregion
+
+    //#region CarDeliveryInit
+
+    //int i = 0;
+    //var carSales = context.CarSales.Include(e => e.DealershipCar).ToList();
+    //var carDeliveryCsv = new List<CarDelivery>();
+
+    //foreach (var carSale in carSales)
+    //{
+    //    try
+    //    {
+    //        var car = context.Cars.Include(e => e.Brand).FirstOrDefault(e=> e.Id == carSale.DealershipCar.CarId);
+    //        carDeliveryCsv.Add(new CarDelivery
+    //        {
+    //            Id = ++i,
+    //            DeliveryCost = car.Price / 20,
+    //            DeliveryDate = carSale.SaleDate,
+    //            DistributorId = car.Brand.Id,
+    //            SaleId = carSale.Id,
+    //            CreateDate = DateOnly.FromDateTime(DateTime.Now),
+    //            UpdateDate = DateOnly.FromDateTime(DateTime.Now)
+    //        });
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        continue;
+    //    }
+
+    //}
+
+    //using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\cardeliveries.csv"))
+
+    //using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+    //{
+    //    csv.WriteRecords(carDeliveryCsv);
+    //}
+
+    //#endregion
+
+    #region LeasesInit
+
+    var leasesCsv = new List<Lease>();
+
+  
+    int maxCustomerId = 30000; // Assuming there are 100 customers
+    int maxDealershipCarId = 10000; // Assuming there are 500 dealership cars
+
+    for (int i = 1; i <= 2000; i++)
     {
-        conditionsCsv.Add(new Condition()
-        {
-            Id = i + 1,
-            Name = conditionNames[i],
-            CreateDate = DateOnly.FromDateTime(DateTime.Now),
-            UpdateDate = DateOnly.FromDateTime(DateTime.Now)
-        });
+        leasesCsv.Add(LeaseGenerator.GenerateLease(i, maxCustomerId, maxDealershipCarId));
     }
-    using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\conditions.csv"))
+
+    using (var writer = new StreamWriter(@"C:\\Users\\Work\\Desktop\\csvFiles\\leases.csv"))
 
     using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
     {
-        csv.WriteRecords(conditionsCsv);
+        csv.WriteRecords(leasesCsv);
     }
+
     #endregion
 }
