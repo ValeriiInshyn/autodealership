@@ -1,0 +1,85 @@
+@page "/cars"
+
+<PageTitle>Cars</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Cars" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
+                </RadzenSplitButton>
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" aria-label="Search by all string columns" />
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@cars" TItem="CourseWork.Models.AutoDealership.Car" RowDoubleClick="@EditRow">
+            <Columns>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="CarTypeId" Title="Car Type Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Doors" Title="Doors">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Seats" Title="Seats">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Year" Title="Year">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Price" Title="Price">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Color.Name" Title="Color">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="CarBodyType.Name" Title="Car Body Type">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Engine" Title="Engine">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Brand.Name" Title="Brand">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Model" Title="Model">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Generation" Title="Generation">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Weight" Title="Weight">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="MaxSpeed" Title="Max Speed">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="GearsCount" Title="Gears Count">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Height" Title="Height">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Width" Title="Width">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="Length" Title="Length">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="GearBoxType.Name" Title="Gear Box Type">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="FuelTankCapacity" Title="Fuel Tank Capacity">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="WheelsCount" Title="Wheels Count">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="CreateDate" Title="Create Date">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Property="UpdateDate" Title="Update Date">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Car" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="car">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, car)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

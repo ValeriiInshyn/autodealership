@@ -1,0 +1,49 @@
+@page "/add-car-multimedia-option"
+
+<PageTitle>Add CarMultimediaOption</PageTitle>
+    <RadzenColumn SizeMD=12>
+        <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save CarMultimediaOption</RadzenAlert>
+        <RadzenTemplateForm TItem="CourseWork.Models.AutoDealership.CarMultimediaOption" Data="@carMultimediaOption" Visible="@(carMultimediaOption != null && canEdit)" Submit="@FormSubmit">
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="Car" Component="Car" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenDropDownDataGrid Data="@carsForCarId" TextProperty="Model" ValueProperty="Id" AllowClear=true
+                         Placeholder="Choose Car" style="display: block; width: 100%" @bind-Value="@carMultimediaOption.CarId" Name="CarId"
+                           />
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="Multimedia Option" Component="MultimediaOption" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenDropDownDataGrid Data="@multimediaOptionsForMultimediaOptionId" TextProperty="OptionName" ValueProperty="Id" AllowClear=true
+                         Placeholder="Choose MultimediaOption" style="display: block; width: 100%" @bind-Value="@carMultimediaOption.MultimediaOptionId" Name="MultimediaOptionId"
+                           />
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="Create Date" Component="CreateDate" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@carMultimediaOption.CreateDate" Name="CreateDate" />
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="Update Date" Component="UpdateDate" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@carMultimediaOption.UpdateDate" Name="UpdateDate" />
+                </RadzenColumn>
+            </RadzenRow>
+          <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
+          </RadzenStack>
+        </RadzenTemplateForm>
+    </RadzenColumn>
+

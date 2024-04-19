@@ -1,0 +1,66 @@
+@inherits LayoutComponentBase
+<RadzenComponents />
+
+<RadzenLayout style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body';">
+    <RadzenHeader>
+        <RadzenRow JustifyContent="JustifyContent.Start" AlignItems="AlignItems.Center" Gap="0">
+            <RadzenColumn Size="5">
+                <RadzenSidebarToggle Click="@SidebarToggleClick"></RadzenSidebarToggle>
+            </RadzenColumn>
+            <RadzenColumn Size="7">
+                <RadzenStack AlignItems="AlignItems.Center" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End"></RadzenStack>
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenHeader>
+    <RadzenBody Expanded="@sidebarExpanded">
+        <RadzenRow class="rz-mx-auto rz-px-4 rz-pt-2 rz-pt-md-4 rz-pt-lg-6 rz-pt-xl-12 rz-pb-2 rz-pb-lg-12" Style="max-width: 1440px;">
+            <RadzenColumn Size="12">
+            @Body
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenBody>
+    <RadzenSidebar Expanded="@sidebarExpanded" style="z-index: 2">
+        <RadzenStack AlignItems="Radzen.AlignItems.Center" class="rz-py-4 rz-py-lg-6" Style="padding: var(--rz-panel-menu-item-padding); border-bottom: var(--rz-panel-menu-item-border);">
+            <RadzenImage Path="images/logo.png"  style="width: 48px; height: 48px;" AlternateText="Application logo"></RadzenImage>
+            <RadzenText Text="CourseWork" TextStyle="Radzen.Blazor.TextStyle.Subtitle1" class="rz-mb-0" style="color: var(--rz-sidebar-color);" />
+        </RadzenStack>
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text="Home" Path="" />
+            <RadzenPanelMenuItem Text="AutoDealerships" Path="auto-dealerships" />
+            <RadzenPanelMenuItem Text="Brands" Path="brands" />
+            <RadzenPanelMenuItem Text="CarBodyTypes" Path="car-body-types" />
+            <RadzenPanelMenuItem Text="CarComfortOptions" Path="car-comfort-options" />
+            <RadzenPanelMenuItem Text="CarDeliveries" Path="car-deliveries" />
+            <RadzenPanelMenuItem Text="CarMultimediaOptions" Path="car-multimedia-options" />
+            <RadzenPanelMenuItem Text="Cars" Path="cars" />
+            <RadzenPanelMenuItem Text="CarSafetyOptions" Path="car-safety-options" />
+            <RadzenPanelMenuItem Text="CarSales" Path="car-sales" />
+            <RadzenPanelMenuItem Text="CarTypes" Path="car-types" />
+            <RadzenPanelMenuItem Text="Cities" Path="cities" />
+            <RadzenPanelMenuItem Text="Colors" Path="colors" />
+            <RadzenPanelMenuItem Text="ComfortOptions" Path="comfort-options" />
+            <RadzenPanelMenuItem Text="Conditions" Path="conditions" />
+            <RadzenPanelMenuItem Text="Countries" Path="countries" />
+            <RadzenPanelMenuItem Text="Customers" Path="customers" />
+            <RadzenPanelMenuItem Text="DealershipCars" Path="dealership-cars" />
+            <RadzenPanelMenuItem Text="DealershipCarStatuses" Path="dealership-car-statuses" />
+            <RadzenPanelMenuItem Text="Distributors" Path="distributors" />
+            <RadzenPanelMenuItem Text="Employees" Path="employees" />
+            <RadzenPanelMenuItem Text="Engines" Path="engines" />
+            <RadzenPanelMenuItem Text="EngineTypes" Path="engine-types" />
+            <RadzenPanelMenuItem Text="GearBoxTypes" Path="gear-box-types" />
+            <RadzenPanelMenuItem Text="LeaseProposalConditions" Path="lease-proposal-conditions" />
+            <RadzenPanelMenuItem Text="LeaseProposals" Path="lease-proposals" />
+            <RadzenPanelMenuItem Text="Leases" Path="leases" />
+            <RadzenPanelMenuItem Text="LeaseTypes" Path="lease-types" />
+            <RadzenPanelMenuItem Text="MultimediaOptions" Path="multimedia-options" />
+            <RadzenPanelMenuItem Text="PaymentMethods" Path="payment-methods" />
+            <RadzenPanelMenuItem Text="SafetyOptions" Path="safety-options" />
+            <RadzenPanelMenuItem Text="SaleStatuses" Path="sale-statuses" />
+        </RadzenPanelMenu>
+        <RadzenStack AlignItems="Radzen.AlignItems.Center" Gap="0" class="rz-py-4 rz-py-lg-6" Style="padding: var(--rz-panel-menu-item-padding);">
+            <RadzenText Text="CourseWork v1.0.0" TextStyle="Radzen.Blazor.TextStyle.Caption" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
+            <RadzenText Text="Copyright Ⓒ 2024" TextStyle="Radzen.Blazor.TextStyle.Caption" class="rz-mb-0" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
+        </RadzenStack>
+    </RadzenSidebar>
+</RadzenLayout>
