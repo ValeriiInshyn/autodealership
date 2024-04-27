@@ -15,6 +15,8 @@ namespace CourseWork.Models.AutoDealership
         [Required]
         public int CarId { get; set; }
 
+        public Car Car { get; set; }
+
         public int? DealershipId { get; set; }
 
         public AutoDealership AutoDealership { get; set; }

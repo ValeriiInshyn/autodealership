@@ -161,6 +161,12 @@ namespace CourseWork.Data
               .HasPrincipalKey(i => i.Id);
 
             builder.Entity<CourseWork.Models.AutoDealership.DealershipCar>()
+              .HasOne(i => i.Car)
+              .WithMany(i => i.DealershipCars)
+              .HasForeignKey(i => i.CarId)
+              .HasPrincipalKey(i => i.Id);
+
+            builder.Entity<CourseWork.Models.AutoDealership.DealershipCar>()
               .HasOne(i => i.DealershipCarStatus)
               .WithMany(i => i.DealershipCars)
               .HasForeignKey(i => i.CarStatusId)

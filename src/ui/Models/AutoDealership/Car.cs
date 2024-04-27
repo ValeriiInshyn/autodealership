@@ -80,5 +80,7 @@ namespace CourseWork.Models.AutoDealership
 
         public ICollection<CarSafetyOption> CarSafetyOptions { get; set; }
 
+        public ICollection<DealershipCar> DealershipCars { get; set; }
+
     }
 }

@@ -1203,6 +1203,7 @@ namespace CourseWork
                               .Include(i => i.CarComfortOptions)
                               .Include(i => i.CarMultimediaOptions)
                               .Include(i => i.CarSafetyOptions)
+                              .Include(i => i.DealershipCars)
                               .FirstOrDefault();
 
             if (itemToDelete == null)
@@ -2720,6 +2721,7 @@ namespace CourseWork
         {
             var items = Context.DealershipCars.AsQueryable();
 
+            items = items.Include(i => i.Car);
             items = items.Include(i => i.DealershipCarStatus);
             items = items.Include(i => i.AutoDealership);
 
@@ -2752,6 +2754,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
+            items = items.Include(i => i.Car);
             items = items.Include(i => i.DealershipCarStatus);
             items = items.Include(i => i.AutoDealership);
  

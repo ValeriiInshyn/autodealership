@@ -15,11 +15,12 @@
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Car Id" Component="CarId" style="width: 100%" />
+                    <RadzenLabel Text="Car" Component="Car" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@dealershipCar.CarId" Name="CarId" />
-                    <RadzenRequiredValidator Component="CarId" Text="CarId is required" />
+                    <RadzenDropDownDataGrid Data="@carsForCarId" TextProperty="Model" ValueProperty="Id" AllowClear=true
+                         Placeholder="Choose Car" style="display: block; width: 100%" @bind-Value="@dealershipCar.CarId" Name="CarId"
+                           />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">

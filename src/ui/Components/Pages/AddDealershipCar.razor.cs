@@ -36,12 +36,16 @@ namespace CourseWork.Components.Pages
         {
             dealershipCar = new CourseWork.Models.AutoDealership.DealershipCar();
 
+            carsForCarId = await AutoDealershipService.GetCars();
+
             autoDealershipsForDealershipId = await AutoDealershipService.GetAutoDealerships();
 
             dealershipCarStatusesForCarStatusId = await AutoDealershipService.GetDealershipCarStatuses();
         }
         protected bool errorVisible;
         protected CourseWork.Models.AutoDealership.DealershipCar dealershipCar;
+
+        protected IEnumerable<CourseWork.Models.AutoDealership.Car> carsForCarId;
 
         protected IEnumerable<CourseWork.Models.AutoDealership.AutoDealership> autoDealershipsForDealershipId;
 

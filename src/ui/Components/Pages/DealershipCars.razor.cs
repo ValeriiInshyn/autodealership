@@ -45,11 +45,11 @@ namespace CourseWork.Components.Pages
 
             await grid0.GoToPage(0);
 
-            dealershipCars = await AutoDealershipService.GetDealershipCars();
+            dealershipCars = await AutoDealershipService.GetDealershipCars(new Query { Expand = "Car,AutoDealership,DealershipCarStatus" });
         }
         protected override async Task OnInitializedAsync()
         {
-            dealershipCars = await AutoDealershipService.GetDealershipCars();
+            dealershipCars = await AutoDealershipService.GetDealershipCars(new Query { Expand = "Car,AutoDealership,DealershipCarStatus" });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -96,7 +96,7 @@ namespace CourseWork.Components.Pages
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "",
+    Expand = "Car,AutoDealership,DealershipCarStatus",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
 }, "DealershipCars");
             }
@@ -107,7 +107,7 @@ namespace CourseWork.Components.Pages
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "",
+    Expand = "Car,AutoDealership,DealershipCarStatus",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
 }, "DealershipCars");
             }
