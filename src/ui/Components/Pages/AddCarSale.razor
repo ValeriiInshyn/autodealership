@@ -1,4 +1,5 @@
 @page "/add-car-sale"
+@using CourseWork.Models.AutoDealership
 
 <PageTitle>Add CarSale</PageTitle>
     <RadzenColumn SizeMD=12>
@@ -9,9 +10,12 @@
                     <RadzenLabel Text="Dealership Car" Component="DealershipCar" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="" ValueProperty="Id" AllowClear=true
-                         Placeholder="Choose DealershipCar" style="display: block; width: 100%" @bind-Value="@carSale.DealershipCarId" Name="DealershipCarId"
-                           />
+                    <RadzenStack Orientation="Orientation.Horizontal">
+                        <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="" ValueProperty="Id" AllowClear=true
+                                                Placeholder="Choose DealershipCar" style="display: block; width: 100%" @bind-Value="@carSale.DealershipCarId" Name="DealershipCarId"/>
+                        <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddDealershipCarClick" Variant="Variant.Flat" />
+                    </RadzenStack>
+                    
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -19,18 +23,12 @@
                     <RadzenLabel Text="Customer" Component="Customer" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenDropDownDataGrid Data="@customersForCustomerId" TextProperty="FirstName" ValueProperty="Id" AllowClear=true
-                         Placeholder="Choose Customer" style="display: block; width: 100%" @bind-Value="@carSale.CustomerId" Name="CustomerId"
-                           />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Sale Date" Component="SaleDate" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@carSale.SaleDate" Name="SaleDate" />
-                    <RadzenRequiredValidator Component="SaleDate" Text="SaleDate is required" />
+                    <RadzenStack Orientation="Orientation.Horizontal">
+                        <RadzenDropDownDataGrid Data="@customersForCustomerId" TextProperty="FirstName" ValueProperty="Id" AllowClear=true
+                                                Placeholder="Choose Customer" style="display: block; width: 100%" @bind-Value="@carSale.CustomerId" Name="CustomerId"/>
+                        <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddCustomerClick" Variant="Variant.Flat" />
+                    </RadzenStack>
+                   
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -56,9 +54,12 @@
                     <RadzenLabel Text="Employee" Component="Employee" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenDropDownDataGrid Data="@employeesForEmployeeId" TextProperty="FirstName" ValueProperty="Id" AllowClear=true
-                         Placeholder="Choose Employee" style="display: block; width: 100%" @bind-Value="@carSale.EmployeeId" Name="EmployeeId"
-                           />
+                    <RadzenStack Orientation="Orientation.Horizontal">
+                        <RadzenDropDownDataGrid Data="@employeesForEmployeeId" TextProperty="FirstName" ValueProperty="Id" AllowClear=true
+                                            Placeholder="Choose Employee" style="display: block; width: 100%" @bind-Value="@carSale.EmployeeId" Name="EmployeeId"/>
+                        <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddEmplyeeClick" Variant="Variant.Flat" />
+                    </RadzenStack>
+                    
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -71,26 +72,9 @@
                            />
                 </RadzenColumn>
             </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Create Date" Component="CreateDate" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@carSale.CreateDate" Name="CreateDate" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Update Date" Component="UpdateDate" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@carSale.UpdateDate" Name="UpdateDate" />
-                </RadzenColumn>
-            </RadzenRow>
           <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
                     <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
                     <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
           </RadzenStack>
         </RadzenTemplateForm>
     </RadzenColumn>
-

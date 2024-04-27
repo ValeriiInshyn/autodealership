@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using DocumentFormat.OpenXml.Presentation;
+using CourseWork.Models.AutoDealership;
 
 namespace CourseWork.Components.Pages
 {
@@ -82,5 +84,24 @@ namespace CourseWork.Components.Pages
 
         protected bool hasChanges = false;
         protected bool canEdit = true;
+        protected async Task AddCustomerClick(MouseEventArgs args)
+        {
+            await DialogService.OpenAsync<AddCustomer>("Add customer");
+            customersForCustomerId = await AutoDealershipService.GetCustomers();
+
+        }
+
+        private async Task AddDealershipCarClick()
+        {
+            await DialogService.OpenAsync<AddDealershipCar>("Add dealership car");
+            dealershipCarsForDealershipCarId = await AutoDealershipService.GetDealershipCars();
+
+        }
+
+        private async Task AddEmplyeeClick()
+        {
+            await DialogService.OpenAsync<AddEmployee>("Add employee");
+            employeesForEmployeeId = await AutoDealershipService.GetEmployees();
+        }
     }
 }

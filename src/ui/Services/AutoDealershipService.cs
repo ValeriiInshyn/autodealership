@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Components;
@@ -11,18 +12,14 @@ using Microsoft.EntityFrameworkCore;
 using Radzen;
 
 using CourseWork.Data;
+using CourseWork.Models.AutoDealership;
 
 namespace CourseWork
 {
+    [SuppressMessage("ReSharper", "MethodHasAsyncOverload")]
     public partial class AutoDealershipService
     {
-        AutoDealershipContext Context
-        {
-           get
-           {
-             return this.context;
-           }
-        }
+        AutoDealershipContext Context => this.context;
 
         private readonly AutoDealershipContext context;
         private readonly NavigationManager navigationManager;
@@ -92,7 +89,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -117,7 +114,7 @@ namespace CourseWork
                               .Where(i => i.Id == id);
 
             items = items.Include(i => i.City);
- 
+
             OnGetAutoDealershipById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -135,13 +132,12 @@ namespace CourseWork
             OnAutoDealershipCreated(autodealership);
 
             var existingItem = Context.AutoDealerships
-                              .Where(i => i.Id == autodealership.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == autodealership.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -164,8 +160,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -179,14 +175,13 @@ namespace CourseWork
             OnAutoDealershipUpdated(autodealership);
 
             var itemToUpdate = Context.AutoDealerships
-                              .Where(i => i.Id == autodealership.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == autodealership.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(autodealership);
             entryToUpdate.State = EntityState.Modified;
@@ -211,7 +206,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnAutoDealershipDeleted(itemToDelete);
@@ -233,7 +228,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportBrandsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/brands/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/brands/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -257,7 +252,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -282,7 +277,7 @@ namespace CourseWork
                               .Where(i => i.Id == id);
 
             items = items.Include(i => i.Country);
- 
+
             OnGetBrandById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -300,13 +295,12 @@ namespace CourseWork
             OnBrandCreated(brand);
 
             var existingItem = Context.Brands
-                              .Where(i => i.Id == brand.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == brand.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -329,8 +323,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -344,14 +338,13 @@ namespace CourseWork
             OnBrandUpdated(brand);
 
             var itemToUpdate = Context.Brands
-                              .Where(i => i.Id == brand.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == brand.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(brand);
             entryToUpdate.State = EntityState.Modified;
@@ -376,7 +369,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnBrandDeleted(itemToDelete);
@@ -398,7 +391,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarBodyTypesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/carbodytypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/carbodytypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -421,7 +414,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -445,7 +438,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetCarBodyTypeById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -463,13 +456,12 @@ namespace CourseWork
             OnCarBodyTypeCreated(carbodytype);
 
             var existingItem = Context.CarBodyTypes
-                              .Where(i => i.Id == carbodytype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == carbodytype.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -492,8 +484,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -507,14 +499,13 @@ namespace CourseWork
             OnCarBodyTypeUpdated(carbodytype);
 
             var itemToUpdate = Context.CarBodyTypes
-                              .Where(i => i.Id == carbodytype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == carbodytype.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(carbodytype);
             entryToUpdate.State = EntityState.Modified;
@@ -538,7 +529,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarBodyTypeDeleted(itemToDelete);
@@ -560,7 +551,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarComfortOptionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/carcomfortoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/carcomfortoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -585,7 +576,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -611,7 +602,7 @@ namespace CourseWork
 
             items = items.Include(i => i.Car);
             items = items.Include(i => i.ComfortOption);
- 
+
             OnGetCarComfortOptionByCarIdAndComfortOptionId(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -629,13 +620,12 @@ namespace CourseWork
             OnCarComfortOptionCreated(carcomfortoption);
 
             var existingItem = Context.CarComfortOptions
-                              .Where(i => i.CarId == carcomfortoption.CarId && i.ComfortOptionId == carcomfortoption.ComfortOptionId)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carcomfortoption.CarId && i.ComfortOptionId == carcomfortoption.ComfortOptionId);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -658,8 +648,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -673,14 +663,13 @@ namespace CourseWork
             OnCarComfortOptionUpdated(carcomfortoption);
 
             var itemToUpdate = Context.CarComfortOptions
-                              .Where(i => i.CarId == carcomfortoption.CarId && i.ComfortOptionId == carcomfortoption.ComfortOptionId)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carcomfortoption.CarId && i.ComfortOptionId == carcomfortoption.ComfortOptionId);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(carcomfortoption);
             entryToUpdate.State = EntityState.Modified;
@@ -698,12 +687,11 @@ namespace CourseWork
         public async Task<CourseWork.Models.AutoDealership.CarComfortOption> DeleteCarComfortOption(int carid, int comfortoptionid)
         {
             var itemToDelete = Context.CarComfortOptions
-                              .Where(i => i.CarId == carid && i.ComfortOptionId == comfortoptionid)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carid && i.ComfortOptionId == comfortoptionid);
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarComfortOptionDeleted(itemToDelete);
@@ -725,7 +713,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarDeliveriesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/cardeliveries/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/cardeliveries/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -750,7 +738,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -776,7 +764,7 @@ namespace CourseWork
 
             items = items.Include(i => i.Distributor);
             items = items.Include(i => i.CarSale);
- 
+
             OnGetCarDeliveryById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -794,13 +782,12 @@ namespace CourseWork
             OnCarDeliveryCreated(cardelivery);
 
             var existingItem = Context.CarDeliveries
-                              .Where(i => i.Id == cardelivery.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == cardelivery.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -823,8 +810,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -838,14 +825,13 @@ namespace CourseWork
             OnCarDeliveryUpdated(cardelivery);
 
             var itemToUpdate = Context.CarDeliveries
-                              .Where(i => i.Id == cardelivery.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == cardelivery.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(cardelivery);
             entryToUpdate.State = EntityState.Modified;
@@ -863,12 +849,11 @@ namespace CourseWork
         public async Task<CourseWork.Models.AutoDealership.CarDelivery> DeleteCarDelivery(int id)
         {
             var itemToDelete = Context.CarDeliveries
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == id);
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarDeliveryDeleted(itemToDelete);
@@ -890,7 +875,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarMultimediaOptionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/carmultimediaoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/carmultimediaoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -915,7 +900,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -941,7 +926,7 @@ namespace CourseWork
 
             items = items.Include(i => i.Car);
             items = items.Include(i => i.MultimediaOption);
- 
+
             OnGetCarMultimediaOptionByCarIdAndMultimediaOptionId(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -959,13 +944,12 @@ namespace CourseWork
             OnCarMultimediaOptionCreated(carmultimediaoption);
 
             var existingItem = Context.CarMultimediaOptions
-                              .Where(i => i.CarId == carmultimediaoption.CarId && i.MultimediaOptionId == carmultimediaoption.MultimediaOptionId)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carmultimediaoption.CarId && i.MultimediaOptionId == carmultimediaoption.MultimediaOptionId);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -988,8 +972,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -1003,14 +987,13 @@ namespace CourseWork
             OnCarMultimediaOptionUpdated(carmultimediaoption);
 
             var itemToUpdate = Context.CarMultimediaOptions
-                              .Where(i => i.CarId == carmultimediaoption.CarId && i.MultimediaOptionId == carmultimediaoption.MultimediaOptionId)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carmultimediaoption.CarId && i.MultimediaOptionId == carmultimediaoption.MultimediaOptionId);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(carmultimediaoption);
             entryToUpdate.State = EntityState.Modified;
@@ -1028,12 +1011,11 @@ namespace CourseWork
         public async Task<CourseWork.Models.AutoDealership.CarMultimediaOption> DeleteCarMultimediaOption(int carid, int multimediaoptionid)
         {
             var itemToDelete = Context.CarMultimediaOptions
-                              .Where(i => i.CarId == carid && i.MultimediaOptionId == multimediaoptionid)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carid && i.MultimediaOptionId == multimediaoptionid);
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarMultimediaOptionDeleted(itemToDelete);
@@ -1055,7 +1037,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/cars/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/cars/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -1083,7 +1065,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -1112,7 +1094,7 @@ namespace CourseWork
             items = items.Include(i => i.Color);
             items = items.Include(i => i.Engine);
             items = items.Include(i => i.GearBoxType);
- 
+
             OnGetCarById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -1130,13 +1112,12 @@ namespace CourseWork
             OnCarCreated(car);
 
             var existingItem = Context.Cars
-                              .Where(i => i.Id == car.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == car.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -1159,8 +1140,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -1174,14 +1155,13 @@ namespace CourseWork
             OnCarUpdated(car);
 
             var itemToUpdate = Context.Cars
-                              .Where(i => i.Id == car.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == car.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(car);
             entryToUpdate.State = EntityState.Modified;
@@ -1208,7 +1188,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarDeleted(itemToDelete);
@@ -1230,7 +1210,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarSafetyOptionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/carsafetyoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/carsafetyoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -1255,7 +1235,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -1281,7 +1261,7 @@ namespace CourseWork
 
             items = items.Include(i => i.Car);
             items = items.Include(i => i.SafetyOption);
- 
+
             OnGetCarSafetyOptionByCarIdAndSafetyOptionId(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -1299,13 +1279,12 @@ namespace CourseWork
             OnCarSafetyOptionCreated(carsafetyoption);
 
             var existingItem = Context.CarSafetyOptions
-                              .Where(i => i.CarId == carsafetyoption.CarId && i.SafetyOptionId == carsafetyoption.SafetyOptionId)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carsafetyoption.CarId && i.SafetyOptionId == carsafetyoption.SafetyOptionId);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -1328,8 +1307,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -1343,14 +1322,13 @@ namespace CourseWork
             OnCarSafetyOptionUpdated(carsafetyoption);
 
             var itemToUpdate = Context.CarSafetyOptions
-                              .Where(i => i.CarId == carsafetyoption.CarId && i.SafetyOptionId == carsafetyoption.SafetyOptionId)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carsafetyoption.CarId && i.SafetyOptionId == carsafetyoption.SafetyOptionId);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(carsafetyoption);
             entryToUpdate.State = EntityState.Modified;
@@ -1368,12 +1346,11 @@ namespace CourseWork
         public async Task<CourseWork.Models.AutoDealership.CarSafetyOption> DeleteCarSafetyOption(int carid, int safetyoptionid)
         {
             var itemToDelete = Context.CarSafetyOptions
-                              .Where(i => i.CarId == carid && i.SafetyOptionId == safetyoptionid)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.CarId == carid && i.SafetyOptionId == safetyoptionid);
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarSafetyOptionDeleted(itemToDelete);
@@ -1395,7 +1372,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarSalesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/carsales/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/carsales/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -1423,7 +1400,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -1452,7 +1429,7 @@ namespace CourseWork
             items = items.Include(i => i.Employee);
             items = items.Include(i => i.PaymentMethod);
             items = items.Include(i => i.SaleStatus);
- 
+
             OnGetCarSaleById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -1469,17 +1446,11 @@ namespace CourseWork
         {
             OnCarSaleCreated(carsale);
 
-            var existingItem = Context.CarSales
-                              .Where(i => i.Id == carsale.Id)
-                              .FirstOrDefault();
-
-            if (existingItem != null)
-            {
-               throw new Exception("Item already available");
-            }            
-
             try
             {
+                carsale.SaleDate = DateTime.Now;
+                carsale.CreateDate = DateTime.Now;
+                carsale.UpdateDate = DateTime.Now;
                 Context.CarSales.Add(carsale);
                 Context.SaveChanges();
             }
@@ -1499,8 +1470,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -1514,14 +1485,13 @@ namespace CourseWork
             OnCarSaleUpdated(carsale);
 
             var itemToUpdate = Context.CarSales
-                              .Where(i => i.Id == carsale.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == carsale.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(carsale);
             entryToUpdate.State = EntityState.Modified;
@@ -1545,7 +1515,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarSaleDeleted(itemToDelete);
@@ -1567,7 +1537,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCarTypesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/cartypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/cartypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -1590,7 +1560,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -1614,7 +1584,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetCarTypeById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -1632,13 +1602,12 @@ namespace CourseWork
             OnCarTypeCreated(cartype);
 
             var existingItem = Context.CarTypes
-                              .Where(i => i.Id == cartype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == cartype.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -1661,8 +1630,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -1676,14 +1645,13 @@ namespace CourseWork
             OnCarTypeUpdated(cartype);
 
             var itemToUpdate = Context.CarTypes
-                              .Where(i => i.Id == cartype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == cartype.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(cartype);
             entryToUpdate.State = EntityState.Modified;
@@ -1701,12 +1669,11 @@ namespace CourseWork
         public async Task<CourseWork.Models.AutoDealership.CarType> DeleteCarType(int id)
         {
             var itemToDelete = Context.CarTypes
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == id);
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCarTypeDeleted(itemToDelete);
@@ -1728,7 +1695,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCitiesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/cities/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/cities/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -1752,7 +1719,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -1777,7 +1744,7 @@ namespace CourseWork
                               .Where(i => i.Id == id);
 
             items = items.Include(i => i.Country);
- 
+
             OnGetCityById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -1795,13 +1762,12 @@ namespace CourseWork
             OnCityCreated(city);
 
             var existingItem = Context.Cities
-                              .Where(i => i.Id == city.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == city.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -1824,8 +1790,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -1839,14 +1805,13 @@ namespace CourseWork
             OnCityUpdated(city);
 
             var itemToUpdate = Context.Cities
-                              .Where(i => i.Id == city.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == city.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(city);
             entryToUpdate.State = EntityState.Modified;
@@ -1870,7 +1835,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCityDeleted(itemToDelete);
@@ -1892,7 +1857,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportColorsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/colors/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/colors/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -1915,7 +1880,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -1939,7 +1904,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetColorById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -1957,13 +1922,12 @@ namespace CourseWork
             OnColorCreated(color);
 
             var existingItem = Context.Colors
-                              .Where(i => i.Id == color.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == color.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -1986,8 +1950,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -2001,14 +1965,13 @@ namespace CourseWork
             OnColorUpdated(color);
 
             var itemToUpdate = Context.Colors
-                              .Where(i => i.Id == color.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == color.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(color);
             entryToUpdate.State = EntityState.Modified;
@@ -2032,7 +1995,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnColorDeleted(itemToDelete);
@@ -2054,7 +2017,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportComfortOptionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/comfortoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/comfortoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -2077,7 +2040,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -2101,7 +2064,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetComfortOptionById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -2119,13 +2082,12 @@ namespace CourseWork
             OnComfortOptionCreated(comfortoption);
 
             var existingItem = Context.ComfortOptions
-                              .Where(i => i.Id == comfortoption.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == comfortoption.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -2148,8 +2110,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -2163,14 +2125,13 @@ namespace CourseWork
             OnComfortOptionUpdated(comfortoption);
 
             var itemToUpdate = Context.ComfortOptions
-                              .Where(i => i.Id == comfortoption.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == comfortoption.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(comfortoption);
             entryToUpdate.State = EntityState.Modified;
@@ -2194,7 +2155,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnComfortOptionDeleted(itemToDelete);
@@ -2216,7 +2177,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportConditionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/conditions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/conditions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -2239,7 +2200,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -2263,7 +2224,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetConditionById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -2281,13 +2242,12 @@ namespace CourseWork
             OnConditionCreated(condition);
 
             var existingItem = Context.Conditions
-                              .Where(i => i.Id == condition.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == condition.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -2310,8 +2270,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -2325,14 +2285,13 @@ namespace CourseWork
             OnConditionUpdated(condition);
 
             var itemToUpdate = Context.Conditions
-                              .Where(i => i.Id == condition.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == condition.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(condition);
             entryToUpdate.State = EntityState.Modified;
@@ -2356,7 +2315,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnConditionDeleted(itemToDelete);
@@ -2378,7 +2337,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCountriesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/countries/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/countries/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -2401,7 +2360,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -2425,7 +2384,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetCountryById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -2443,13 +2402,12 @@ namespace CourseWork
             OnCountryCreated(country);
 
             var existingItem = Context.Countries
-                              .Where(i => i.Id == country.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == country.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -2472,8 +2430,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -2487,14 +2445,13 @@ namespace CourseWork
             OnCountryUpdated(country);
 
             var itemToUpdate = Context.Countries
-                              .Where(i => i.Id == country.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == country.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(country);
             entryToUpdate.State = EntityState.Modified;
@@ -2519,7 +2476,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCountryDeleted(itemToDelete);
@@ -2541,7 +2498,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportCustomersToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/customers/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/customers/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -2564,7 +2521,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -2588,7 +2545,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetCustomerById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -2605,18 +2562,14 @@ namespace CourseWork
         {
             OnCustomerCreated(customer);
 
-            var existingItem = Context.Customers
-                              .Where(i => i.Id == customer.Id)
-                              .FirstOrDefault();
-
-            if (existingItem != null)
-            {
-               throw new Exception("Item already available");
-            }            
-
             try
             {
-                Context.Customers.Add(customer);
+
+                customer.Id = await Context.Customers.Select(c => c.Id).MaxAsync() + 1;
+                customer.CreateDate = DateTime.Now;
+                customer.UpdateDate = DateTime.Now;
+
+                await Context.Customers.AddAsync(customer);
                 Context.SaveChanges();
             }
             catch
@@ -2635,8 +2588,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -2650,14 +2603,13 @@ namespace CourseWork
             OnCustomerUpdated(customer);
 
             var itemToUpdate = Context.Customers
-                              .Where(i => i.Id == customer.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == customer.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(customer);
             entryToUpdate.State = EntityState.Modified;
@@ -2682,7 +2634,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnCustomerDeleted(itemToDelete);
@@ -2704,7 +2656,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportDealershipCarsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/dealershipcars/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/dealershipcars/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -2730,7 +2682,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -2757,7 +2709,7 @@ namespace CourseWork
             items = items.Include(i => i.Car);
             items = items.Include(i => i.DealershipCarStatus);
             items = items.Include(i => i.AutoDealership);
- 
+
             OnGetDealershipCarById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -2774,17 +2726,11 @@ namespace CourseWork
         {
             OnDealershipCarCreated(dealershipcar);
 
-            var existingItem = Context.DealershipCars
-                              .Where(i => i.Id == dealershipcar.Id)
-                              .FirstOrDefault();
-
-            if (existingItem != null)
-            {
-               throw new Exception("Item already available");
-            }            
-
             try
             {
+                dealershipcar.Id = Context.Employees.Max(c => c.Id) + 1;
+                dealershipcar.CreateDate = DateTime.Now;
+                dealershipcar.UpdateDate = DateTime.Now;
                 Context.DealershipCars.Add(dealershipcar);
                 Context.SaveChanges();
             }
@@ -2804,8 +2750,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -2819,14 +2765,13 @@ namespace CourseWork
             OnDealershipCarUpdated(dealershipcar);
 
             var itemToUpdate = Context.DealershipCars
-                              .Where(i => i.Id == dealershipcar.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == dealershipcar.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(dealershipcar);
             entryToUpdate.State = EntityState.Modified;
@@ -2851,7 +2796,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnDealershipCarDeleted(itemToDelete);
@@ -2873,7 +2818,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportDealershipCarStatusesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/dealershipcarstatuses/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/dealershipcarstatuses/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -2896,7 +2841,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -2920,7 +2865,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetDealershipCarStatusById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -2938,13 +2883,12 @@ namespace CourseWork
             OnDealershipCarStatusCreated(dealershipcarstatus);
 
             var existingItem = Context.DealershipCarStatuses
-                              .Where(i => i.Id == dealershipcarstatus.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == dealershipcarstatus.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -2967,8 +2911,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -2982,14 +2926,13 @@ namespace CourseWork
             OnDealershipCarStatusUpdated(dealershipcarstatus);
 
             var itemToUpdate = Context.DealershipCarStatuses
-                              .Where(i => i.Id == dealershipcarstatus.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == dealershipcarstatus.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(dealershipcarstatus);
             entryToUpdate.State = EntityState.Modified;
@@ -3013,7 +2956,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnDealershipCarStatusDeleted(itemToDelete);
@@ -3035,7 +2978,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportDistributorsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/distributors/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/distributors/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -3058,7 +3001,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -3082,7 +3025,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetDistributorById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -3100,13 +3043,12 @@ namespace CourseWork
             OnDistributorCreated(distributor);
 
             var existingItem = Context.Distributors
-                              .Where(i => i.Id == distributor.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == distributor.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -3129,8 +3071,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -3144,14 +3086,13 @@ namespace CourseWork
             OnDistributorUpdated(distributor);
 
             var itemToUpdate = Context.Distributors
-                              .Where(i => i.Id == distributor.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == distributor.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(distributor);
             entryToUpdate.State = EntityState.Modified;
@@ -3175,7 +3116,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnDistributorDeleted(itemToDelete);
@@ -3197,7 +3138,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportEmployeesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/employees/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/employees/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -3221,7 +3162,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -3246,7 +3187,7 @@ namespace CourseWork
                               .Where(i => i.Id == id);
 
             items = items.Include(i => i.AutoDealership);
- 
+
             OnGetEmployeeById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -3264,16 +3205,18 @@ namespace CourseWork
             OnEmployeeCreated(employee);
 
             var existingItem = Context.Employees
-                              .Where(i => i.Id == employee.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == employee.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
+                employee.Id = Context.Employees.Max(c => c.Id) + 1;
+                employee.CreateDate=DateTime.Now;
+                employee.UpdateDate=DateTime.Now;
                 Context.Employees.Add(employee);
                 Context.SaveChanges();
             }
@@ -3293,8 +3236,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -3308,14 +3251,13 @@ namespace CourseWork
             OnEmployeeUpdated(employee);
 
             var itemToUpdate = Context.Employees
-                              .Where(i => i.Id == employee.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == employee.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(employee);
             entryToUpdate.State = EntityState.Modified;
@@ -3340,7 +3282,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnEmployeeDeleted(itemToDelete);
@@ -3362,7 +3304,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportEnginesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/engines/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/engines/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -3387,7 +3329,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -3413,7 +3355,7 @@ namespace CourseWork
 
             items = items.Include(i => i.Brand);
             items = items.Include(i => i.EngineType);
- 
+
             OnGetEngineById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -3431,13 +3373,12 @@ namespace CourseWork
             OnEngineCreated(engine);
 
             var existingItem = Context.Engines
-                              .Where(i => i.Id == engine.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == engine.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -3460,8 +3401,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -3475,14 +3416,13 @@ namespace CourseWork
             OnEngineUpdated(engine);
 
             var itemToUpdate = Context.Engines
-                              .Where(i => i.Id == engine.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == engine.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(engine);
             entryToUpdate.State = EntityState.Modified;
@@ -3506,7 +3446,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnEngineDeleted(itemToDelete);
@@ -3528,7 +3468,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportEngineTypesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/enginetypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/enginetypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -3551,7 +3491,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -3575,7 +3515,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetEngineTypeById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -3593,13 +3533,12 @@ namespace CourseWork
             OnEngineTypeCreated(enginetype);
 
             var existingItem = Context.EngineTypes
-                              .Where(i => i.Id == enginetype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == enginetype.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -3622,8 +3561,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -3637,14 +3576,13 @@ namespace CourseWork
             OnEngineTypeUpdated(enginetype);
 
             var itemToUpdate = Context.EngineTypes
-                              .Where(i => i.Id == enginetype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == enginetype.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(enginetype);
             entryToUpdate.State = EntityState.Modified;
@@ -3668,7 +3606,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnEngineTypeDeleted(itemToDelete);
@@ -3690,7 +3628,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportGearBoxTypesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/gearboxtypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/gearboxtypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -3713,7 +3651,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -3737,7 +3675,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetGearBoxTypeById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -3755,13 +3693,12 @@ namespace CourseWork
             OnGearBoxTypeCreated(gearboxtype);
 
             var existingItem = Context.GearBoxTypes
-                              .Where(i => i.Id == gearboxtype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == gearboxtype.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -3784,8 +3721,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -3799,14 +3736,13 @@ namespace CourseWork
             OnGearBoxTypeUpdated(gearboxtype);
 
             var itemToUpdate = Context.GearBoxTypes
-                              .Where(i => i.Id == gearboxtype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == gearboxtype.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(gearboxtype);
             entryToUpdate.State = EntityState.Modified;
@@ -3830,7 +3766,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnGearBoxTypeDeleted(itemToDelete);
@@ -3852,7 +3788,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportLeaseProposalConditionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/leaseproposalconditions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/leaseproposalconditions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -3877,7 +3813,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -3903,7 +3839,7 @@ namespace CourseWork
 
             items = items.Include(i => i.Condition);
             items = items.Include(i => i.LeaseProposal);
- 
+
             OnGetLeaseProposalConditionById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -3921,13 +3857,12 @@ namespace CourseWork
             OnLeaseProposalConditionCreated(leaseproposalcondition);
 
             var existingItem = Context.LeaseProposalConditions
-                              .Where(i => i.Id == leaseproposalcondition.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == leaseproposalcondition.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -3950,8 +3885,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -3965,14 +3900,13 @@ namespace CourseWork
             OnLeaseProposalConditionUpdated(leaseproposalcondition);
 
             var itemToUpdate = Context.LeaseProposalConditions
-                              .Where(i => i.Id == leaseproposalcondition.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == leaseproposalcondition.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(leaseproposalcondition);
             entryToUpdate.State = EntityState.Modified;
@@ -3990,12 +3924,11 @@ namespace CourseWork
         public async Task<CourseWork.Models.AutoDealership.LeaseProposalCondition> DeleteLeaseProposalCondition(int id)
         {
             var itemToDelete = Context.LeaseProposalConditions
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == id);
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnLeaseProposalConditionDeleted(itemToDelete);
@@ -4017,7 +3950,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportLeaseProposalsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/leaseproposals/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/leaseproposals/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -4041,7 +3974,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -4066,7 +3999,7 @@ namespace CourseWork
                               .Where(i => i.Id == id);
 
             items = items.Include(i => i.LeaseType);
- 
+
             OnGetLeaseProposalById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -4083,17 +4016,11 @@ namespace CourseWork
         {
             OnLeaseProposalCreated(leaseproposal);
 
-            var existingItem = Context.LeaseProposals
-                              .Where(i => i.Id == leaseproposal.Id)
-                              .FirstOrDefault();
-
-            if (existingItem != null)
-            {
-               throw new Exception("Item already available");
-            }            
-
             try
             {
+                leaseproposal.Id = Context.LeaseProposals.Max(c => c.Id) + 1;
+                leaseproposal.CreateDate = DateTime.Now;
+                leaseproposal.UpdateDate = DateTime.Now;
                 Context.LeaseProposals.Add(leaseproposal);
                 Context.SaveChanges();
             }
@@ -4113,8 +4040,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -4128,14 +4055,13 @@ namespace CourseWork
             OnLeaseProposalUpdated(leaseproposal);
 
             var itemToUpdate = Context.LeaseProposals
-                              .Where(i => i.Id == leaseproposal.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == leaseproposal.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(leaseproposal);
             entryToUpdate.State = EntityState.Modified;
@@ -4160,7 +4086,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnLeaseProposalDeleted(itemToDelete);
@@ -4182,7 +4108,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportLeasesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/leases/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/leases/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -4209,7 +4135,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -4237,7 +4163,7 @@ namespace CourseWork
             items = items.Include(i => i.DealershipCar);
             items = items.Include(i => i.Employee);
             items = items.Include(i => i.LeaseProposal);
- 
+
             OnGetLeaseById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -4254,17 +4180,10 @@ namespace CourseWork
         {
             OnLeaseCreated(lease);
 
-            var existingItem = Context.Leases
-                              .Where(i => i.Id == lease.Id)
-                              .FirstOrDefault();
-
-            if (existingItem != null)
-            {
-               throw new Exception("Item already available");
-            }            
-
             try
             {
+                lease.CreateDate = DateTime.Now;
+                lease.UpdateDate = DateTime.Now;
                 Context.Leases.Add(lease);
                 Context.SaveChanges();
             }
@@ -4284,8 +4203,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -4299,14 +4218,13 @@ namespace CourseWork
             OnLeaseUpdated(lease);
 
             var itemToUpdate = Context.Leases
-                              .Where(i => i.Id == lease.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == lease.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(lease);
             entryToUpdate.State = EntityState.Modified;
@@ -4324,12 +4242,11 @@ namespace CourseWork
         public async Task<CourseWork.Models.AutoDealership.Lease> DeleteLease(int id)
         {
             var itemToDelete = Context.Leases
-                              .Where(i => i.Id == id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == id);
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnLeaseDeleted(itemToDelete);
@@ -4351,7 +4268,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportLeaseTypesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/leasetypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/leasetypes/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -4374,7 +4291,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -4398,7 +4315,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetLeaseTypeById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -4416,13 +4333,12 @@ namespace CourseWork
             OnLeaseTypeCreated(leasetype);
 
             var existingItem = Context.LeaseTypes
-                              .Where(i => i.Id == leasetype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == leasetype.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -4445,8 +4361,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -4460,14 +4376,13 @@ namespace CourseWork
             OnLeaseTypeUpdated(leasetype);
 
             var itemToUpdate = Context.LeaseTypes
-                              .Where(i => i.Id == leasetype.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == leasetype.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(leasetype);
             entryToUpdate.State = EntityState.Modified;
@@ -4491,7 +4406,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnLeaseTypeDeleted(itemToDelete);
@@ -4513,7 +4428,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportMultimediaOptionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/multimediaoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/multimediaoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -4536,7 +4451,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -4560,7 +4475,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetMultimediaOptionById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -4578,13 +4493,12 @@ namespace CourseWork
             OnMultimediaOptionCreated(multimediaoption);
 
             var existingItem = Context.MultimediaOptions
-                              .Where(i => i.Id == multimediaoption.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == multimediaoption.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -4607,8 +4521,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -4622,14 +4536,13 @@ namespace CourseWork
             OnMultimediaOptionUpdated(multimediaoption);
 
             var itemToUpdate = Context.MultimediaOptions
-                              .Where(i => i.Id == multimediaoption.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == multimediaoption.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(multimediaoption);
             entryToUpdate.State = EntityState.Modified;
@@ -4653,7 +4566,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnMultimediaOptionDeleted(itemToDelete);
@@ -4675,7 +4588,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportPaymentMethodsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/paymentmethods/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/paymentmethods/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -4698,7 +4611,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -4722,7 +4635,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetPaymentMethodById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -4740,13 +4653,12 @@ namespace CourseWork
             OnPaymentMethodCreated(paymentmethod);
 
             var existingItem = Context.PaymentMethods
-                              .Where(i => i.Id == paymentmethod.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == paymentmethod.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -4769,8 +4681,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -4784,14 +4696,13 @@ namespace CourseWork
             OnPaymentMethodUpdated(paymentmethod);
 
             var itemToUpdate = Context.PaymentMethods
-                              .Where(i => i.Id == paymentmethod.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == paymentmethod.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(paymentmethod);
             entryToUpdate.State = EntityState.Modified;
@@ -4815,7 +4726,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnPaymentMethodDeleted(itemToDelete);
@@ -4837,7 +4748,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportSafetyOptionsToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/safetyoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/safetyoptions/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -4860,7 +4771,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -4884,7 +4795,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetSafetyOptionById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -4902,13 +4813,12 @@ namespace CourseWork
             OnSafetyOptionCreated(safetyoption);
 
             var existingItem = Context.SafetyOptions
-                              .Where(i => i.Id == safetyoption.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == safetyoption.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -4931,8 +4841,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -4946,14 +4856,13 @@ namespace CourseWork
             OnSafetyOptionUpdated(safetyoption);
 
             var itemToUpdate = Context.SafetyOptions
-                              .Where(i => i.Id == safetyoption.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == safetyoption.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(safetyoption);
             entryToUpdate.State = EntityState.Modified;
@@ -4977,7 +4886,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnSafetyOptionDeleted(itemToDelete);
@@ -4999,7 +4908,7 @@ namespace CourseWork
 
             return itemToDelete;
         }
-    
+
         public async Task ExportSaleStatusesToExcel(Query query = null, string fileName = null)
         {
             navigationManager.NavigateTo(query != null ? query.ToUrl($"export/autodealership/salestatuses/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')") : $"export/autodealership/salestatuses/excel(fileName='{(!string.IsNullOrEmpty(fileName) ? UrlEncoder.Default.Encode(fileName) : "Export")}')", true);
@@ -5022,7 +4931,7 @@ namespace CourseWork
                 if (!string.IsNullOrEmpty(query.Expand))
                 {
                     var propertiesToExpand = query.Expand.Split(',');
-                    foreach(var p in propertiesToExpand)
+                    foreach (var p in propertiesToExpand)
                     {
                         items = items.Include(p.Trim());
                     }
@@ -5046,7 +4955,7 @@ namespace CourseWork
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
- 
+
             OnGetSaleStatusById(ref items);
 
             var itemToReturn = items.FirstOrDefault();
@@ -5064,13 +4973,12 @@ namespace CourseWork
             OnSaleStatusCreated(salestatus);
 
             var existingItem = Context.SaleStatuses
-                              .Where(i => i.Id == salestatus.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == salestatus.Id);
 
             if (existingItem != null)
             {
-               throw new Exception("Item already available");
-            }            
+                throw new Exception("Item already available");
+            }
 
             try
             {
@@ -5093,8 +5001,8 @@ namespace CourseWork
             var entityToCancel = Context.Entry(item);
             if (entityToCancel.State == EntityState.Modified)
             {
-              entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
-              entityToCancel.State = EntityState.Unchanged;
+                entityToCancel.CurrentValues.SetValues(entityToCancel.OriginalValues);
+                entityToCancel.State = EntityState.Unchanged;
             }
 
             return item;
@@ -5108,14 +5016,13 @@ namespace CourseWork
             OnSaleStatusUpdated(salestatus);
 
             var itemToUpdate = Context.SaleStatuses
-                              .Where(i => i.Id == salestatus.Id)
-                              .FirstOrDefault();
+                .FirstOrDefault(i => i.Id == salestatus.Id);
 
             if (itemToUpdate == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
-                
+
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(salestatus);
             entryToUpdate.State = EntityState.Modified;
@@ -5139,7 +5046,7 @@ namespace CourseWork
 
             if (itemToDelete == null)
             {
-               throw new Exception("Item no longer available");
+                throw new Exception("Item no longer available");
             }
 
             OnSaleStatusDeleted(itemToDelete);
@@ -5161,5 +5068,5 @@ namespace CourseWork
 
             return itemToDelete;
         }
-        }
+    }
 }
