@@ -274,6 +274,37 @@ SELECT * FROM AutoDealershipOLAPTmp.dbo.Leases;
 -- Sales
 SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.CarSales;
 
+;WITH SalesData AS (
+    SELECT 
+        ds.Id AS DealershipId,
+        c.BrandId,
+        FORMAT(cs.SaleDate, 'yyyy-MM') as SaleDate,
+        SUM(c.Price) AS TotalPrice,
+        COUNT(c.Price) as SalesCount
+    FROM
+        AutoDealership.dbo.AutoDealerships ds
+        JOIN AutoDealership.dbo.DealershipCars dc ON dc.DealershipId = ds.Id
+        JOIN AutoDealership.dbo.CarSales cs ON cs.DealershipCarId = dc.CarId
+        JOIN AutoDealership.dbo.Cars c ON dc.CarId = c.Id
+    GROUP BY
+        ds.Id,
+        c.BrandId,
+        FORMAT(cs.SaleDate, 'yyyy-MM')
+        
+),
+
+RankedSalesData AS (
+    SELECT
+        DealershipId,
+        BrandId,
+        CONVERT(DATE, SaleDate + '-01') AS SaleDate,
+        TotalPrice as TotalIncomeForCurrentMonth,
+        ISNULL(LAG(TotalPrice, 1) OVER (PARTITION BY DealershipId, BrandId ORDER BY SaleDate), 0) AS TotalIncomeLastMonth,
+        ISNULL(LAG(SalesCount, 1) OVER (PARTITION BY DealershipId, BrandId ORDER BY SaleDate), 0) AS SalesCountForLastMonth,
+        SalesCount AS SalesCountForCurrentMonth
+    FROM
+        SalesData
+)
 INSERT INTO AutoDealershipOLAPTmp.dbo.CarSales (
     Id,
     AutoDealershipId,
@@ -289,39 +320,26 @@ INSERT INTO AutoDealershipOLAPTmp.dbo.CarSales (
 )
 SELECT
     @CurrentMaxId + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS Id,
-    ds.Id,
-    c.BrandId,
-    SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -2, GETDATE()) AND DATEADD(MONTH, -1, GETDATE()) THEN c.Price ELSE 0 END) AS TotalIncomeLastMonth,
-    -- Assuming StartDateId and EndDateId refer to monthly period identifiers
-    (YEAR(GETDATE()) * 100 + MONTH(GETDATE()) - 1) AS StartDateId,
-    (YEAR(GETDATE()) * 100 + MONTH(GETDATE())) AS EndDateId,
-    SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -1, GETDATE()) AND GETDATE() THEN c.Price ELSE 0 END) AS TotalIncomeForCurrentMonth,
-    -- Calculating percent change
-    (SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -1, GETDATE()) AND GETDATE() THEN c.Price ELSE 0 END) - 
-    SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -2, GETDATE()) AND DATEADD(MONTH, -1, GETDATE()) THEN c.Price ELSE 0 END)) /
-    ISNULL(
-        (SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -1, GETDATE()) AND GETDATE() THEN c.Price ELSE 0 END) - 
-         SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -2, GETDATE()) AND DATEADD(MONTH, -1, GETDATE()) THEN c.Price ELSE 0 END)) / 
-        NULLIF((SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -1, GETDATE()) AND GETDATE() THEN c.Price ELSE 0 END) + 
-                SUM(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -2, GETDATE()) AND DATEADD(MONTH, -1, GETDATE()) THEN c.Price ELSE 0 END)) / 2, 0)
-        * 100,
-        0
-    ) AS MonthTotalIncomeModifyPercent,
-    COUNT(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -2, GETDATE()) AND DATEADD(MONTH, -1, GETDATE()) THEN 1 ELSE NULL END) AS SalesCountForLastMonth,
-    COUNT(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -1, GETDATE()) AND GETDATE() THEN 1 ELSE NULL END) AS SalesCountForCurrentMonth,
-    COUNT(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -1, GETDATE()) AND GETDATE() THEN 1 ELSE NULL END) -
-    COUNT(CASE WHEN cs.SaleDate BETWEEN DATEADD(MONTH, -2, GETDATE()) AND DATEADD(MONTH, -1, GETDATE()) THEN 1 ELSE NULL END) AS SalesCountChangeForMonth
+    DealershipId,
+    BrandId,
+    TotalIncomeLastMonth,
+    (SELECT TOP 1 id FROM AutoDealershipOLAPTmp.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=1) AS StartDateId,
+    (SELECT TOP 1 id FROM AutoDealershipOLAPTmp.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=DAY(EOMONTH(SaleDate))) AS EndDateId,
+    TotalIncomeForCurrentMonth,
+    (TotalIncomeForCurrentMonth - TotalIncomeLastMonth) / ((TotalIncomeForCurrentMonth + TotalIncomeLastMonth) /2 ) * 100 - 100 AS MonthTotalIncomeModifyPercent,
+    SalesCountForLastMonth,
+    SalesCountForCurrentMonth,
+    SalesCountForCurrentMonth - SalesCountForLastMonth AS SalesCountChangeForMonth
 FROM
-    AutoDealership.dbo.AutoDealerships ds
-    JOIN AutoDealership.dbo.DealershipCars dc ON dc.DealershipId = ds.Id
-    JOIN AutoDealership.dbo.CarSales cs ON cs.DealershipCarId = dc.CarId
-    JOIN AutoDealership.dbo.Cars c ON dc.CarId = c.Id
-WHERE
-    cs.SaleDate >= DATEADD(MONTH, -2, GETDATE())
+    RankedSalesData
 GROUP BY
-    ds.Id,
-    c.BrandId;
-
+    DealershipId,
+    BrandId,
+    SaleDate,
+    TotalIncomeLastMonth,
+    TotalIncomeForCurrentMonth,
+    SalesCountForCurrentMonth,
+    SalesCountForLastMonth
 
 INSERT INTO AutoDealershipOLAP.dbo.CarSales
 SELECT * FROM AutoDealershipOLAPTmp.dbo.CarSales;
