@@ -10,7 +10,7 @@ using Radzen.Blazor;
 
 namespace CourseWork.Components.Pages
 {
-    public partial class DealershipCars
+    public partial class CarsOlap
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -31,11 +31,11 @@ namespace CourseWork.Components.Pages
         protected NotificationService NotificationService { get; set; }
 
         [Inject]
-        public AutoDealershipService AutoDealershipService { get; set; }
+        public AutoDealershipOLAPService AutoDealershipOLAPService { get; set; }
 
-        protected IEnumerable<CourseWork.Models.AutoDealership.DealershipCar> dealershipCars;
+        protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.Car> cars;
 
-        protected RadzenDataGrid<CourseWork.Models.AutoDealership.DealershipCar> grid0;
+        protected RadzenDataGrid<CourseWork.Models.AutoDealershipOLAP.Car> grid0;
 
         protected string search = "";
 
@@ -45,31 +45,31 @@ namespace CourseWork.Components.Pages
 
             await grid0.GoToPage(0);
 
-            dealershipCars = await AutoDealershipService.GetDealershipCars();
+            cars = await AutoDealershipOLAPService.GetCars(new Query { Filter = $@"i => i.Model.Contains(@0) || i.Generation.Contains(@0)", FilterParameters = new object[] { search } });
         }
         protected override async Task OnInitializedAsync()
         {
-            dealershipCars = await AutoDealershipService.GetDealershipCars();
+            cars = await AutoDealershipOLAPService.GetCars(new Query { Filter = $@"i => i.Model.Contains(@0) || i.Generation.Contains(@0)", FilterParameters = new object[] { search } });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
         {
-            await DialogService.OpenAsync<AddDealershipCar>("Add DealershipCar", null);
+            await DialogService.OpenAsync<AddCarsOlap>("Add Car", null);
             await grid0.Reload();
         }
 
-        protected async Task EditRow(DataGridRowMouseEventArgs<CourseWork.Models.AutoDealership.DealershipCar> args)
+        protected async Task EditRow(DataGridRowMouseEventArgs<CourseWork.Models.AutoDealershipOLAP.Car> args)
         {
-            await DialogService.OpenAsync<EditDealershipCar>("Edit DealershipCar", new Dictionary<string, object> { {"Id", args.Data.Id} });
+            await DialogService.OpenAsync<EditCarsOlap>("Edit Car", new Dictionary<string, object> { {"Id", args.Data.Id} });
         }
 
-        protected async Task GridDeleteButtonClick(MouseEventArgs args, CourseWork.Models.AutoDealership.DealershipCar dealershipCar)
+        protected async Task GridDeleteButtonClick(MouseEventArgs args, CourseWork.Models.AutoDealershipOLAP.Car car)
         {
             try
             {
                 if (await DialogService.Confirm("Are you sure you want to delete this record?") == true)
                 {
-                    var deleteResult = await AutoDealershipService.DeleteDealershipCar(dealershipCar.Id);
+                    var deleteResult = await AutoDealershipOLAPService.DeleteCar(car.Id);
 
                     if (deleteResult != null)
                     {
@@ -83,7 +83,7 @@ namespace CourseWork.Components.Pages
                 {
                     Severity = NotificationSeverity.Error,
                     Summary = $"Error",
-                    Detail = $"Unable to delete DealershipCar"
+                    Detail = $"Unable to delete Car"
                 });
             }
         }
@@ -92,24 +92,24 @@ namespace CourseWork.Components.Pages
         {
             if (args?.Value == "csv")
             {
-                await AutoDealershipService.ExportDealershipCarsToCSV(new Query
+                await AutoDealershipOLAPService.ExportCarsToCSV(new Query
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
     Expand = "",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-}, "DealershipCars");
+}, "Cars");
             }
 
             if (args == null || args.Value == "xlsx")
             {
-                await AutoDealershipService.ExportDealershipCarsToExcel(new Query
+                await AutoDealershipOLAPService.ExportCarsToExcel(new Query
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
     Expand = "",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-}, "DealershipCars");
+}, "Cars");
             }
         }
     }

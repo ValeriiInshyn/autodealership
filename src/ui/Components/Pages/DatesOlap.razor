@@ -1,10 +1,10 @@
-@page "/dealership-cars"
+@page "/dates-olap"
 
-<PageTitle>DealershipCars</PageTitle>
+<PageTitle>Dates</PageTitle>
 <RadzenStack>
     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
-            <RadzenText Text="DealershipCars" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+            <RadzenText Text="Dates" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
         </RadzenColumn>
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
@@ -20,22 +20,22 @@
     <RadzenRow>
       <RadzenColumn SizeMD=12>
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@dealershipCars" TItem="CourseWork.Models.AutoDealership.DealershipCar" RowDoubleClick="@EditRow">
+            Data="@dates" TItem="CourseWork.Models.AutoDealershipOLAP.Date" RowDoubleClick="@EditRow">
             <Columns>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.DealershipCar" Property="Id" Title="Id">
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.Date" Property="Id" Title="Id">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.DealershipCar" Property="CarsCount" Title="Cars Count">
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.Date" Property="Year" Title="Year">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.DealershipCar" Property="CreateDate" Title="Create Date">
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.Date" Property="Month" Title="Month">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.DealershipCar" Property="UpdateDate" Title="Update Date">
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.Date" Property="Day" Title="Day">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.DealershipCar" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
-                    <Template Context="dealershipCar">
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.Date" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="date">
 
                         <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
                             Shade="Shade.Lighter" Variant="Variant.Flat"
-                            Click=@(args => GridDeleteButtonClick(args, dealershipCar)) @onclick:stopPropagation="true" />
+                            Click=@(args => GridDeleteButtonClick(args, date)) @onclick:stopPropagation="true" />
                     </Template>
                 </RadzenDataGridColumn>
             </Columns>

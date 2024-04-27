@@ -13,6 +13,11 @@ builder.Services.AddDbContext<CourseWork.Data.AutoDealershipContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("AutoDealershipConnection"));
 });
+builder.Services.AddScoped<CourseWork.AutoDealershipOLAPService>();
+builder.Services.AddDbContext<CourseWork.Data.AutoDealershipOLAPContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AutoDealershipOLAPConnection"));
+});
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

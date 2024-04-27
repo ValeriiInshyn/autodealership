@@ -1,0 +1,61 @@
+@page "/car-sales-olap"
+
+<PageTitle>CarSales</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="CarSales" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
+                </RadzenSplitButton>
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" aria-label="Search by all string columns" />
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@carSales" TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" RowDoubleClick="@EditRow">
+            <Columns>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="AutoDealership.Name" Title="Auto Dealership">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="BrandId" Title="Brand Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="TotalIncomeLastMonth" Title="Total Income Last Month">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="Date1" Title="Date1">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="Date" Title="Date">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="TotalIncomeForCurrentMonth" Title="Total Income For Current Month">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="MonthTotalIncomeModifyPercent" Title="Month Total Income Modify Percent">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="SalesCountForLastMonth" Title="Sales Count For Last Month">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="SalesCountForCurrentMonth" Title="Sales Count For Current Month">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Property="SalesCountChangeForMonth" Title="Sales Count Change For Month">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealershipOLAP.CarSale" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="carSale">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, carSale)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>
