@@ -2675,7 +2675,7 @@ namespace CourseWork
 
             items = items.Include(i => i.Car);
             items = items.Include(i => i.DealershipCarStatus);
-            items = items.Include(i => i.AutoDealership);
+            items = items.Include(i => i.AutoDealership).ThenInclude(i=>i.DealershipCars);
 
             if (query != null)
             {
