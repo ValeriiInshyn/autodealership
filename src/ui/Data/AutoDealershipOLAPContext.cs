@@ -22,10 +22,22 @@ namespace CourseWork.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<CourseWork.Models.AutoDealershipOLAP.Car>()
+              .HasOne(i => i.Brand)
+              .WithMany(i => i.Cars)
+              .HasForeignKey(i => i.BrandId)
+              .HasPrincipalKey(i => i.Id);
+
             builder.Entity<CourseWork.Models.AutoDealershipOLAP.CarSale>()
               .HasOne(i => i.AutoDealership)
               .WithMany(i => i.CarSales)
               .HasForeignKey(i => i.AutoDealershipId)
+              .HasPrincipalKey(i => i.Id);
+
+            builder.Entity<CourseWork.Models.AutoDealershipOLAP.CarSale>()
+              .HasOne(i => i.Brand)
+              .WithMany(i => i.CarSales)
+              .HasForeignKey(i => i.BrandId)
               .HasPrincipalKey(i => i.Id);
 
             builder.Entity<CourseWork.Models.AutoDealershipOLAP.CarSale>()

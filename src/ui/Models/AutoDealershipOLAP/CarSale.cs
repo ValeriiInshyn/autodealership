@@ -20,6 +20,8 @@ namespace CourseWork.Models.AutoDealershipOLAP
         [Required]
         public int BrandId { get; set; }
 
+        public Brand Brand { get; set; }
+
         [Required]
         public decimal TotalIncomeLastMonth { get; set; }
 

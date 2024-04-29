@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.Services;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -46,11 +45,11 @@ namespace CourseWork.Components.Pages
 
             await grid0.GoToPage(0);
 
-            carSales = await AutoDealershipOLAPService.GetCarSales(new Query { Expand = "AutoDealership,Date1,Date" });
+            carSales = await AutoDealershipOLAPService.GetCarSales(new Query { Expand = "AutoDealership,Brand,Date1,Date" });
         }
         protected override async Task OnInitializedAsync()
         {
-            carSales = await AutoDealershipOLAPService.GetCarSales(new Query { Expand = "AutoDealership,Date1,Date" });
+            carSales = await AutoDealershipOLAPService.GetCarSales(new Query { Expand = "AutoDealership,Brand,Date1,Date" });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -97,7 +96,7 @@ namespace CourseWork.Components.Pages
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "AutoDealership,Date1,Date",
+    Expand = "AutoDealership,Brand,Date1,Date",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
 }, "CarSales");
             }
@@ -108,7 +107,7 @@ namespace CourseWork.Components.Pages
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "AutoDealership,Date1,Date",
+    Expand = "AutoDealership,Brand,Date1,Date",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
 }, "CarSales");
             }

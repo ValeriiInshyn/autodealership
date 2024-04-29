@@ -18,6 +18,8 @@ namespace CourseWork.Models.AutoDealershipOLAP
         [Required]
         public int BrandId { get; set; }
 
+        public Brand Brand { get; set; }
+
         [Required]
         public string Generation { get; set; }
 

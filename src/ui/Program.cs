@@ -1,3 +1,4 @@
+using CourseWork;
 using Radzen;
 using CourseWork.Components;
 using CourseWork.Services;
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<CourseWork.Data.AutoDealershipOLAPContext>(options
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("AutoDealershipOLAPConnection"));
 });
+builder.Services.AddScoped<CourseWork.AutoDealershipOLAPService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

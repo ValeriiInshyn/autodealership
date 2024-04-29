@@ -38,8 +38,7 @@ namespace CourseWork.Models.AutoDealershipOLAP
 
         public Date Date { get; set; }
 
-        [Required]
-        public int LastLeaseId { get; set; }
+        public int? LastLeaseId { get; set; }
 
     }
 }

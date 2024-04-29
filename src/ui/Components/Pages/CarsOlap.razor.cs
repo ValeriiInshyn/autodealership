@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.Services;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -46,11 +45,11 @@ namespace CourseWork.Components.Pages
 
             await grid0.GoToPage(0);
 
-            cars = await AutoDealershipOLAPService.GetCars(new Query { Filter = $@"i => i.Model.Contains(@0) || i.Generation.Contains(@0)", FilterParameters = new object[] { search } });
+            cars = await AutoDealershipOLAPService.GetCars(new Query { Filter = $@"i => i.Model.Contains(@0) || i.Generation.Contains(@0)", FilterParameters = new object[] { search }, Expand = "Brand" });
         }
         protected override async Task OnInitializedAsync()
         {
-            cars = await AutoDealershipOLAPService.GetCars(new Query { Filter = $@"i => i.Model.Contains(@0) || i.Generation.Contains(@0)", FilterParameters = new object[] { search } });
+            cars = await AutoDealershipOLAPService.GetCars(new Query { Filter = $@"i => i.Model.Contains(@0) || i.Generation.Contains(@0)", FilterParameters = new object[] { search }, Expand = "Brand" });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -97,7 +96,7 @@ namespace CourseWork.Components.Pages
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "",
+    Expand = "Brand",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
 }, "Cars");
             }
@@ -108,7 +107,7 @@ namespace CourseWork.Components.Pages
 {
     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
     OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "",
+    Expand = "Brand",
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
 }, "Cars");
             }

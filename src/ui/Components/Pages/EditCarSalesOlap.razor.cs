@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.Services;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -42,6 +41,8 @@ namespace CourseWork.Components.Pages
 
             autoDealershipsForAutoDealershipId = await AutoDealershipOLAPService.GetAutoDealerships();
 
+            brandsForBrandId = await AutoDealershipOLAPService.GetBrands();
+
             datesForStartDateId = await AutoDealershipOLAPService.GetDates();
 
             datesForEndDateId = await AutoDealershipOLAPService.GetDates();
@@ -50,6 +51,8 @@ namespace CourseWork.Components.Pages
         protected CourseWork.Models.AutoDealershipOLAP.CarSale carSale;
 
         protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.AutoDealership> autoDealershipsForAutoDealershipId;
+
+        protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.Brand> brandsForBrandId;
 
         protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.Date> datesForStartDateId;
 

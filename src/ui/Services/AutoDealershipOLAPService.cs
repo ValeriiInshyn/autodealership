@@ -1,11 +1,18 @@
+using System;
+using System.Data;
+using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Text.Encodings.Web;
-using CourseWork.Data;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 
-namespace CourseWork.Services
+using CourseWork.Data;
+
+namespace CourseWork
 {
     public partial class AutoDealershipOLAPService
     {
@@ -358,6 +365,8 @@ namespace CourseWork.Services
         {
             var itemToDelete = Context.Brands
                               .Where(i => i.Id == id)
+                              .Include(i => i.Cars)
+                              .Include(i => i.CarSales)
                               .FirstOrDefault();
 
             if (itemToDelete == null)
@@ -401,6 +410,7 @@ namespace CourseWork.Services
         {
             var items = Context.Cars.AsQueryable();
 
+            items = items.Include(i => i.Brand);
 
             if (query != null)
             {
@@ -431,6 +441,7 @@ namespace CourseWork.Services
                               .AsNoTracking()
                               .Where(i => i.Id == id);
 
+            items = items.Include(i => i.Brand);
  
             OnGetCarById(ref items);
 
@@ -564,6 +575,7 @@ namespace CourseWork.Services
             var items = Context.CarSales.AsQueryable();
 
             items = items.Include(i => i.AutoDealership);
+            items = items.Include(i => i.Brand);
             items = items.Include(i => i.Date);
             items = items.Include(i => i.Date1);
 
@@ -597,6 +609,7 @@ namespace CourseWork.Services
                               .Where(i => i.Id == id);
 
             items = items.Include(i => i.AutoDealership);
+            items = items.Include(i => i.Brand);
             items = items.Include(i => i.Date);
             items = items.Include(i => i.Date1);
  

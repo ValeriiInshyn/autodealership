@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWork.Services;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -39,9 +38,13 @@ namespace CourseWork.Components.Pages
         protected override async Task OnInitializedAsync()
         {
             car = await AutoDealershipOLAPService.GetCarById(Id);
+
+            brandsForBrandId = await AutoDealershipOLAPService.GetBrands();
         }
         protected bool errorVisible;
         protected CourseWork.Models.AutoDealershipOLAP.Car car;
+
+        protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.Brand> brandsForBrandId;
 
         protected async Task FormSubmit()
         {

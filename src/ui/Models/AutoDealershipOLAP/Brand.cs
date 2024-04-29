@@ -15,5 +15,9 @@ namespace CourseWork.Models.AutoDealershipOLAP
         [Required]
         public string Name { get; set; }
 
+        public ICollection<Car> Cars { get; set; }
+
+        public ICollection<CarSale> CarSales { get; set; }
+
     }
 }
