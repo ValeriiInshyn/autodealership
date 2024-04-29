@@ -1,18 +1,11 @@
-using System;
-using System.Data;
-using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Text.Encodings.Web;
+using CourseWork.Data;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 
-using CourseWork.Data;
-
-namespace CourseWork
+namespace CourseWork.Services
 {
     public partial class AutoDealershipOLAPService
     {

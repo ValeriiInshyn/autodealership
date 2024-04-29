@@ -1,21 +1,12 @@
-using System;
-using System.Data;
-using System.Linq;
-using System.Linq.Dynamic.Core;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
 using System.Text.Encodings.Web;
+using CourseWork.Data;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 
-using CourseWork.Data;
-using CourseWork.Models.AutoDealership;
-using CourseWork.Models.AutoDealershipOLAP;
-
-namespace CourseWork
+namespace CourseWork.Services
 {
     [SuppressMessage("ReSharper", "MethodHasAsyncOverload")]
     public partial class AutoDealershipService
