@@ -1,0 +1,941 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="db7fd9bc-5af5-4e4a-8612-2ea8a238c71e" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Auto Dealership OLAP</ID>
+  <Name>Auto Dealership OLAP</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Dimensions>
+    <Dimension dwd:design-time-name="1746ad06-a67e-40ed-ac65-021d2837b51b">
+      <ID>Car Sales</ID>
+      <Name>Car Sales</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="0e2bddbb-1006-45be-8e67-09ceafa49c2d">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="83aab83b-0f50-40bc-82cd-e0d65d416c7f">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="cf5bfa9a-9573-4311-ba49-313ff8d72b06">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f8e348d4-e1c7-40cb-8636-3222cc3cb47e">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e8855309-08ca-4181-bedd-12f74ae78d91">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="4f146ae3-c1dc-4b3d-8297-954f4c474d9e">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="149b98ed-e333-45fc-b704-a654f8279472">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="dfc7592f-e7c7-42a8-b5e1-ff0bc19d6822">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e94847bd-804e-4268-9703-c9591274cf76">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ae87c773-9472-453e-8775-a8909e9697b4">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="40baba35-967c-4a68-baed-dbdba754e723">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="48fdbcce-ab31-40df-93f0-1abbbcb58f22">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="28e83417-cbc6-491d-b79b-1cff95e984d3">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e347b0e0-53bb-4b3d-9038-b3f31f6aed26">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ead53357-110c-462d-9fe3-2bd4de0029ac">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="fb1eb925-cf36-41ff-89a7-e5f0a77bc57f">
+      <ID>Auto Dealership</ID>
+      <Name>Auto Dealership</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="83e08e57-e1f7-4dfa-bf5f-7fde79076dd9">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="fd4bbc28-e85a-4932-9f3d-ecd90a51f5d5">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8d4753f7-3437-4164-8fff-e9d5899c7699">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="734623a6-723b-4c0f-9ea8-965f49da1224">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="4d609971-72a4-4b1e-aa40-43c68420924a">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3736f488-a436-42d1-8bfc-85b01776da50">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7e95560f-7942-4e3c-a055-9f7d933f34e2">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6f084164-ccd3-4ba9-ac9f-c5cd6118c47e">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="92324509-a379-4603-89d0-1e6c207ae3e7">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="30d46b04-3de1-4075-babd-1b29fa041999">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="40b2509d-62a4-43b3-af25-560b533a3340">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9aee82f2-0885-4200-a284-5d8819f271e7">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="764c4dc9-50a9-44d8-b307-f760cf1bc009">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="51ccded9-6f8b-4431-a4b1-aadf464b36b0">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="91cbb5a2-653c-45f0-b140-693556e73dfd">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="d7bb0ffe-d13f-4a70-ba5c-6d3282ba071b">
+      <ID>End Date</ID>
+      <Name>End Date</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="f6814b98-8ecd-497c-8d30-ab2ce84bf583">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="350a9100-67ff-4323-b040-1bff65b8d9cc">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="93b85080-2e27-46cf-baf2-9a802198dd0a">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6e2af4ae-69e1-40a4-b10d-125c8c924a02">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="42506adb-3b7f-49a4-8711-b73f4d4404ca">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c02cde65-158f-4069-bd5e-0ebb503f7cd8">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e5e62278-eb93-4346-ac3c-a16c8cd07b7e">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="aa313502-e04b-49db-9850-d4f43ccc6a9d">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f6840031-13bf-4e2f-a6d7-50e895acabcf">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0c306389-3ec8-4584-ada4-53a6b7c268f9">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0b509611-fc68-4769-80a6-d4add2057247">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="85bfe514-ea34-4bbf-ac5e-c765d5ba9304">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f2d5ce6a-3971-4671-aff7-e3507af75822">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="827e5da6-ff53-4d0d-85f6-83836f4206f1">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="44c2fd87-a619-465e-99ec-bce1ae63080f">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="691810f9-a5a1-4195-ac03-8a0275c07d2b">
+      <ID>Brand</ID>
+      <Name>Brand</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="4d4f3c6c-f61e-43fa-948f-89f81b519161">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d99bf060-20dd-4633-9bef-f4b9fbb66dfa">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="fb419d04-f87f-4da6-8530-8d52938a252a">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2fa2e801-95e2-4d7d-90e5-276193b169d6">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="80c48845-8da4-4159-8dd2-d0c64a626b6f">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="086137fc-0bba-4bc2-b81f-fbfb2bd7fd9f">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ac2e3f4d-f190-4818-82e1-993ad4b58a57">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8c75bb28-a7de-4179-b3d5-38314ce9dda1">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9a53f403-3919-408f-b610-5802a76dd880">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="269f64d5-8f29-4df6-a7bb-7614ba296868">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="667f78f9-cc31-4633-8e1d-ddb3aa69bdb3">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e69940c7-3c17-471b-9c82-c0c2b7a8aafa">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9a11d16e-e638-4aa2-bded-4d4ae9391ee9">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="40495655-24cf-48e6-aed8-c201ce9e37fb">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="39a27f7d-f652-4957-b874-236b9667d62e">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="9f8b19b7-93b2-486e-8400-671a6c14e53c">
+      <ID>Start Date</ID>
+      <Name>Start Date</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="5493dad9-78cb-41f7-a6a1-774d82f9487b">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="18a697c1-5fde-40be-809b-dc2d7b57cf3c">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ccdfefb4-c282-41ec-9185-056c77937da1">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6c6cfd71-34c8-4727-9dd8-5553776178d7">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="83849dba-f10e-4613-afcf-d932ccd24fa4">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c7de48a0-498f-40df-8b4f-7f453a86e40c">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="22cb02ee-f9e4-44f3-9709-d098890006c1">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a21c5f43-0579-4a06-af11-b9272bf2b154">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="29b853ad-96a8-4480-80cc-f30db0adb36d">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="368251ac-8910-4472-9aec-b928594f6e52">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="67c568dc-9e3a-4cd5-9bde-1c5c60306f40">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a3bfe0a9-a89e-40d2-98e1-0a67ba2ecde8">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="59712e15-eff1-4999-9286-10575b0e745a">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5c47fee1-da06-4a99-97e1-a4ed90914114">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a7fd1dd2-3afe-4490-aba6-214b91b274b3">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="835bbbdb-42ca-4fe2-9f4f-2749521c6ba4">
+      <ID>Leases</ID>
+      <Name>Leases</Name>
+      <DimensionID>Leases</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="469ff340-6fc2-46f6-86fd-7acfe5cec620">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5f8ef7ce-1a00-42d8-9725-2b0ec2409f81">
+          <AttributeID>Price</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c685c29f-a8fc-4428-b415-20ea3cb80cde">
+          <AttributeID>Previous Lease Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="15b062cb-d317-4fc7-b949-0566c06bb165">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="57ec37b3-3747-4b39-b191-6b626775bed5">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="1d423239-a3eb-4501-af92-b06a5048b0d6">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="78f1c55b-b927-4380-82a4-bbdb0aafb09a">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a6aa0662-4466-4aa3-87a3-dcf8943d6d2a">
+          <AttributeID>Cars - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2d856c82-9ddc-40a3-b5f6-c51e5489979a">
+          <AttributeID>Model</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5a29a585-dd75-4a00-ad4d-c834ec587fd5">
+          <AttributeID>Generation</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3b338fdf-500f-4512-9498-924fcbd97e56">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="735ff761-356f-42c4-b9e1-5b7a7a3b7a33">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="f087dd6a-1eeb-4426-83fb-29a83637af0f">
+      <ID>Lease End Date</ID>
+      <Name>Lease End Date</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="09129649-19d4-4e6e-8137-43a072151ec0">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b2b6d31b-25d6-4102-acae-3399037446cd">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="69fe829c-1452-47e4-a0ee-6a618edcb5e7">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2133c8e4-31ac-4f66-b89a-26b4b91acbe8">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7a67db47-0a5f-4514-a676-f9aa10d37cd6">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6be54635-df09-4add-91e0-badc26f0393e">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="20ab21a2-28b1-4f04-a2cd-fc8a15c78863">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3d2c8b8e-cb97-4a9b-aefa-3ac01842dc93">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ba2d59cf-4db9-41ed-95d3-4c74181f472e">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2617f826-b220-4c46-981e-c1af6c99b912">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f4dca846-662d-49d4-a25c-4b11e13f7ca6">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a2e8a0ec-701d-4abd-ac6d-29121117cc9c">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e2bc56bf-a828-4f21-8c59-84d88268d20a">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="50eac6b6-a207-48bb-a5b2-3769409f268f">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="854eb1af-4cce-449a-90f5-3206f81f06f6">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="cc13829e-6410-4200-9d5c-38bb3983da5d">
+      <ID>Car</ID>
+      <Name>Car</Name>
+      <DimensionID>Leases</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="b99bd965-9d5f-4d36-944f-eea8540ccda5">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7bf30fe7-e318-4b55-ba25-2d60fcf30576">
+          <AttributeID>Price</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9c9c7144-4a10-4892-9971-fb1a47edc5ae">
+          <AttributeID>Previous Lease Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="db6a2971-ccf1-442b-99c7-6c58dc4b765b">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="62ce7ccb-f031-4815-8f92-adfbd2b0f188">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="31904710-5496-4d88-8d57-bd3f1b311700">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="03c73730-29e8-4b40-b666-e89fb628b5ae">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="182eaa6e-7c25-4eb5-8377-85703372bf26">
+          <AttributeID>Cars - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="eb24841a-b390-4973-9efa-00a4ff444edd">
+          <AttributeID>Model</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a128fc0b-66f0-482e-8e02-9cb519e8c36f">
+          <AttributeID>Generation</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e3251011-a648-47dc-850f-565e3c9e7e0b">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="bdfb383d-584d-4883-8012-68b8eb8ddd92">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="86ee851d-18df-4b88-98df-d072ba47c69b">
+      <ID>Lease Sign Date</ID>
+      <Name>Lease Sign Date</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="0a7c44ee-06ba-4411-9f94-559d637ebde6">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="13eadb0f-dacc-4591-b659-0a9f368dcad3">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="858ff9e4-c96d-40b4-8cb9-f61e77f75541">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0a228c4a-b115-4d19-ae58-fa2dc4c5eefa">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5921b0de-7d38-4494-ac63-8118172f233a">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="29489585-53a8-40d8-8828-9381fd5dc08d">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e7c4f0af-ea2d-4c58-929d-7d4a69ada43f">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3a950d39-f322-40a6-8c3c-08970077f00e">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c31cd7e3-7602-440e-af46-f0806d235a37">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c8e33a00-fff7-4256-9193-69ef214c7223">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="1ff6472b-bf7f-48d9-9809-69e02995c516">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8719eede-62ad-41aa-a0ad-bb603ab274d2">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d753b2b1-16c4-48ba-99b5-09039b525481">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2eb41f03-083c-4c90-81d1-653a17a33db7">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5ba1a93d-461f-43d5-998d-92736aa4eee4">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="27570293-0b11-4453-a1bf-3bfe36062f3d">
+      <ID>Lease Start Date</ID>
+      <Name>Lease Start Date</Name>
+      <DimensionID>Car Sales</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="6e975903-746b-4823-ae3d-096ef9c1491e">
+          <AttributeID>Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b0adf026-0ead-4df3-9c1c-7515e1e6d302">
+          <AttributeID>Total Income Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="44f29ad7-3aa8-4939-b06f-64e92937acac">
+          <AttributeID>Total Income For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0bc9293a-bec5-4229-bd56-868298936650">
+          <AttributeID>Month Total Income Modify Percent</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9c6a5670-bd7b-4895-abac-f96bf4679fd1">
+          <AttributeID>Sales Count For Last Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="75a352cb-676d-48c9-95e7-6ff631471bd0">
+          <AttributeID>Sales Count For Current Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="93436bd8-6e7c-4bb6-bd8e-71e7546829d4">
+          <AttributeID>Sales Count Change For Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d87dcbfc-f5f3-4a02-94c3-4abfdfe5726d">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="eafc3873-c27e-4dbc-b1ca-fa040c67c4ea">
+          <AttributeID>Name</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="67c6946f-559d-43a7-9fa7-1d0fa1a1e09d">
+          <AttributeID>Dates - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="bc2c3074-f9df-47eb-b06a-0e98054ef515">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="fd921262-f072-4f1c-80bb-f95909944d7d">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="25774c86-23c2-4e3c-b85a-243741c29489">
+          <AttributeID>Day</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="bbf52974-ea74-4762-8af8-d1f099899d30">
+          <AttributeID>Brands - Id</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7dec99fb-9618-4351-b0e7-f5cc3d8bc138">
+          <AttributeID>Brands - Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+  </Dimensions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="6483c1c9-bf00-4daa-937c-19e5566dc2ee">
+      <ID>Car Sales</ID>
+      <Name>Car Sales</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="49f4e06a-4938-4147-bf6e-2e66758abbbb">
+          <ID>Total Income Last Month</ID>
+          <Name>Total Income Last Month</Name>
+          <Source dwd:design-time-name="152f4ccb-38f1-49eb-8642-069c6025c6da">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="3965d240-2486-4ab8-8f86-96aa0ae81de9">
+              <TableID>dbo_CarSales</TableID>
+              <ColumnID>TotalIncomeLastMonth</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="d32eda7e-1c8a-4403-90a7-d8909b71b2d9">
+          <ID>Total Income For Current Month</ID>
+          <Name>Total Income For Current Month</Name>
+          <Source dwd:design-time-name="390621ec-d0d9-4904-95a9-4f1fe040851b">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="fc77b96c-7d1c-407d-bf64-c437e74f4d7c">
+              <TableID>dbo_CarSales</TableID>
+              <ColumnID>TotalIncomeForCurrentMonth</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="558576e8-3352-4d7a-91c1-3001cf8ad102">
+          <ID>Month Total Income Modify Percent</ID>
+          <Name>Month Total Income Modify Percent</Name>
+          <Source dwd:design-time-name="06df5df5-aa02-4762-bb11-9562b77fad09">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="459ae664-9ece-497f-928c-1c6134524125">
+              <TableID>dbo_CarSales</TableID>
+              <ColumnID>MonthTotalIncomeModifyPercent</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="89650bdf-30c6-4583-9685-b636f5210e80">
+          <ID>Sales Count For Last Month</ID>
+          <Name>Sales Count For Last Month</Name>
+          <Source dwd:design-time-name="4f7f8d1d-f0bd-4248-b779-875a540b022c">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="703fd16e-e1fd-4ba4-ab46-790cb4565e3f">
+              <TableID>dbo_CarSales</TableID>
+              <ColumnID>SalesCountForLastMonth</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="7136fdb6-cf95-4b4d-bcd3-9acc4b89db07">
+          <ID>Sales Count For Current Month</ID>
+          <Name>Sales Count For Current Month</Name>
+          <Source dwd:design-time-name="b6dcf118-94d4-4b69-a79e-89543b23cd8b">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="361606eb-2931-4b83-a8bb-18fdcae8c0a2">
+              <TableID>dbo_CarSales</TableID>
+              <ColumnID>SalesCountForCurrentMonth</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="207f71e3-7dfa-4038-8f88-e58b7eead5b0">
+          <ID>Sales Count Change For Month</ID>
+          <Name>Sales Count Change For Month</Name>
+          <Source dwd:design-time-name="f5b3f5d5-c19f-44a4-b89e-cf4563427f22">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="579218f4-facd-4fbb-9fd7-b9d6ee9a931d">
+              <TableID>dbo_CarSales</TableID>
+              <ColumnID>SalesCountChangeForMonth</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="b5151012-2e54-4f64-909d-332ac7d59838">
+          <ID>Car Sales Count</ID>
+          <Name>Car Sales Count</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <Source dwd:design-time-name="b5c529a6-f6a5-480c-bb8e-5c863f83c442">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="42cb7048-65e4-4a12-b034-2c0181b0fa30">
+              <TableID>dbo_CarSales</TableID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="86ba2e48-a800-483a-98d0-ba9553d92ccb">
+          <CubeDimensionID>Car Sales</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="3e0a5d05-cbf8-4db8-88a0-0cbc04866a13">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="6fc3f6e1-5d3d-41f4-9fdf-2212cf8293bb">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="ba92e107-c093-4d90-9be8-cbd69be83014">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="c00ee8f9-ca4f-4ea6-87af-c5c4262db014">
+          <CubeDimensionID>Auto Dealership</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="badafa38-f4be-4fe7-9557-7ce102936a6b">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="3ac76cdb-037d-4b9f-9ff1-accae4b70090">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="c201a05f-01ef-471b-bcbc-ce4888f8dd0e">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="f1c1ddd2-8513-42e9-98c4-b1383a8c7170">
+          <CubeDimensionID>End Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="e188545b-ec48-4d21-87c3-03067c2f348b">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="a5ccdcc8-c389-4422-b33f-3b18f1e2070c">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="507424de-bbc6-42c8-8802-30abe200be8e">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="7be138cc-4605-4dad-bde4-29ff731c3e34">
+          <CubeDimensionID>Brand</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="8d36ff35-978b-4264-b784-f96e4b0cf27e">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="26e38c96-688e-4664-b436-d99058c14393">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="9ee97b42-de9d-4085-aca4-48789698b0b3">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="cd697879-a47a-4d7f-90a0-8d2a3a8a0c6e">
+          <CubeDimensionID>Start Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="3941e3cc-9993-466f-a806-d8a76af69cef">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="361fd89f-d440-42fe-b82a-275dc02833be">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="ccde2222-638e-4861-86dc-03bdb008a1f3">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="e2ea9631-09ff-4621-89cd-e256e42fa685">
+          <CubeDimensionID>Lease End Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="20f70110-91d9-4291-9fd4-6b7a0f9a99ff">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="f9fbac52-ae67-4b9e-8e63-f2947d1247c0">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="5591d4a7-9464-4983-aa60-8d11e332d1e2">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="a6369e40-4fdf-4531-8acc-921cbca83ed5">
+          <CubeDimensionID>Lease Sign Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="2a5d872c-92fd-4615-b66c-2a24d7de3fdd">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="1931ed14-79db-4899-9c1e-d3c6e77e3647">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="08437241-1f92-460d-b672-6a8577d97021">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="3aff66a2-a994-477e-9dd2-afe74fe17c5d">
+          <CubeDimensionID>Lease Start Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="e14ffdd9-5a91-43a2-bf80-9e59d81eeec8">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="d25cad04-2f24-4862-8c6d-6ddbfb720c43">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="c6c665f6-0dd5-4a26-b795-dfc00da45221">
+                    <TableID>dbo_CarSales</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+    <MeasureGroup dwd:design-time-name="e63d56ea-f45b-4632-abc6-062585295e2e">
+      <ID>Leases</ID>
+      <Name>Leases</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="575200e4-98df-48e2-a0ac-fee32a3b89fc">
+          <ID>Price</ID>
+          <Name>Price</Name>
+          <Source dwd:design-time-name="dd4ad41e-852c-4d6c-8233-71f123a7795f">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="e6cdf015-25bf-40c6-a59d-df5393564de3">
+              <TableID>dbo_Leases</TableID>
+              <ColumnID>Price</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="42c929e6-0f33-4672-9993-543b85fa63cb">
+          <ID>Previous Lease Modify Percent</ID>
+          <Name>Previous Lease Modify Percent</Name>
+          <Source dwd:design-time-name="509a9ae5-4039-44d7-b27e-cc79a9550467">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="ee2448f0-919c-4d23-b8cc-eff3cde1f155">
+              <TableID>dbo_Leases</TableID>
+              <ColumnID>PreviousLeaseModifyPercent</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="2bc95c0c-c1fc-4d0e-9222-985bd5fa29b4">
+          <ID>Last Lease Id</ID>
+          <Name>Last Lease Id</Name>
+          <Source dwd:design-time-name="317c0b7a-9b4f-4bb0-9959-af9ad400540f">
+            <DataType>Integer</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="cad9a749-aab0-40ec-a03e-cfbbda1a54f2">
+              <TableID>dbo_Leases</TableID>
+              <ColumnID>LastLeaseId</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+        <Measure dwd:design-time-name="ac77952d-e70e-4076-ad48-1722b82eb7c4">
+          <ID>Leases Count</ID>
+          <Name>Leases Count</Name>
+          <AggregateFunction>Count</AggregateFunction>
+          <Source dwd:design-time-name="c6a4b13c-4848-4e2f-b501-b11fe3ea8534">
+            <DataType>Integer</DataType>
+            <DataSize>4</DataSize>
+            <Source xsi:type="RowBinding" dwd:design-time-name="50149fe7-fa2b-47de-84b7-ae17e04e56a0">
+              <TableID>dbo_Leases</TableID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="1cab789f-28d4-42a2-9cf1-cbf77194bc8d">
+          <CubeDimensionID>Leases</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="0011064c-cda0-4844-8761-2f664583fcb5">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="df4fe1eb-ff6b-4329-befc-2016d97130d3">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="30507cf4-5f63-47ef-9771-69cb33aa1e39">
+                    <TableID>dbo_Leases</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="bd308408-7019-4bb2-817f-b2130e71d51e">
+          <CubeDimensionID>Lease End Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="d4819ab1-b7bb-4bef-bbe1-1a3db0f92f45">
+              <AttributeID>Dates - Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="4a18a514-52be-4ce9-9a77-809363020657">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="f86325e2-b8f3-458c-8026-4b4e4c7df3a9">
+                    <TableID>dbo_Leases</TableID>
+                    <ColumnID>LeaseEndDateId</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="bb8efeab-b5fc-49f9-978b-200c3f3de59d">
+          <CubeDimensionID>Lease Sign Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="61ebb5de-3fd0-400b-8546-506c24285e85">
+              <AttributeID>Dates - Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="8fe0e1e5-dc73-41a3-aa01-4fed8573c48a">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="b3bd0bdd-79d5-4728-a571-1da159ed326e">
+                    <TableID>dbo_Leases</TableID>
+                    <ColumnID>LeaseSignDateId</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="28e29873-04c5-4b3a-98d0-f20f9ef4f809">
+          <CubeDimensionID>Lease Start Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="b571f857-6add-471f-85e3-6e846b965cce">
+              <AttributeID>Dates - Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="eb39afc8-4377-4df9-a038-e67fe94b707e">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="5f02d14d-aa62-4d31-9224-b323b848b7ab">
+                    <TableID>dbo_Leases</TableID>
+                    <ColumnID>LeaseStartDateId</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="2e5cf79f-4412-4b31-8299-99f7133f8f3f">
+          <CubeDimensionID>Car</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="17f420d2-60b4-4a24-8606-5f3002a6019d">
+              <AttributeID>Id</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="58ab1b19-f19d-406c-a556-06b71050c5a2">
+                  <DataType>Integer</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="60043975-db94-43e1-84b8-6a09402456aa">
+                    <TableID>dbo_Leases</TableID>
+                    <ColumnID>Id</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="01c8dd3e-231a-43cd-89de-0499f79c562c">
+    <DataSourceViewID>Auto Dealership OLAP</DataSourceViewID>
+  </Source>
+</Cube>

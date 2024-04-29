@@ -1,0 +1,4 @@
+SELECT
+   [Measures].[Month Total Income Modify Percent] ON COLUMNS,
+   ([Car Sales].[Brands - Name].Children,[Car Sales].[Year].MEMBERS,[Car Sales].[Month].MEMBERS) ON ROWS
+FROM [Auto Dealership OLAP]

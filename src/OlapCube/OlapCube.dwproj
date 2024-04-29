@@ -8,12 +8,12 @@
   </Database>
   <Cubes>
     <ProjectItem>
-      <Name>Auto Dealership OLAP View.cube</Name>
-      <FullPath>Auto Dealership OLAP View.cube</FullPath>
+      <Name>Auto Dealership OLAP.cube</Name>
+      <FullPath>Auto Dealership OLAP.cube</FullPath>
       <Dependencies>
         <ProjectItem>
-          <Name>Auto Dealership OLAP View.partitions</Name>
-          <FullPath>Auto Dealership OLAP View.partitions</FullPath>
+          <Name>Auto Dealership OLAP.partitions</Name>
+          <FullPath>Auto Dealership OLAP.partitions</FullPath>
         </ProjectItem>
       </Dependencies>
     </ProjectItem>
@@ -30,14 +30,14 @@
   </Dimensions>
   <DataSources>
     <ProjectItem>
-      <Name>Auto Dealership OLAP Source.ds</Name>
-      <FullPath>Auto Dealership OLAP Source.ds</FullPath>
+      <Name>Auto Dealership OLAP.ds</Name>
+      <FullPath>Auto Dealership OLAP.ds</FullPath>
     </ProjectItem>
   </DataSources>
   <DataSourceViews>
     <ProjectItem>
-      <Name>Auto Dealership OLAP View.dsv</Name>
-      <FullPath>Auto Dealership OLAP View.dsv</FullPath>
+      <Name>Auto Dealership OLAP.dsv</Name>
+      <FullPath>Auto Dealership OLAP.dsv</FullPath>
     </ProjectItem>
   </DataSourceViews>
   <Configurations>

@@ -1,0 +1,4 @@
+SELECT
+	[Measures].[Total Income For Current Month] ON COLUMNS,
+   ([Car Sales].[Name].MEMBERS,[Car Sales].[Brands - Name].Children,[Car Sales].[Year].Children) ON ROWS
+FROM [Auto Dealership OLAP]

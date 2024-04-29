@@ -1,4 +1,4 @@
-﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="73b973ef-8f9d-4814-ae1c-559ebaadc036" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="8db47348-006e-4fef-9a26-f3bda7e52490" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
   <ID>Car Sales</ID>
   <Name>Car Sales</Name>
   <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
@@ -42,78 +42,78 @@
   </Annotations>
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
   <State>Unprocessed</State>
-  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="7b002e7d-9f9c-4e6c-a03a-fe276d5cf808">
-    <DataSourceViewID>Auto Dealership OLAP View</DataSourceViewID>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="e4a98ddc-7468-4dc7-b932-77ea5a775c4d">
+    <DataSourceViewID>Auto Dealership OLAP</DataSourceViewID>
   </Source>
-  <ErrorConfiguration dwd:design-time-name="0962a812-3997-4089-8a52-ea6c2e8671e7">
+  <ErrorConfiguration dwd:design-time-name="66a7ef1e-ea05-4a90-9222-71d9342555f3">
     <KeyNotFound>ReportAndStop</KeyNotFound>
     <KeyDuplicate>ReportAndStop</KeyDuplicate>
     <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
   </ErrorConfiguration>
   <CurrentStorageMode>Molap</CurrentStorageMode>
   <Attributes>
-    <Attribute dwd:design-time-name="0f1e6c49-065f-46f5-8d84-041489f7dc05">
+    <Attribute dwd:design-time-name="0c8c733b-f510-43c3-8c51-1ce06c65ea9c">
       <ID>Id</ID>
       <Name>Id</Name>
       <Usage>Key</Usage>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="c2076721-73b4-4ce0-a925-7516e82c2114">
+        <KeyColumn dwd:design-time-name="a054fa1b-7695-4333-96b4-5da936f58bf0">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="306cf035-7555-46ed-9ec6-1389641e4575">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="7152c40c-70ad-4db1-89c6-59180bb70ae9">
             <TableID>dbo_CarSales</TableID>
             <ColumnID>Id</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
       <AttributeRelationships>
-        <AttributeRelationship dwd:design-time-name="4a531e05-4adf-4861-b8b2-334eaf05aa12">
+        <AttributeRelationship dwd:design-time-name="96ddf6da-da49-4627-9efc-e7425f0ff6f8">
           <AttributeID>Total Income Last Month</AttributeID>
           <Name>Total Income Last Month</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="cd86e958-6841-41e7-abae-363157c47fa0">
+        <AttributeRelationship dwd:design-time-name="d0c94029-adc4-44bd-af51-477620f473e5">
           <AttributeID>Total Income For Current Month</AttributeID>
           <Name>Total Income For Current Month</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="67226b9b-2ed7-43ea-a3e7-c195cd6d3291">
+        <AttributeRelationship dwd:design-time-name="834287ef-ba09-4e49-8c2f-f7d5d9ab1ec2">
           <AttributeID>Month Total Income Modify Percent</AttributeID>
           <Name>Month Total Income Modify Percent</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="5738b6af-8d31-4c17-887a-52712d704dee">
+        <AttributeRelationship dwd:design-time-name="316e792c-4db3-4634-92e3-af2a2dcaae51">
           <AttributeID>Sales Count For Last Month</AttributeID>
           <Name>Sales Count For Last Month</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="e2518a81-96ab-4655-8bbe-205b651439e0">
+        <AttributeRelationship dwd:design-time-name="718bd456-d05a-4a0b-9257-3fc628343d8d">
           <AttributeID>Sales Count For Current Month</AttributeID>
           <Name>Sales Count For Current Month</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="60127b8d-e97e-4e12-8464-6bd300c18ae4">
+        <AttributeRelationship dwd:design-time-name="13fa301b-d9a7-4ee1-a201-9cc4ee43fa79">
           <AttributeID>Sales Count Change For Month</AttributeID>
           <Name>Sales Count Change For Month</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="7fcad05a-511d-4641-912c-c76f3631a309">
+        <AttributeRelationship dwd:design-time-name="661f44e9-d3aa-47fe-9fc3-f1750fb8153c">
+          <AttributeID>Auto Dealerships - Id</AttributeID>
+          <Name>Auto Dealerships - Id</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="cf86b5f5-e8f0-4d1b-9d93-d42dd39fbd3a">
           <AttributeID>Dates - Id</AttributeID>
           <Name>Dates - Id</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="0e0cde1b-0536-4024-baa7-465942e0c8a2">
+        <AttributeRelationship dwd:design-time-name="7f401631-1aa7-48b4-ac48-b2081cb2b452">
           <AttributeID>Brands - Id</AttributeID>
           <Name>Brands - Id</Name>
-        </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="7fee69e4-15a4-4504-b3c2-b6680125b0c6">
-          <AttributeID>Auto Dealerships - Id</AttributeID>
-          <Name>Auto Dealerships - Id</Name>
         </AttributeRelationship>
       </AttributeRelationships>
       <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="a471a54b-e851-4e24-b7ee-dcd3b9d034aa">
+    <Attribute dwd:design-time-name="af36d73b-6a00-4b37-afe3-60c2e0caa3ba">
       <ID>Total Income Last Month</ID>
       <Name>Total Income Last Month</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="18863cf0-6dbe-43f2-9c92-0eae27c1495a">
+        <KeyColumn dwd:design-time-name="a898e625-c331-47b3-94f7-04c5fbed2000">
           <DataType>Double</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="d4dcfa35-f5bd-488c-9233-f9567a8e6cb0">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ab90de7b-b064-4a24-8ebd-aec4ba1520a1">
             <TableID>dbo_CarSales</TableID>
             <ColumnID>TotalIncomeLastMonth</ColumnID>
           </Source>
@@ -123,13 +123,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="9369a4cd-8553-4639-8481-18aaf6da38ab">
+    <Attribute dwd:design-time-name="b935b145-f829-427c-94c3-2aadcb85cb2f">
       <ID>Total Income For Current Month</ID>
       <Name>Total Income For Current Month</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="138a4277-6285-4a1c-8720-b778be278a29">
+        <KeyColumn dwd:design-time-name="7909179b-40bc-441d-b85c-803c5fe46819">
           <DataType>Double</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="56a3eb7e-7c49-42d8-9f56-c8a7685ba438">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="90ef0a2e-c310-4bca-adb1-b52c5359d350">
             <TableID>dbo_CarSales</TableID>
             <ColumnID>TotalIncomeForCurrentMonth</ColumnID>
           </Source>
@@ -139,13 +139,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="c3996ca2-e0a5-44ca-821f-ac8612b28564">
+    <Attribute dwd:design-time-name="243519e7-2201-478b-9afe-841ee6211fef">
       <ID>Month Total Income Modify Percent</ID>
       <Name>Month Total Income Modify Percent</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="fa060c6a-b517-4ad1-bce3-f91e07bb767e">
+        <KeyColumn dwd:design-time-name="3c5f02ba-1e1d-4354-bd8b-55ea5f24f75a">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="eee499ca-5764-41d9-88f6-fb2f6f771e48">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f05d1ca4-5aba-498c-8fa8-d8f1f413f298">
             <TableID>dbo_CarSales</TableID>
             <ColumnID>MonthTotalIncomeModifyPercent</ColumnID>
           </Source>
@@ -155,13 +155,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="83635edb-c3cc-42a3-b1a6-11110481eca1">
+    <Attribute dwd:design-time-name="41544e52-0caf-42d3-a684-238b28d1f2a1">
       <ID>Sales Count For Last Month</ID>
       <Name>Sales Count For Last Month</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="e6d083f9-38e1-4690-b4a5-db3a44436a82">
+        <KeyColumn dwd:design-time-name="7c220550-2ad0-4c76-9f60-324838ddbe50">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="8507b016-ddfe-45fd-b2ae-03c545dba6fe">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2d691ac2-0659-4e75-8ae2-99b3f8608b6e">
             <TableID>dbo_CarSales</TableID>
             <ColumnID>SalesCountForLastMonth</ColumnID>
           </Source>
@@ -171,13 +171,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="64d04192-0e2c-4607-a5ff-f125735a92ab">
+    <Attribute dwd:design-time-name="8aacfc25-9573-4c0f-aaf2-bec4d1f6c893">
       <ID>Sales Count For Current Month</ID>
       <Name>Sales Count For Current Month</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="6de9a326-e8e4-41a9-bd22-15f9df4b4633">
+        <KeyColumn dwd:design-time-name="d3e71ccf-5fc8-4fd6-adce-6815d013e180">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="3fecb1d8-8d1f-4a8c-a6da-964c042f5b16">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="206e072e-dab9-49f2-88cb-b369a4769b87">
             <TableID>dbo_CarSales</TableID>
             <ColumnID>SalesCountForCurrentMonth</ColumnID>
           </Source>
@@ -187,13 +187,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="37c545c1-a172-4838-b27a-20c3fd61fa1d">
+    <Attribute dwd:design-time-name="bdb2d760-7dc1-44ce-bc42-c4a7cfcce5be">
       <ID>Sales Count Change For Month</ID>
       <Name>Sales Count Change For Month</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="720364ef-3c32-48d5-a218-c62a045fba14">
+        <KeyColumn dwd:design-time-name="9b396bb4-5574-42a3-928e-21a8b9c9cf57">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="51b9ddce-969b-4081-a960-8f4e32c43e82">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5f9bdd41-4d93-442c-b93c-66665867b70d">
             <TableID>dbo_CarSales</TableID>
             <ColumnID>SalesCountChangeForMonth</ColumnID>
           </Source>
@@ -203,28 +203,67 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="b4beb256-3c8c-4dff-bad0-40952735ebb4">
+    <Attribute dwd:design-time-name="7976d929-9c7b-42cb-b892-626b933de6af">
+      <ID>Auto Dealerships - Id</ID>
+      <Name>Auto Dealerships - Id</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="0bd9418b-296f-494f-bf61-6b2c05ccbe7a">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="edd19185-2f68-4af6-996a-3f2832e7c23f">
+            <TableID>dbo_AutoDealerships</TableID>
+            <ColumnID>Id</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="59b0e417-2586-492c-baba-5a30b48088ee">
+          <AttributeID>Name</AttributeID>
+          <Name>Name_</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="57b1e6a8-7ce9-4ec3-983e-3c7e1b194410">
+      <ID>Name</ID>
+      <Name>Name</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a7e282ac-33a1-40c0-a09e-aff87752e16a">
+          <DataType>WChar</DataType>
+          <DataSize>100</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="56d576f5-56fd-4d45-a883-4e6283ca366d">
+            <TableID>dbo_AutoDealerships</TableID>
+            <ColumnID>Name</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="65090735-cad2-429f-8fde-cc5d6e461a8a">
       <ID>Dates - Id</ID>
       <Name>Dates - Id</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="f10c5f84-8b48-442f-92d2-584a7c7550b5">
+        <KeyColumn dwd:design-time-name="4a62f6d6-697e-400c-8fdf-a4814b64f87a">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="3a0efdeb-a457-48e3-b2ad-bf0d4ccefc1f">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="59b06fdf-ff9a-4b06-9af0-e75ab7de2641">
             <TableID>dbo_Dates</TableID>
             <ColumnID>Id</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
       <AttributeRelationships>
-        <AttributeRelationship dwd:design-time-name="22f9ea83-a953-4f93-90cf-3008aab0a764">
+        <AttributeRelationship dwd:design-time-name="2f39e2af-2c15-4a74-912a-81f56b765c55">
           <AttributeID>Year</AttributeID>
           <Name>Year</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="3288d2a6-1b92-4abb-a232-f48a4e346fea">
+        <AttributeRelationship dwd:design-time-name="387dbdf4-67cb-4dd9-86cf-555e7af4a77d">
           <AttributeID>Month</AttributeID>
           <Name>Month</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="d885dd65-8944-4943-8a6c-447f7dc7e5b4">
+        <AttributeRelationship dwd:design-time-name="b4141960-86e1-4df0-9fd7-e14ff435fa17">
           <AttributeID>Day</AttributeID>
           <Name>Day</Name>
         </AttributeRelationship>
@@ -233,13 +272,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="c24b7e80-6c91-43f6-b4af-38d6696f6bae">
+    <Attribute dwd:design-time-name="63f4ee05-11ce-4394-8df1-1e361b27b651">
       <ID>Year</ID>
       <Name>Year</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="62605751-15e6-4045-a7e1-a3e7fffa2c87">
+        <KeyColumn dwd:design-time-name="5d717b96-509b-44fc-ae8b-1ed1b6e97e26">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="c9c39a9f-b4f2-40d1-ae51-8c6d637e1dc3">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1bc7cc82-9750-4ccd-a767-23fedad8387f">
             <TableID>dbo_Dates</TableID>
             <ColumnID>Year</ColumnID>
           </Source>
@@ -249,13 +288,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="0474e397-633f-4f3a-ad2f-682dec3cc485">
+    <Attribute dwd:design-time-name="8869ea42-d6ee-4b47-a0e1-7ddc811b30b4">
       <ID>Month</ID>
       <Name>Month</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="1256cc43-2dff-4ed6-907d-00c6b13fb191">
+        <KeyColumn dwd:design-time-name="4ef4b2af-1d7f-426e-b77d-9b3551a5644a">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="ce9b6b4e-4ec1-44f5-ba0b-acc75f7c060f">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d1ba6574-20d6-4774-aaa8-808d6f19bced">
             <TableID>dbo_Dates</TableID>
             <ColumnID>Month</ColumnID>
           </Source>
@@ -265,13 +304,13 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="2c14724f-39ef-45eb-a51b-539317ac0e02">
+    <Attribute dwd:design-time-name="6bf4b39b-8cad-4019-b405-4e4f0453fffa">
       <ID>Day</ID>
       <Name>Day</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="a3f42f11-103b-4799-bce4-29d22258b60a">
+        <KeyColumn dwd:design-time-name="cdf17ad3-450f-4b84-9dc3-df28c5609546">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="c60a6819-8e05-49c6-85ae-83bdd72c2f1a">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="2614f9c7-5a2f-4f6a-9081-c7af04429f68">
             <TableID>dbo_Dates</TableID>
             <ColumnID>Day</ColumnID>
           </Source>
@@ -281,76 +320,37 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="1e9bd76e-1ecb-497d-a0d9-f48b309e3d0d">
+    <Attribute dwd:design-time-name="1f35a1b0-4edc-43bb-a721-456efb186760">
       <ID>Brands - Id</ID>
       <Name>Brands - Id</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="d9701e8e-f581-401e-ae3a-acfab93a304b">
+        <KeyColumn dwd:design-time-name="6cdc91b9-666d-4e2b-98d4-e64b5a0d1895">
           <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="64f70602-c3c5-4373-9ebb-c6e1a213dd39">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="87c9274f-900c-41fc-9eb6-59198bc9e9c8">
             <TableID>dbo_Brands</TableID>
             <ColumnID>Id</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
       <AttributeRelationships>
-        <AttributeRelationship dwd:design-time-name="9b21ebd3-be6f-4e96-9cdf-b5cde19f8b8b">
-          <AttributeID>Name</AttributeID>
-          <Name>Name_</Name>
+        <AttributeRelationship dwd:design-time-name="c4c0b733-a7e1-4448-a0ba-6635c2d4afd9">
+          <AttributeID>Brands - Name</AttributeID>
+          <Name>Brands - Name</Name>
         </AttributeRelationship>
       </AttributeRelationships>
       <OrderBy>Key</OrderBy>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="9695a53d-d4db-41d3-b0f8-36b6bab40357">
-      <ID>Name</ID>
-      <Name>Name</Name>
+    <Attribute dwd:design-time-name="719c3d18-af12-4ec9-87d9-916875a57528">
+      <ID>Brands - Name</ID>
+      <Name>Brands - Name</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="f4ead455-ed03-47c4-a3a5-0e66d5ea90af">
+        <KeyColumn dwd:design-time-name="f24cfa80-15d1-43f5-9a8c-d849ac0803f8">
           <DataType>WChar</DataType>
           <DataSize>100</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="3265896f-9994-4e5a-a30d-175c24f7082b">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b7c67120-8ca0-4bc9-af9d-e8c4abbafdf1">
             <TableID>dbo_Brands</TableID>
-            <ColumnID>Name</ColumnID>
-          </Source>
-        </KeyColumn>
-      </KeyColumns>
-      <OrderBy>Key</OrderBy>
-      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
-      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
-    </Attribute>
-    <Attribute dwd:design-time-name="40d3ee1e-7d83-4f76-8bc0-7421e03164d7">
-      <ID>Auto Dealerships - Id</ID>
-      <Name>Auto Dealerships - Id</Name>
-      <KeyColumns>
-        <KeyColumn dwd:design-time-name="93c4841e-26bb-42dc-805a-7eeb392bad63">
-          <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="b27b9ae0-0c4b-48c2-bd11-a341d6a69f90">
-            <TableID>dbo_AutoDealerships</TableID>
-            <ColumnID>Id</ColumnID>
-          </Source>
-        </KeyColumn>
-      </KeyColumns>
-      <AttributeRelationships>
-        <AttributeRelationship dwd:design-time-name="cd0da530-809e-41f1-814b-31d824f4603e">
-          <AttributeID>Auto Dealerships - Name</AttributeID>
-          <Name>Auto Dealerships - Name</Name>
-        </AttributeRelationship>
-      </AttributeRelationships>
-      <OrderBy>Key</OrderBy>
-      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
-      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
-    </Attribute>
-    <Attribute dwd:design-time-name="8e5f98bd-fa7e-43c7-98dc-7adf85f486d4">
-      <ID>Auto Dealerships - Name</ID>
-      <Name>Auto Dealerships - Name</Name>
-      <KeyColumns>
-        <KeyColumn dwd:design-time-name="ed6b37d6-dbcc-4632-b744-ee3b5b80cca6">
-          <DataType>WChar</DataType>
-          <DataSize>100</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="e6091f78-7fd9-4e27-a8c3-b112540c151b">
-            <TableID>dbo_AutoDealerships</TableID>
             <ColumnID>Name</ColumnID>
           </Source>
         </KeyColumn>
