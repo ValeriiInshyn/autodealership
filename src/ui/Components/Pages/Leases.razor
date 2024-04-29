@@ -22,15 +22,13 @@
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@leases" TItem="CourseWork.Models.AutoDealership.Lease" RowDoubleClick="@EditRow">
             <Columns>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="Id" Title="Id">
-                </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="Employee.FirstName" Title="Employee">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="LeaseProposal.Description" Title="Lease Proposal">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="Customer.FirstName" Title="Customer">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="DealershipCar" Title="Dealership Car">
+                    <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="DealershipCar.Car.FullName" Title="Dealership Car">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="LeaseSignDate" Title="Lease Sign Date">
                 </RadzenDataGridColumn>
@@ -43,10 +41,6 @@
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="TotalPrice" Title="Total Price">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="Description" Title="Description">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="CreateDate" Title="Create Date">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Property="UpdateDate" Title="Update Date">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Lease" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                     <Template Context="lease">

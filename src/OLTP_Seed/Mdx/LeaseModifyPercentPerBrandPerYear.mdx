@@ -1,0 +1,4 @@
+SELECT
+	[Measures].[Previous Lease Modify Percent] ON COLUMNS,
+   ([Leases].[Name].Children,[Leases].[Year].Children) ON ROWS
+FROM [Auto Dealership OLAP]

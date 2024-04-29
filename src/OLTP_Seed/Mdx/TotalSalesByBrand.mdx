@@ -1,0 +1,4 @@
+SELECT
+	[Measures].[Car Sales Count] ON COLUMNS,
+	([Car Sales].[Brands - Name].Children,[Car Sales].[Year].Children) ON ROWS
+FROM [Auto Dealership OLAP]

@@ -26,7 +26,7 @@
                     <RadzenLabel Text="Dealership Car" Component="DealershipCar" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="" ValueProperty="Id" AllowClear=true
+                <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="Car.FullName" ValueProperty="Id" AllowClear=true
                          Placeholder="Choose DealershipCar" style="display: block; width: 100%" @bind-Value="@carSale.DealershipCarId" Name="DealershipCarId"
                            />
                 </RadzenColumn>
@@ -86,22 +86,6 @@
                     <RadzenDropDownDataGrid Data="@paymentMethodsForPaymentMethodId" TextProperty="Name" ValueProperty="Id" AllowClear=true
                          Placeholder="Choose PaymentMethod" style="display: block; width: 100%" @bind-Value="@carSale.PaymentMethodId" Name="PaymentMethodId"
                            />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Create Date" Component="CreateDate" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@carSale.CreateDate" Name="CreateDate" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Update Date" Component="UpdateDate" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@carSale.UpdateDate" Name="UpdateDate" />
                 </RadzenColumn>
             </RadzenRow>
           <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">

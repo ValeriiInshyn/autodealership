@@ -45,5 +45,6 @@ namespace CourseWork.Models.AutoDealership
 
         public ICollection<CarDelivery> CarDeliveries { get; set; }
 
+
     }
 }
