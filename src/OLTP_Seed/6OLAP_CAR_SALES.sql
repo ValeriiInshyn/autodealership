@@ -1,5 +1,9 @@
 DECLARE @CurrentMaxId INT;
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.CarSales;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarSales;
+
+
+INSERT INTO AutoDealershipStaging.dbo.CarSales
+SELECT * FROM AutoDealership.dbo.CarSales;
 
 ;WITH SalesData AS (
     SELECT 
@@ -9,10 +13,10 @@ SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.CarSale
         SUM(c.Price) AS TotalPrice,
         COUNT(c.Price) as SalesCount
     FROM
-        AutoDealership.dbo.AutoDealerships ds
-        JOIN AutoDealership.dbo.DealershipCars dc ON dc.DealershipId = ds.Id
-        JOIN AutoDealership.dbo.CarSales cs ON cs.DealershipCarId = dc.CarId
-        JOIN AutoDealership.dbo.Cars c ON dc.CarId = c.Id
+        AutoDealershipStaging.dbo.AutoDealerships ds
+        JOIN AutoDealershipStaging.dbo.DealershipCars dc ON dc.DealershipId = ds.Id
+        JOIN AutoDealershipStaging.dbo.CarSales cs ON cs.DealershipCarId = dc.CarId
+        JOIN AutoDealershipStaging.dbo.Cars c ON dc.CarId = c.Id
     GROUP BY
         ds.Id,
         c.BrandId,
@@ -32,7 +36,7 @@ RankedSalesData AS (
     FROM
         SalesData
 )
-INSERT INTO AutoDealershipOLAPTmp.dbo.CarSales (
+INSERT INTO AutoDealershipOLAP.dbo.CarSales (
     Id,
     AutoDealershipId,
     BrandId,
@@ -50,8 +54,8 @@ SELECT
     DealershipId,
     BrandId,
     TotalIncomeLastMonth,
-    (SELECT TOP 1 id FROM AutoDealershipOLAPTmp.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=1) AS StartDateId,
-    (SELECT TOP 1 id FROM AutoDealershipOLAPTmp.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=DAY(EOMONTH(SaleDate))) AS EndDateId,
+    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=1) AS StartDateId,
+    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=DAY(EOMONTH(SaleDate))) AS EndDateId,
     TotalIncomeForCurrentMonth,
     (TotalIncomeForCurrentMonth - TotalIncomeLastMonth) / ((TotalIncomeForCurrentMonth + TotalIncomeLastMonth) /2 ) * 100 - 100 AS MonthTotalIncomeModifyPercent,
     SalesCountForLastMonth,
@@ -67,6 +71,3 @@ GROUP BY
     TotalIncomeForCurrentMonth,
     SalesCountForCurrentMonth,
     SalesCountForLastMonth
-
-INSERT INTO AutoDealershipOLAP.dbo.CarSales
-SELECT * FROM AutoDealershipOLAPTmp.dbo.CarSales;

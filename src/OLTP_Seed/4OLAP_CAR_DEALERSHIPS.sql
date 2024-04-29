@@ -1,7 +1,10 @@
 DECLARE @CurrentMaxId INT;
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.AutoDealerships;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.AutoDealerships;
 
-INSERT INTO AutoDealershipOLAPTmp.dbo.AutoDealerships(
+INSERT INTO AutoDealershipStaging.dbo.AutoDealerships
+SELECT * FROM AutoDealership.dbo.AutoDealerships;
+
+INSERT INTO AutoDealershipOLAP.dbo.AutoDealerships(
     Id,
     Name
 )
@@ -9,7 +12,5 @@ SELECT
     @CurrentMaxId + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS Id,
     ds.Name
 FROM 
-    AutoDealership.dbo.AutoDealerships ds
+    AutoDealershipStaging.dbo.AutoDealerships ds
 
-INSERT INTO AutoDealershipOLAP.dbo.AutoDealerships
-SELECT * FROM AutoDealershipOLAPTmp.dbo.AutoDealerships;

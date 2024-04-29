@@ -1,7 +1,10 @@
 DECLARE @CurrentMaxId INT;
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.Dates;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Dates;
 
-INSERT INTO AutoDealershipOLAPTmp.dbo.Dates(
+INSERT INTO AutoDealership.dbo.Dates
+SELECT * FROM AutoDealershipStaging.dbo.Dates;
+
+INSERT INTO AutoDealershipOLAP.dbo.Dates(
     Id,
     [Year],
     [Month],
@@ -15,11 +18,11 @@ SELECT
     DAY(CombinedDates.Date) AS [Day]
 FROM (
 
-    SELECT LeaseSignDate AS Date FROM AutoDealership.dbo.Leases
+    SELECT LeaseSignDate AS Date FROM AutoDealershipStaging.dbo.Leases
     UNION
-    SELECT LeaseStartDate AS Date FROM AutoDealership.dbo.Leases
+    SELECT LeaseStartDate AS Date FROM AutoDealershipStaging.dbo.Leases
     UNION
-    SELECT LeaseEndDate AS Date FROM AutoDealership.dbo.Leases
+    SELECT LeaseEndDate AS Date FROM AutoDealershipStaging.dbo.Leases
     UNION
   SELECT Date FROM (
         SELECT FirstDayOfMonth AS Date 
@@ -31,7 +34,7 @@ FROM (
                 SELECT
                     MIN(CAST(SaleDate AS DATE)) AS MinDate,
                     MAX(CAST(SaleDate AS DATE)) AS MaxDate
-                FROM AutoDealership.dbo.CarSales
+                FROM AutoDealershipStaging.dbo.CarSales
             ) AS DateRange
             CROSS JOIN master.dbo.spt_values v
             WHERE
@@ -48,7 +51,7 @@ FROM (
                 SELECT
                     MIN(CAST(SaleDate AS DATE)) AS MinDate,
                     MAX(CAST(SaleDate AS DATE)) AS MaxDate
-                FROM AutoDealership.dbo.CarSales
+                FROM AutoDealershipStaging.dbo.CarSales
             ) AS DateRange
             CROSS JOIN master.dbo.spt_values v
             WHERE
@@ -58,5 +61,3 @@ FROM (
     ) AS MonthFirstLastDays
 ) AS CombinedDates;
 
-INSERT INTO AutoDealershipOLAP.dbo.Dates
-SELECT * FROM AutoDealershipOLAPTmp.dbo.Dates;
