@@ -74,9 +74,33 @@ namespace CourseWork.Components.Pages
         {
             DialogService.Close(null);
         }
+        protected async Task AddCustomerClick(MouseEventArgs args)
+        {
+            await DialogService.OpenAsync<AddCustomer>("Add customer");
+            customersForCustomerId = await AutoDealershipService.GetCustomers();
 
+        }
+
+        private async Task AddDealershipCarClick()
+        {
+            await DialogService.OpenAsync<AddDealershipCar>("Add dealership car");
+            dealershipCarsForDealershipCarId = await AutoDealershipService.GetDealershipCars();
+
+        }
+
+        private async Task AddEmplyeeClick()
+        {
+            await DialogService.OpenAsync<AddEmployee>("Add employee");
+            employeesForEmployeeId = await AutoDealershipService.GetEmployees();
+        }
 
         protected bool hasChanges = false;
         protected bool canEdit = true;
+
+        private async Task AddLeaseProposalClick()
+        {
+            await DialogService.OpenAsync<AddLeaseProposal>("Add list proposal");
+            leaseProposalsForProposalId = await AutoDealershipService.GetLeaseProposals();
+        }
     }
 }

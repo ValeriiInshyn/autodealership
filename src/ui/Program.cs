@@ -8,7 +8,7 @@ builder.Services.AddRazorComponents().AddInteractiveServerComponents().AddHubOpt
 builder.Services.AddControllers();
 builder.Services.AddRadzenComponents();
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<CourseWork.AutoDealershipService>();
+builder.Services.AddTransient<CourseWork.AutoDealershipService>();
 builder.Services.AddDbContext<CourseWork.Data.AutoDealershipContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("AutoDealershipConnection"));

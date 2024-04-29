@@ -9,9 +9,11 @@
                     <RadzenLabel Text="Employee" Component="Employee" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenDropDownDataGrid Data="@employeesForEmployeeId" TextProperty="FirstName" ValueProperty="Id" AllowClear=true
-                         Placeholder="Choose Employee" style="display: block; width: 100%" @bind-Value="@lease.EmployeeId" Name="EmployeeId"
-                           />
+                    <RadzenStack Orientation="Orientation.Horizontal">
+                        <RadzenDropDownDataGrid Data="@employeesForEmployeeId" TextProperty="FirstName" ValueProperty="Id" AllowClear=true
+                                                Placeholder="Choose Employee" style="display: block; width: 100%" @bind-Value="@lease.EmployeeId" Name="EmployeeId"/>
+                        <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddEmplyeeClick" Variant="Variant.Flat" />
+                    </RadzenStack>
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -19,9 +21,12 @@
                     <RadzenLabel Text="Lease Proposal" Component="LeaseProposal" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenDropDownDataGrid Data="@leaseProposalsForProposalId" TextProperty="Description" ValueProperty="Id" AllowClear=true
-                         Placeholder="Choose LeaseProposal" style="display: block; width: 100%" @bind-Value="@lease.ProposalId" Name="ProposalId"
-                           />
+                    <RadzenStack Orientation="Orientation.Horizontal">
+                        <RadzenDropDownDataGrid Data="@leaseProposalsForProposalId" TextProperty="Description" ValueProperty="Id" AllowClear=true
+                                                Placeholder="Choose LeaseProposal" style="display: block; width: 100%" @bind-Value="@lease.ProposalId" Name="ProposalId"/>
+                        <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddLeaseProposalClick" Variant="Variant.Flat" />
+                    </RadzenStack>
+                    
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -29,9 +34,11 @@
                     <RadzenLabel Text="Customer" Component="Customer" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
+                <RadzenStack Orientation="Orientation.Horizontal">
                     <RadzenDropDownDataGrid Data="@customersForCustomerId" TextProperty="FirstName" ValueProperty="Id" AllowClear=true
-                         Placeholder="Choose Customer" style="display: block; width: 100%" @bind-Value="@lease.CustomerId" Name="CustomerId"
-                           />
+                                            Placeholder="Choose Customer" style="display: block; width: 100%" @bind-Value="@lease.CustomerId" Name="CustomerId" />
+                    <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddCustomerClick" Variant="Variant.Flat" />
+                </RadzenStack>
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -39,9 +46,11 @@
                     <RadzenLabel Text="Dealership Car" Component="DealershipCar" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="" ValueProperty="Id" AllowClear=true
-                         Placeholder="Choose DealershipCar" style="display: block; width: 100%" @bind-Value="@lease.DealershipCarId" Name="DealershipCarId"
-                           />
+                    <RadzenStack Orientation="Orientation.Horizontal">
+                    <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="Car.Model" ValueProperty="Id" AllowClear=true
+                                                Placeholder="Choose DealershipCar" style="display: block; width: 100%" @bind-Value="@lease.DealershipCarId" Name="DealershipCarId"/>
+                        <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddDealershipCarClick" Variant="Variant.Flat" />
+                    </RadzenStack>
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -93,22 +102,6 @@
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
                     <RadzenTextBox style="display: block; width: 100%" @bind-Value="@lease.Description" Name="Description" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Create Date" Component="CreateDate" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@lease.CreateDate" Name="CreateDate" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Update Date" Component="UpdateDate" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDatePicker DateFormat="MM/dd/yyyy HH:mm:ss" style="display: block; width: 100%" @bind-Value="@lease.UpdateDate" Name="UpdateDate" />
                 </RadzenColumn>
             </RadzenRow>
           <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
