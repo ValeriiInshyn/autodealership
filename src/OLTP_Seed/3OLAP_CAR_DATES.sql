@@ -1,9 +1,6 @@
 DECLARE @CurrentMaxId INT;
 SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Dates;
 
-INSERT INTO AutoDealership.dbo.Dates
-SELECT * FROM AutoDealershipStaging.dbo.Dates;
-
 INSERT INTO AutoDealershipOLAP.dbo.Dates(
     Id,
     [Year],
