@@ -1,8 +1,56 @@
 DECLARE @CurrentMaxId INT;
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.Cars;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Cars;
 
+SET IDENTITY_INSERT AutoDealershipStaging.dbo.Cars ON;
 INSERT INTO AutoDealershipStaging.dbo.Cars
-SELECT * FROM AutoDealership.dbo.Cars;
+([Id]
+      ,[CarTypeId]
+      ,[Doors]
+      ,[Seats]
+      ,[Year]
+      ,[Price]
+      ,[ColorId]
+      ,[BodyTypeId]
+      ,[EngineId]
+      ,[BrandId]
+      ,[Model]
+      ,[Generation]
+      ,[Weight]
+      ,[MaxSpeed]
+      ,[GearsCount]
+      ,[Height]
+      ,[Width]
+      ,[Length]
+      ,[GearBoxId]
+      ,[FuelTankCapacity]
+      ,[WheelsCount]
+      ,[CreateDate]
+      ,[UpdateDate])
+SELECT [Id]
+      ,[CarTypeId]
+      ,[Doors]
+      ,[Seats]
+      ,[Year]
+      ,[Price]
+      ,[ColorId]
+      ,[BodyTypeId]
+      ,[EngineId]
+      ,[BrandId]
+      ,[Model]
+      ,[Generation]
+      ,[Weight]
+      ,[MaxSpeed]
+      ,[GearsCount]
+      ,[Height]
+      ,[Width]
+      ,[Length]
+      ,[GearBoxId]
+      ,[FuelTankCapacity]
+      ,[WheelsCount]
+      ,[CreateDate]
+      ,[UpdateDate] FROM AutoDealership.dbo.Cars;
+SET IDENTITY_INSERT AutoDealershipStaging.dbo.Cars OFF;
+
 
 INSERT INTO AutoDealershipOLAP.dbo.Cars(
     Id,

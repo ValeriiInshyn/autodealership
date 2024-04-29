@@ -1,7 +1,32 @@
-
+SET IDENTITY_INSERT AutoDealershipStaging.dbo.Leases ON
 INSERT INTO AutoDealershipStaging.dbo.Leases
-SELECT * FROM AutoDealership.dbo.Leases;
-
+([Id]
+      ,[EmployeeId]
+      ,[ProposalId]
+      ,[CustomerId]
+      ,[DealershipCarId]
+      ,[LeaseSignDate]
+      ,[LeaseStartDate]
+      ,[LeaseEndDate]
+      ,[LeaseUniqueNumber]
+      ,[TotalPrice]
+      ,[Description]
+      ,[CreateDate]
+      ,[UpdateDate])
+SELECT [Id]
+      ,[EmployeeId]
+      ,[ProposalId]
+      ,[CustomerId]
+      ,[DealershipCarId]
+      ,[LeaseSignDate]
+      ,[LeaseStartDate]
+      ,[LeaseEndDate]
+      ,[LeaseUniqueNumber]
+      ,[TotalPrice]
+      ,[Description]
+      ,[CreateDate]
+      ,[UpdateDate] FROM AutoDealership.dbo.Leases;
+SET IDENTITY_INSERT AutoDealershipStaging.dbo.Leases OFF
 DECLARE @CurrentMaxId INT;
 SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Leases;
 DECLARE @iterator INT;
