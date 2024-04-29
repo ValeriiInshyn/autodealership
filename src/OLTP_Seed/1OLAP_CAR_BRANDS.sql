@@ -1,5 +1,5 @@
 DECLARE @CurrentMaxId INT;
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.Brands;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Brands;
 
 INSERT INTO AutoDealershipStaging.dbo.Brands
 SELECT * FROM AutoDealership.dbo.Brands;

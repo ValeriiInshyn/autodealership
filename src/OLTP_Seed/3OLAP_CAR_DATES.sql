@@ -15,11 +15,11 @@ SELECT
     DAY(CombinedDates.Date) AS [Day]
 FROM (
 
-    SELECT LeaseSignDate AS Date FROM AutoDealershipStaging.dbo.Leases
+    SELECT LeaseSignDate AS Date FROM AutoDealership.dbo.Leases
     UNION
-    SELECT LeaseStartDate AS Date FROM AutoDealershipStaging.dbo.Leases
+    SELECT LeaseStartDate AS Date FROM AutoDealership.dbo.Leases
     UNION
-    SELECT LeaseEndDate AS Date FROM AutoDealershipStaging.dbo.Leases
+    SELECT LeaseEndDate AS Date FROM AutoDealership.dbo.Leases
     UNION
   SELECT Date FROM (
         SELECT FirstDayOfMonth AS Date 
@@ -31,7 +31,7 @@ FROM (
                 SELECT
                     MIN(CAST(SaleDate AS DATE)) AS MinDate,
                     MAX(CAST(SaleDate AS DATE)) AS MaxDate
-                FROM AutoDealershipStaging.dbo.CarSales
+                FROM AutoDealership.dbo.CarSales
             ) AS DateRange
             CROSS JOIN master.dbo.spt_values v
             WHERE
@@ -48,7 +48,7 @@ FROM (
                 SELECT
                     MIN(CAST(SaleDate AS DATE)) AS MinDate,
                     MAX(CAST(SaleDate AS DATE)) AS MaxDate
-                FROM AutoDealershipStaging.dbo.CarSales
+                FROM AutoDealership.dbo.CarSales
             ) AS DateRange
             CROSS JOIN master.dbo.spt_values v
             WHERE
