@@ -134,6 +134,7 @@ SELECT * FROM AutoDealershipOLAPTmp.dbo.Brands;
 
 
 
+
 -- Cars
 SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.Cars;
 
@@ -345,14 +346,14 @@ GROUP BY
 INSERT INTO AutoDealershipOLAP.dbo.CarSales
 SELECT * FROM AutoDealershipOLAPTmp.dbo.CarSales;
 -- Drop Database
-USE [master]
-GO
-ALTER DATABASE [AutoDealershipOLAPTmp] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
-GO
-USE [master]
-GO
-/****** Object:  Database [AutoDealershipOLAPTmp]    Script Date: 4/26/2024 10:15:17 PM ******/
-DROP DATABASE [AutoDealershipOLAPTmp]
-GO
-EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'AutoDealershipOLAPTmp'
-GO
+-- USE [master]
+-- GO
+-- ALTER DATABASE [AutoDealershipOLAPTmp] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+-- GO
+-- USE [master]
+-- GO
+-- /****** Object:  Database [AutoDealershipOLAPTmp]    Script Date: 4/26/2024 10:15:17 PM ******/
+-- DROP DATABASE [AutoDealershipOLAPTmp]
+-- GO
+-- EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'AutoDealershipOLAPTmp'
+-- GO

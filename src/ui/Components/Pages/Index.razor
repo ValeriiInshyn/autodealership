@@ -1,2 +1,28 @@
 @page "/"
 <PageTitle>Index</PageTitle>
+<RadzenText TextAlign="TextAlign.Center" TextStyle="TextStyle.DisplayH1">Hot links</RadzenText>
+<RadzenCard Variant="Variant.Filled" Class="rz-my-12 rz-mx-auto" Style="max-width: 820px; min-height: 150px">
+    <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween" Gap="1rem">
+        <RadzenImage Path="images/icons8-car-sale-100.png" Style="width: 100px; height: 100px;"/>
+        <RadzenText TextStyle="TextStyle.DisplayH5">Sales Management</RadzenText>
+
+        <RadzenButton Size="ButtonSize.Large" Variant="Variant.Outlined" Click=@(_ => NavigationManager.NavigateTo("car-sales")) Text="Visit" ButtonStyle="ButtonStyle.Dark" />
+    </RadzenRow>
+</RadzenCard>
+<RadzenCard Variant="@Variant.Filled" Class="rz-my-12 rz-mx-auto" Style="max-width: 820px; min-height: 150px">
+    <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween" Gap="1rem">
+        <RadzenImage Path="images/icons8-lease-100.png" Style="width: 100px; height: 100px;"/>
+        <RadzenText TextStyle="TextStyle.DisplayH5">Lease Management</RadzenText>
+        <RadzenButton Size="ButtonSize.Large" Variant="Variant.Outlined" Click=@(_ => NavigationManager.NavigateTo("leases")) Text="Visit" ButtonStyle="ButtonStyle.Dark" />
+    </RadzenRow>
+</RadzenCard>
+<RadzenCard Variant="@Variant.Filled" Class="rz-my-12 rz-mx-auto" Style="max-width: 820px; min-height: 150px">
+    <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween" Gap="1rem">
+        <RadzenImage Path="images/icons8-statistics-100.png" Style="width: 100px; height: 100px;" />
+        <RadzenText TextStyle="TextStyle.DisplayH5">Statistics</RadzenText>
+        <RadzenStack Orientation="Orientation.Vertical">
+            <RadzenButton Size="ButtonSize.Large" Variant="Variant.Outlined" Click=@(_ => NavigationManager.NavigateTo("car-sales-olap")) Text="Sales" ButtonStyle="ButtonStyle.Dark" />
+            <RadzenButton Size="ButtonSize.Large" Variant="Variant.Outlined" Click=@(_ => NavigationManager.NavigateTo("leases-olap")) Text="Leases" ButtonStyle="ButtonStyle.Dark" />
+        </RadzenStack>
+    </RadzenRow>
+</RadzenCard>
