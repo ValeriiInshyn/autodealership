@@ -116,9 +116,9 @@ GO
 
 DECLARE @CurrentMaxId INT;
 --Car brands
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Brands;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAPTmp.dbo.Brands;
 
-INSERT INTO AutoDealershipOLAP.dbo.Brands(
+INSERT INTO AutoDealershipOLAPTmp.dbo.Brands(
     Id,
     Name
 )
@@ -130,7 +130,8 @@ FROM
 GROUP BY b.Name
     
 INSERT INTO AutoDealershipOLAP.dbo.Brands
-SELECT * FROM AutoDealershipOLAP.dbo.Brands;
+SELECT * FROM AutoDealershipOLAPTmp.dbo.Brands;
+
 
 
 -- Cars

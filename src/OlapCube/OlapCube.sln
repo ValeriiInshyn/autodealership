@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "OlapCube", "OlapCube.dwproj", "{DACCDF67-F232-4947-8EDA-E7BB92988881}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DACCDF67-F232-4947-8EDA-E7BB92988881}.Development|Default.ActiveCfg = Development
+		{DACCDF67-F232-4947-8EDA-E7BB92988881}.Development|Default.Build.0 = Development
+		{DACCDF67-F232-4947-8EDA-E7BB92988881}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE991754-14C6-4056-A72F-8D427F279638}
+	EndGlobalSection
+EndGlobal
