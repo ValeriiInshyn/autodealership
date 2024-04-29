@@ -37,7 +37,6 @@ namespace CourseWork.Components.Pages
             dealershipCar = new CourseWork.Models.AutoDealership.DealershipCar();
 
             carsForCarId = await AutoDealershipService.GetCars();
-
             autoDealershipsForDealershipId = await AutoDealershipService.GetAutoDealerships();
 
             dealershipCarStatusesForCarStatusId = await AutoDealershipService.GetDealershipCarStatuses();

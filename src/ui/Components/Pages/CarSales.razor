@@ -22,9 +22,7 @@
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@carSales" TItem="CourseWork.Models.AutoDealership.CarSale" RowDoubleClick="@EditRow">
             <Columns>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="Id" Title="Id">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="DealershipCar" Title="Dealership Car">
+                    <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="DealershipCar.Car.FullName" Title="Dealership Car">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="Customer.FirstName" Title="Customer">
                 </RadzenDataGridColumn>
@@ -37,10 +35,6 @@
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="Employee.FirstName" Title="Employee">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="PaymentMethod.Name" Title="Payment Method">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="CreateDate" Title="Create Date">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Property="UpdateDate" Title="Update Date">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.CarSale" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                     <Template Context="carSale">

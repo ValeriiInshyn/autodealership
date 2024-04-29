@@ -47,7 +47,7 @@
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
                     <RadzenStack Orientation="Orientation.Horizontal">
-                    <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="Car.Model" ValueProperty="Id" AllowClear=true
+                    <RadzenDropDownDataGrid Data="@dealershipCarsForDealershipCarId" TextProperty="Car.FullName" ValueProperty="Id" AllowClear=true
                                                 Placeholder="Choose DealershipCar" style="display: block; width: 100%" @bind-Value="@lease.DealershipCarId" Name="DealershipCarId"/>
                         <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddDealershipCarClick" Variant="Variant.Flat" />
                     </RadzenStack>

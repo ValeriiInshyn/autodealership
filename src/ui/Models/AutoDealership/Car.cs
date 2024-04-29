@@ -73,6 +73,8 @@ namespace CourseWork.Models.AutoDealership
         public DateTime? CreateDate { get; set; }
 
         public DateTime? UpdateDate { get; set; }
+        [NotMapped] 
+        public string FullName => $"{Brand.Name} {Model}";
 
         public ICollection<CarComfortOption> CarComfortOptions { get; set; }
 
@@ -81,6 +83,7 @@ namespace CourseWork.Models.AutoDealership
         public ICollection<CarSafetyOption> CarSafetyOptions { get; set; }
 
         public ICollection<DealershipCar> DealershipCars { get; set; }
+  
 
     }
 }

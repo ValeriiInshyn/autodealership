@@ -13,6 +13,7 @@ using Radzen;
 
 using CourseWork.Data;
 using CourseWork.Models.AutoDealership;
+using CourseWork.Models.AutoDealershipOLAP;
 
 namespace CourseWork
 {
@@ -1056,8 +1057,10 @@ namespace CourseWork
 
             items = items.Include(i => i.CarBodyType);
             items = items.Include(i => i.Brand);
-            items = items.Include(i => i.Color);
-            items = items.Include(i => i.Engine);
+            // Makes record count to 0
+            //items = items.Include(i => i.Color);
+            //items = items.Include(i => i.Engine);
+
             items = items.Include(i => i.GearBoxType);
 
             if (query != null)
@@ -1390,7 +1393,7 @@ namespace CourseWork
             var items = Context.CarSales.AsQueryable();
 
             items = items.Include(i => i.Customer);
-            items = items.Include(i => i.DealershipCar);
+            items = items.Include(i => i.DealershipCar).ThenInclude(i=>i.Car).ThenInclude(i=>i.Brand);
             items = items.Include(i => i.Employee);
             items = items.Include(i => i.PaymentMethod);
             items = items.Include(i => i.SaleStatus);
@@ -1491,7 +1494,7 @@ namespace CourseWork
             {
                 throw new Exception("Item no longer available");
             }
-
+            carsale.UpdateDate=DateTime.Now;
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(carsale);
             entryToUpdate.State = EntityState.Modified;
@@ -2673,9 +2676,9 @@ namespace CourseWork
         {
             var items = Context.DealershipCars.AsQueryable();
 
-            items = items.Include(i => i.Car);
+            items = items.Include(i => i.Car).ThenInclude(i=>i.Brand);
             items = items.Include(i => i.DealershipCarStatus);
-            items = items.Include(i => i.AutoDealership).ThenInclude(i=>i.DealershipCars);
+            items = items.Include(i => i.AutoDealership);
 
             if (query != null)
             {
@@ -4126,7 +4129,7 @@ namespace CourseWork
             var items = Context.Leases.AsQueryable();
 
             items = items.Include(i => i.Customer);
-            items = items.Include(i => i.DealershipCar);
+            items = items.Include(i => i.DealershipCar).ThenInclude(i => i.Car).ThenInclude(i => i.Brand);
             items = items.Include(i => i.Employee);
             items = items.Include(i => i.LeaseProposal);
 
@@ -4224,6 +4227,7 @@ namespace CourseWork
             {
                 throw new Exception("Item no longer available");
             }
+            lease.UpdateDate = DateTime.Now;
 
             var entryToUpdate = Context.Entry(itemToUpdate);
             entryToUpdate.CurrentValues.SetValues(lease);
