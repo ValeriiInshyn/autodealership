@@ -1116,7 +1116,7 @@ namespace CourseWork
 
         public void UpdateOlapData()
         {
-            Context.Database.
+            Context.Database.ExecuteSqlRaw("EXEC dbo.UpdateFromMainFull {0}");
         }
     }
 }
