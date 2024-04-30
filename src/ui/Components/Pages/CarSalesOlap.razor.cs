@@ -51,9 +51,15 @@ namespace CourseWork.Components.Pages
         }
         protected override async Task OnInitializedAsync()
         {
+            await GetDataAsync();
+        }
+
+        private async Task GetDataAsync()
+        {
             carSales = await AutoDealershipOLAPService.GetCarSales(new Query { Expand = "AutoDealership,Brand,Date1,Date" });
             carSalesSum = [await AutoDealershipOLAPService.GetCarSalesSummary()];
         }
+
 
         protected async Task AddButtonClick(MouseEventArgs args)
         {
@@ -63,7 +69,7 @@ namespace CourseWork.Components.Pages
 
         protected async Task EditRow(DataGridRowMouseEventArgs<CourseWork.Models.AutoDealershipOLAP.CarSale> args)
         {
-            await DialogService.OpenAsync<EditCarSalesOlap>("Edit CarSale", new Dictionary<string, object> { {"Id", args.Data.Id} });
+            await DialogService.OpenAsync<EditCarSalesOlap>("Edit CarSale", new Dictionary<string, object> { { "Id", args.Data.Id } });
         }
 
         protected async Task GridDeleteButtonClick(MouseEventArgs args, CourseWork.Models.AutoDealershipOLAP.CarSale carSale)
@@ -96,29 +102,30 @@ namespace CourseWork.Components.Pages
             if (args?.Value == "csv")
             {
                 await AutoDealershipOLAPService.ExportCarSalesToCSV(new Query
-{
-    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
-    OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "AutoDealership,Brand,Date1,Date",
-    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-}, "CarSales");
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter) ? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "AutoDealership,Brand,Date1,Date",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "CarSales");
             }
 
             if (args == null || args.Value == "xlsx")
             {
                 await AutoDealershipOLAPService.ExportCarSalesToExcel(new Query
-{
-    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
-    OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "AutoDealership,Brand,Date1,Date",
-    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-}, "CarSales");
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter) ? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "AutoDealership,Brand,Date1,Date",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "CarSales");
             }
         }
 
-        private void UpdateDataButtonClick()
+        private Task UpdateFullDataButtonClick()
         {
             AutoDealershipOLAPService.UpdateOlapData();
+            return GetDataAsync();
         }
     }
 }

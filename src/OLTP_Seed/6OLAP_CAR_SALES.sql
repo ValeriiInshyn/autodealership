@@ -36,24 +36,23 @@ SELECT [Id]
       ,[PaymentMethodId]
       ,[CreateDate]
       ,[UpdateDate]
-  FROM [AutoDealershipStaging].[dbo].[CarSales]
+  FROM [AutoDealership].[dbo].[CarSales]
 SET IDENTITY_INSERT AutoDealershipStaging.dbo.CarSales OFF
 DECLARE @CurrentMaxId INT;
 SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarSales;
 ;WITH SalesData AS (
     SELECT 
-        ds.Id AS DealershipId,
+        dc.DealershipId AS DealershipId,
         c.BrandId,
         FORMAT(cs.SaleDate, 'yyyy-MM') as SaleDate,
         SUM(c.Price) AS TotalPrice,
         COUNT(c.Price) as SalesCount
     FROM
-        AutoDealershipStaging.dbo.AutoDealerships ds
-        JOIN AutoDealershipStaging.dbo.DealershipCars dc ON dc.DealershipId = ds.Id
-        JOIN AutoDealershipStaging.dbo.CarSales cs ON cs.DealershipCarId = dc.CarId
+        AutoDealershipStaging.dbo.CarSales cs 
+        JOIN AutoDealershipStaging.dbo.DealershipCars dc ON cs.DealershipCarId = dc.Id
         JOIN AutoDealershipStaging.dbo.Cars c ON dc.CarId = c.Id
     GROUP BY
-        ds.Id,
+        dc.DealershipId,
         c.BrandId,
         FORMAT(cs.SaleDate, 'yyyy-MM')
         

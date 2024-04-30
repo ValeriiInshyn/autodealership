@@ -52,6 +52,11 @@ namespace CourseWork.Components.Pages
         }
         protected override async Task OnInitializedAsync()
         {
+            await GetDataAsync();
+        }
+
+        private async Task GetDataAsync()
+        {
             leases = await AutoDealershipOLAPService.GetLeases(new Query { Expand = "Car,Date1,Date2,Date" });
             leaseSum = [await AutoDealershipOLAPService.GetLeaseSummary()];
         }
@@ -116,9 +121,10 @@ namespace CourseWork.Components.Pages
                 }, "Leases");
             }
         }
-        private void UpdateDataButtonClick()
+        private Task UpdateFullDataButtonClick()
         {
             AutoDealershipOLAPService.UpdateOlapData();
+            return GetDataAsync();
         }
     }
 }

@@ -12,6 +12,7 @@ using Radzen;
 
 using CourseWork.Data;
 using CourseWork.Models.AutoDealership;
+using CarSale = CourseWork.Models.AutoDealershipOLAP.CarSale;
 
 namespace CourseWork
 {
@@ -606,6 +607,8 @@ namespace CourseWork
             items = items.Include(i => i.Brand);
             items = items.Include(i => i.Date);
             items = items.Include(i => i.Date1);
+            if (!items.Any())
+                return Task.FromResult(new CarSale());
             var res = items.GroupBy(i => 1).Select(i => new CourseWork.Models.AutoDealershipOLAP.CarSale
             {
                 Id = 0,
@@ -968,6 +971,8 @@ namespace CourseWork
             items = items.Include(i => i.Date);
             items = items.Include(i => i.Date1);
             items = items.Include(i => i.Date2);
+            if (!items.Any())
+                return Task.FromResult(new CourseWork.Models.AutoDealershipOLAP.Lease());
             var res = items.GroupBy(i => 1).Select(i => new CourseWork.Models.AutoDealershipOLAP.Lease
             {
                 Id = 0,
@@ -1116,7 +1121,7 @@ namespace CourseWork
 
         public void UpdateOlapData()
         {
-            Context.Database.ExecuteSqlRaw("EXEC dbo.UpdateFromMainFull {0}");
+           var rows= Context.Database.ExecuteSqlRaw("EXECUTE [dbo].[UpdateFromMainFull]");
         }
     }
 }
