@@ -61,11 +61,6 @@ namespace CourseWork.Components.Pages
         }
 
 
-        protected async Task AddButtonClick(MouseEventArgs args)
-        {
-            await DialogService.OpenAsync<AddCarSalesOlap>("Add CarSale", null);
-            await grid0.Reload();
-        }
 
         protected async Task EditRow(DataGridRowMouseEventArgs<CourseWork.Models.AutoDealershipOLAP.CarSale> args)
         {

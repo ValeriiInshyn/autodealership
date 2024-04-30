@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Dynamic.Core;
 using System.Text.Encodings.Web;
 using CourseWork.Data;
+using CourseWork.Models.AutoDealership;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
@@ -123,16 +124,11 @@ namespace CourseWork.Services
         {
             OnAutoDealershipCreated(autodealership);
 
-            var existingItem = Context.AutoDealerships
-                .FirstOrDefault(i => i.Id == autodealership.Id);
-
-            if (existingItem != null)
-            {
-                throw new Exception("Item already available");
-            }
-
             try
             {
+                autodealership.CreateDate=DateTime.Now;
+                autodealership.UpdateDate = DateTime.Now;
+
                 Context.AutoDealerships.Add(autodealership);
                 Context.SaveChanges();
             }
@@ -286,16 +282,13 @@ namespace CourseWork.Services
         {
             OnBrandCreated(brand);
 
-            var existingItem = Context.Brands
-                .FirstOrDefault(i => i.Id == brand.Id);
-
-            if (existingItem != null)
-            {
-                throw new Exception("Item already available");
-            }
 
             try
             {
+                brand.Id = Context.Brands.Max(c => c.Id) + 1;
+
+                brand.CreateDate = DateTime.Now;
+                brand.UpdateDate = DateTime.Now;
                 Context.Brands.Add(brand);
                 Context.SaveChanges();
             }

@@ -52,12 +52,6 @@ namespace CourseWork.Components.Pages
             cars = await AutoDealershipOLAPService.GetCars(new Query { Filter = $@"i => i.Model.Contains(@0) || i.Generation.Contains(@0)", FilterParameters = new object[] { search }, Expand = "Brand" });
         }
 
-        protected async Task AddButtonClick(MouseEventArgs args)
-        {
-            await DialogService.OpenAsync<AddCarsOlap>("Add Car", null);
-            await grid0.Reload();
-        }
-
         protected async Task EditRow(DataGridRowMouseEventArgs<CourseWork.Models.AutoDealershipOLAP.Car> args)
         {
             await DialogService.OpenAsync<EditCarsOlap>("Edit Car", new Dictionary<string, object> { {"Id", args.Data.Id} });

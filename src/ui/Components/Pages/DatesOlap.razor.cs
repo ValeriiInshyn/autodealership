@@ -52,11 +52,6 @@ namespace CourseWork.Components.Pages
             dates = await AutoDealershipOLAPService.GetDates();
         }
 
-        protected async Task AddButtonClick(MouseEventArgs args)
-        {
-            await DialogService.OpenAsync<AddDatesOlap>("Add Date", null);
-            await grid0.Reload();
-        }
 
         protected async Task EditRow(DataGridRowMouseEventArgs<CourseWork.Models.AutoDealershipOLAP.Date> args)
         {
