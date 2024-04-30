@@ -22,17 +22,11 @@
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@leaseProposalConditions" TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" RowDoubleClick="@EditRow">
             <Columns>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" Property="Id" Title="Id">
-                </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" Property="LeaseProposal.Description" Title="Lease Proposal">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" Property="Condition.Name" Title="Condition">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" Property="Value" Title="Value">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" Property="CreateDate" Title="Create Date">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" Property="UpdateDate" Title="Update Date">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.LeaseProposalCondition" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                     <Template Context="leaseProposalCondition">

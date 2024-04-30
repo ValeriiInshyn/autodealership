@@ -22,13 +22,7 @@
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@saleStatuses" TItem="CourseWork.Models.AutoDealership.SaleStatus" RowDoubleClick="@EditRow">
             <Columns>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.SaleStatus" Property="Id" Title="Id">
-                </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.SaleStatus" Property="Status" Title="Status">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.SaleStatus" Property="CreateDate" Title="Create Date">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.SaleStatus" Property="UpdateDate" Title="Update Date">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.SaleStatus" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                     <Template Context="saleStatus">

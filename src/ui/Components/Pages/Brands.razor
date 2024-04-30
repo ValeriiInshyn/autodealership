@@ -22,15 +22,9 @@
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@brands" TItem="CourseWork.Models.AutoDealership.Brand" RowDoubleClick="@EditRow">
             <Columns>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Brand" Property="Id" Title="Id">
-                </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Brand" Property="Name" Title="Name">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Brand" Property="Country.Name" Title="Country">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Brand" Property="CreateDate" Title="Create Date">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Brand" Property="UpdateDate" Title="Update Date">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="CourseWork.Models.AutoDealership.Brand" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                     <Template Context="brand">
