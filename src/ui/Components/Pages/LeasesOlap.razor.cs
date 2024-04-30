@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CourseWork.Models.AutoDealership;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -34,6 +35,8 @@ namespace CourseWork.Components.Pages
         public AutoDealershipOLAPService AutoDealershipOLAPService { get; set; }
 
         protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.Lease> leases;
+        protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.Lease> leaseSum;
+
 
         protected RadzenDataGrid<CourseWork.Models.AutoDealershipOLAP.Lease> grid0;
 
@@ -50,6 +53,7 @@ namespace CourseWork.Components.Pages
         protected override async Task OnInitializedAsync()
         {
             leases = await AutoDealershipOLAPService.GetLeases(new Query { Expand = "Car,Date1,Date2,Date" });
+            leaseSum = [await AutoDealershipOLAPService.GetLeaseSummary()];
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -60,7 +64,7 @@ namespace CourseWork.Components.Pages
 
         protected async Task EditRow(DataGridRowMouseEventArgs<CourseWork.Models.AutoDealershipOLAP.Lease> args)
         {
-            await DialogService.OpenAsync<EditLeasesOlap>("Edit Lease", new Dictionary<string, object> { {"Id", args.Data.Id} });
+            await DialogService.OpenAsync<EditLeasesOlap>("Edit Lease", new Dictionary<string, object> { { "Id", args.Data.Id } });
         }
 
         protected async Task GridDeleteButtonClick(MouseEventArgs args, CourseWork.Models.AutoDealershipOLAP.Lease lease)
@@ -93,24 +97,28 @@ namespace CourseWork.Components.Pages
             if (args?.Value == "csv")
             {
                 await AutoDealershipOLAPService.ExportLeasesToCSV(new Query
-{
-    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
-    OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "Car,Date1,Date2,Date",
-    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-}, "Leases");
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter) ? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "Car,Date1,Date2,Date",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "Leases");
             }
 
             if (args == null || args.Value == "xlsx")
             {
                 await AutoDealershipOLAPService.ExportLeasesToExcel(new Query
-{
-    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
-    OrderBy = $"{grid0.Query.OrderBy}",
-    Expand = "Car,Date1,Date2,Date",
-    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-}, "Leases");
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter) ? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "Car,Date1,Date2,Date",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "Leases");
             }
+        }
+        private void UpdateDataButtonClick()
+        {
+            AutoDealershipOLAPService.UpdateOlapData();
         }
     }
 }

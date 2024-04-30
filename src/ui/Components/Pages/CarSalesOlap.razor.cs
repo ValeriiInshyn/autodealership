@@ -34,6 +34,8 @@ namespace CourseWork.Components.Pages
         public AutoDealershipOLAPService AutoDealershipOLAPService { get; set; }
 
         protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.CarSale> carSales;
+        protected IEnumerable<CourseWork.Models.AutoDealershipOLAP.CarSale> carSalesSum;
+
 
         protected RadzenDataGrid<CourseWork.Models.AutoDealershipOLAP.CarSale> grid0;
 
@@ -50,6 +52,7 @@ namespace CourseWork.Components.Pages
         protected override async Task OnInitializedAsync()
         {
             carSales = await AutoDealershipOLAPService.GetCarSales(new Query { Expand = "AutoDealership,Brand,Date1,Date" });
+            carSalesSum = [await AutoDealershipOLAPService.GetCarSalesSummary()];
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -111,6 +114,11 @@ namespace CourseWork.Components.Pages
     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
 }, "CarSales");
             }
+        }
+
+        private void UpdateDataButtonClick()
+        {
+            AutoDealershipOLAPService.UpdateOlapData();
         }
     }
 }

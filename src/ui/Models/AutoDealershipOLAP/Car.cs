@@ -22,6 +22,8 @@ namespace CourseWork.Models.AutoDealershipOLAP
 
         [Required]
         public string Generation { get; set; }
+        [NotMapped]
+        public string FullName => $"{Brand.Name} {Model}";
 
         public ICollection<Lease> Leases { get; set; }
 

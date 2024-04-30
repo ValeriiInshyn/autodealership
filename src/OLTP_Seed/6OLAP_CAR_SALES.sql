@@ -1,5 +1,19 @@
-DECLARE @CurrentMaxId INT;
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarSales;
+
+INSERT INTO AutoDealershipStaging.dbo.DealershipCars([Id]
+      ,[CarId]
+      ,[DealershipId]
+      ,[CarsCount]
+      ,[CarStatusId]
+      ,[CreateDate]
+      ,[UpdateDate])
+SELECT [Id]
+      ,[CarId]
+      ,[DealershipId]
+      ,[CarsCount]
+      ,[CarStatusId]
+      ,[CreateDate]
+      ,[UpdateDate]
+  FROM [AutoDealership].[dbo].[DealershipCars]
 
 SET IDENTITY_INSERT AutoDealershipStaging.dbo.CarSales ON
 INSERT INTO AutoDealershipStaging.dbo.CarSales([Id]
@@ -21,8 +35,11 @@ SELECT [Id]
       ,[EmployeeId]
       ,[PaymentMethodId]
       ,[CreateDate]
-      ,[UpdateDate] FROM AutoDealership.dbo.CarSales;
-	  SET IDENTITY_INSERT AutoDealershipStaging.dbo.CarSales OFF
+      ,[UpdateDate]
+  FROM [AutoDealershipStaging].[dbo].[CarSales]
+SET IDENTITY_INSERT AutoDealershipStaging.dbo.CarSales OFF
+DECLARE @CurrentMaxId INT;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarSales;
 ;WITH SalesData AS (
     SELECT 
         ds.Id AS DealershipId,

@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Radzen;
 
 using CourseWork.Data;
+using CourseWork.Models.AutoDealership;
 
 namespace CourseWork
 {
@@ -597,7 +598,34 @@ namespace CourseWork
 
             return await Task.FromResult(items);
         }
+        public Task<CourseWork.Models.AutoDealershipOLAP.CarSale> GetCarSalesSummary()
+        {
+            var items = Context.CarSales.AsQueryable();
 
+            items = items.Include(i => i.AutoDealership);
+            items = items.Include(i => i.Brand);
+            items = items.Include(i => i.Date);
+            items = items.Include(i => i.Date1);
+            var res = items.GroupBy(i => 1).Select(i => new CourseWork.Models.AutoDealershipOLAP.CarSale
+            {
+                Id = 0,
+                AutoDealershipId = 0,
+                AutoDealership = null,
+                BrandId = 0,
+                Brand = null,
+                TotalIncomeLastMonth = i.Average(i=>i.TotalIncomeLastMonth),
+                StartDateId = 0,
+                Date1 = null,
+                EndDateId = 0,
+                Date = null,
+                TotalIncomeForCurrentMonth = i.Average(i => i.TotalIncomeForCurrentMonth),
+                MonthTotalIncomeModifyPercent = (int)i.Average(i => i.MonthTotalIncomeModifyPercent),
+                SalesCountForLastMonth = (int)i.Average(i => i.SalesCountForLastMonth),
+                SalesCountForCurrentMonth = (int)i.Average(i => i.SalesCountForCurrentMonth),
+                SalesCountChangeForMonth = (int)i.Average(i => i.SalesCountChangeForMonth)
+            }).Single();
+            return Task.FromResult(res);
+        }
         partial void OnCarSaleGet(CourseWork.Models.AutoDealershipOLAP.CarSale item);
         partial void OnGetCarSaleById(ref IQueryable<CourseWork.Models.AutoDealershipOLAP.CarSale> items);
 
@@ -909,7 +937,7 @@ namespace CourseWork
         {
             var items = Context.Leases.AsQueryable();
 
-            items = items.Include(i => i.Car);
+            items = items.Include(i => i.Car).ThenInclude(i=>i.Brand);
             items = items.Include(i => i.Date);
             items = items.Include(i => i.Date1);
             items = items.Include(i => i.Date2);
@@ -932,7 +960,31 @@ namespace CourseWork
 
             return await Task.FromResult(items);
         }
+        public Task<CourseWork.Models.AutoDealershipOLAP.Lease> GetLeaseSummary()
+        {
+            var items = Context.Leases.AsQueryable();
 
+            items = items.Include(i => i.Car).ThenInclude(i => i.Brand);
+            items = items.Include(i => i.Date);
+            items = items.Include(i => i.Date1);
+            items = items.Include(i => i.Date2);
+            var res = items.GroupBy(i => 1).Select(i => new CourseWork.Models.AutoDealershipOLAP.Lease
+            {
+                Id = 0,
+                CarId = 0,
+                Car = null,
+                Price = i.Average(i=>i.Price),
+                PreviousLeaseModifyPercent = (int)i.Average(i => i.PreviousLeaseModifyPercent),
+                LeaseSignDateId = 0,
+                Date1 = null,
+                LeaseStartDateId = 0,
+                Date2 = null,
+                LeaseEndDateId = 0,
+                Date = null,
+                LastLeaseId = null
+            });
+            return Task.FromResult(res.Single());
+        }
         partial void OnLeaseGet(CourseWork.Models.AutoDealershipOLAP.Lease item);
         partial void OnGetLeaseById(ref IQueryable<CourseWork.Models.AutoDealershipOLAP.Lease> items);
 
@@ -1061,5 +1113,10 @@ namespace CourseWork
 
             return itemToDelete;
         }
+
+        public void UpdateOlapData()
+        {
+            Context.Database.
         }
+    }
 }

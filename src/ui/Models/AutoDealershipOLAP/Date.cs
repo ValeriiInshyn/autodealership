@@ -1,3 +1,4 @@
+using DocumentFormat.OpenXml.Bibliography;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,8 @@ namespace CourseWork.Models.AutoDealershipOLAP
 
         [Required]
         public int Day { get; set; }
+
+        [NotMapped] public DateOnly FullDate => new(Year, Month, Day);
 
         public ICollection<CarSale> CarSales { get; set; }
 
