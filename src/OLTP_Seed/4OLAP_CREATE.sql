@@ -3,7 +3,8 @@ GO
 /****** Object:  Database [AutoDealershipOLAP]    Script Date: 5/1/2024 11:54:02 PM ******/
 CREATE DATABASE [AutoDealershipOLAP]
 GO
-
+USE [AutoDealershipOLAP]
+GO
 CREATE TABLE [dbo].[AutoDealershipsDim](
 	[Id] [int] NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
