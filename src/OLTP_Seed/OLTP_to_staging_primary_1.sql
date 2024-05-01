@@ -30,7 +30,7 @@ insert into CompStoreStaging.dbo.computer_device_subtype select computer_device_
 truncate table CompStoreStaging.dbo.manufacturer
 insert into CompStoreStaging.dbo.manufacturer select manufacturer_id,name from CompStore.dbo.manufacturer
 
-truncate table CompStoreStaging.dbo.material
+truncate table CompStoreStaging.dbo.material 
 insert into CompStoreStaging.dbo.material select material_id,name from CompStore.dbo.material
 
 truncate table CompStoreStaging.dbo.color
