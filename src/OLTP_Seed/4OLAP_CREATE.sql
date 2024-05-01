@@ -6,7 +6,7 @@ GO
 USE [AutoDealershipOLAP]
 GO
 CREATE TABLE [dbo].[AutoDealershipsDim](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY (1, 1) NOT NULL, 
 	[Name] [nvarchar](100) NOT NULL,
 	[bk_dealership_id] [int] NOT NULL,
  CONSTRAINT [PK_AutoDealershipsDim] PRIMARY KEY CLUSTERED 
@@ -21,7 +21,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[BrandsDim](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY (1, 1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
 	[bk_brand_id] [int] NOT NULL,
  CONSTRAINT [PK_BrandsDim] PRIMARY KEY CLUSTERED 
@@ -36,7 +36,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CarSalesFact](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY (1, 1) NOT NULL,
 	[AutoDealershipId] [int] NOT NULL,
 	[BrandId] [int] NOT NULL,
 	[TotalIncomeLastMonth] [decimal](10, 2) NOT NULL,
@@ -59,7 +59,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CarsDim](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY (1, 1) NOT NULL,
 	[Model] [nvarchar](100) NOT NULL,
 	[BrandId] [int] NOT NULL,
 	[Generation] [nvarchar](100) NOT NULL,
@@ -76,7 +76,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[DatesDim](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY (1, 1) NOT NULL,
 	[Year] [int] NOT NULL,
 	[Month] [int] NOT NULL,
 	[Day] [int] NOT NULL,
@@ -92,7 +92,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[LeasesFact](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY (1, 1) NOT NULL,
 	[CarId] [int] NOT NULL,
 	[Price] [decimal](10, 2) NOT NULL,
 	[PreviousLeaseModifyPercent] [int] NOT NULL,
