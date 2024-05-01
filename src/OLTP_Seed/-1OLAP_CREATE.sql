@@ -5,40 +5,40 @@ CREATE DATABASE [AutoDealershipOLAP]
 GO
 USE [AutoDealershipOLAP]
 GO
-/****** Object:  Table [dbo].[AutoDealerships]    Script Date: 4/30/2024 1:43:57 PM ******/
+/****** Object:  Table [dbo].[AutoDealershipsDim]    Script Date: 4/30/2024 1:43:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[AutoDealerships](
+CREATE TABLE [dbo].[AutoDealershipsDim](
 	[Id] [int] NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_AutoDealerships] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_AutoDealershipsDim] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Brands]    Script Date: 4/30/2024 1:43:57 PM ******/
+/****** Object:  Table [dbo].[BrandsDim]    Script Date: 4/30/2024 1:43:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Brands](
+CREATE TABLE [dbo].[BrandsDim](
 	[Id] [int] NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
- CONSTRAINT [PK_Brands] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_BrandsDim] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Cars]    Script Date: 4/30/2024 1:43:57 PM ******/
+/****** Object:  Table [dbo].[CarsDim]    Script Date: 4/30/2024 1:43:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Cars](
+CREATE TABLE [dbo].[CarsDim](
 	[Id] [int] NOT NULL,
 	[Model] [nvarchar](100) NOT NULL,
 	[BrandId] [int] NOT NULL,
@@ -49,12 +49,12 @@ CREATE TABLE [dbo].[Cars](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CarSales]    Script Date: 4/30/2024 1:43:57 PM ******/
+/****** Object:  Table [dbo].[CarSalesFact]    Script Date: 4/30/2024 1:43:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[CarSales](
+CREATE TABLE [dbo].[CarSalesFact](
 	[Id] [int] NOT NULL,
 	[AutoDealershipId] [int] NOT NULL,
 	[BrandId] [int] NOT NULL,
@@ -66,18 +66,18 @@ CREATE TABLE [dbo].[CarSales](
 	[SalesCountForLastMonth] [int] NOT NULL,
 	[SalesCountForCurrentMonth] [int] NOT NULL,
 	[SalesCountChangeForMonth] [int] NOT NULL,
- CONSTRAINT [PK_CarSales] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_CarSalesFact] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Dates]    Script Date: 4/30/2024 1:43:57 PM ******/
+/****** Object:  Table [dbo].[DatesDim]    Script Date: 4/30/2024 1:43:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Dates](
+CREATE TABLE [dbo].[DatesDim](
 	[Id] [int] NOT NULL,
 	[Year] [int] NOT NULL,
 	[Month] [int] NOT NULL,
@@ -88,12 +88,12 @@ CREATE TABLE [dbo].[Dates](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Leases]    Script Date: 4/30/2024 1:43:57 PM ******/
+/****** Object:  Table [dbo].[LeasesFact]    Script Date: 4/30/2024 1:43:57 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Leases](
+CREATE TABLE [dbo].[LeasesFact](
 	[Id] [int] NOT NULL,
 	[CarId] [int] NOT NULL,
 	[Price] [decimal](10, 2) NOT NULL,
@@ -108,50 +108,50 @@ CREATE TABLE [dbo].[Leases](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Cars]  WITH CHECK ADD  CONSTRAINT [FK_Cars_Brands] FOREIGN KEY([BrandId])
-REFERENCES [dbo].[Brands] ([Id])
+ALTER TABLE [dbo].[CarsDim]  WITH CHECK ADD  CONSTRAINT [FK_Cars_BrandsDim] FOREIGN KEY([BrandId])
+REFERENCES [dbo].[BrandsDim] ([Id])
 GO
-ALTER TABLE [dbo].[Cars] CHECK CONSTRAINT [FK_Cars_Brands]
+ALTER TABLE [dbo].[CarsDim] CHECK CONSTRAINT [FK_Cars_BrandsDim]
 GO
-ALTER TABLE [dbo].[CarSales]  WITH CHECK ADD  CONSTRAINT [FK_CarSales_AutoDealerships] FOREIGN KEY([AutoDealershipId])
-REFERENCES [dbo].[AutoDealerships] ([Id])
+ALTER TABLE [dbo].[CarSalesFact]  WITH CHECK ADD  CONSTRAINT [FK_CarSalesFact_AutoDealershipsDim] FOREIGN KEY([AutoDealershipId])
+REFERENCES [dbo].[AutoDealershipsDim] ([Id])
 GO
-ALTER TABLE [dbo].[CarSales] CHECK CONSTRAINT [FK_CarSales_AutoDealerships]
+ALTER TABLE [dbo].[CarSalesFact] CHECK CONSTRAINT [FK_CarSalesFact_AutoDealershipsDim]
 GO
-ALTER TABLE [dbo].[CarSales]  WITH CHECK ADD  CONSTRAINT [FK_CarSales_Brands] FOREIGN KEY([BrandId])
-REFERENCES [dbo].[Brands] ([Id])
+ALTER TABLE [dbo].[CarSalesFact]  WITH CHECK ADD  CONSTRAINT [FK_CarSalesFact_BrandsDim] FOREIGN KEY([BrandId])
+REFERENCES [dbo].[BrandsDim] ([Id])
 GO
-ALTER TABLE [dbo].[CarSales] CHECK CONSTRAINT [FK_CarSales_Brands]
+ALTER TABLE [dbo].[CarSalesFact] CHECK CONSTRAINT [FK_CarSalesFact_BrandsDim]
 GO
-ALTER TABLE [dbo].[CarSales]  WITH CHECK ADD  CONSTRAINT [FK_CarSales_Dates2] FOREIGN KEY([EndDateId])
-REFERENCES [dbo].[Dates] ([Id])
+ALTER TABLE [dbo].[CarSalesFact]  WITH CHECK ADD  CONSTRAINT [FK_CarSalesFact_Dates2] FOREIGN KEY([EndDateId])
+REFERENCES [dbo].[DatesDim] ([Id])
 GO
-ALTER TABLE [dbo].[CarSales] CHECK CONSTRAINT [FK_CarSales_Dates2]
+ALTER TABLE [dbo].[CarSalesFact] CHECK CONSTRAINT [FK_CarSalesFact_Dates2]
 GO
-ALTER TABLE [dbo].[CarSales]  WITH CHECK ADD  CONSTRAINT [FK_CarSales_Dates3] FOREIGN KEY([StartDateId])
-REFERENCES [dbo].[Dates] ([Id])
+ALTER TABLE [dbo].[CarSalesFact]  WITH CHECK ADD  CONSTRAINT [FK_CarSalesFact_Dates3] FOREIGN KEY([StartDateId])
+REFERENCES [dbo].[DatesDim] ([Id])
 GO
-ALTER TABLE [dbo].[CarSales] CHECK CONSTRAINT [FK_CarSales_Dates3]
+ALTER TABLE [dbo].[CarSalesFact] CHECK CONSTRAINT [FK_CarSalesFact_Dates3]
 GO
-ALTER TABLE [dbo].[Leases]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Cars] FOREIGN KEY([CarId])
-REFERENCES [dbo].[Cars] ([Id])
+ALTER TABLE [dbo].[LeasesFact]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Cars] FOREIGN KEY([CarId])
+REFERENCES [dbo].[CarsDim] ([Id])
 GO
-ALTER TABLE [dbo].[Leases] CHECK CONSTRAINT [FK_Leases_Cars]
+ALTER TABLE [dbo].[LeasesFact] CHECK CONSTRAINT [FK_Leases_Cars]
 GO
-ALTER TABLE [dbo].[Leases]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Dates1] FOREIGN KEY([LeaseSignDateId])
-REFERENCES [dbo].[Dates] ([Id])
+ALTER TABLE [dbo].[LeasesFact]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Dates1] FOREIGN KEY([LeaseSignDateId])
+REFERENCES [dbo].[DatesDim] ([Id])
 GO
-ALTER TABLE [dbo].[Leases] CHECK CONSTRAINT [FK_Leases_Dates1]
+ALTER TABLE [dbo].[LeasesFact] CHECK CONSTRAINT [FK_Leases_Dates1]
 GO
-ALTER TABLE [dbo].[Leases]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Dates2] FOREIGN KEY([LeaseStartDateId])
-REFERENCES [dbo].[Dates] ([Id])
+ALTER TABLE [dbo].[LeasesFact]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Dates2] FOREIGN KEY([LeaseStartDateId])
+REFERENCES [dbo].[DatesDim] ([Id])
 GO
-ALTER TABLE [dbo].[Leases] CHECK CONSTRAINT [FK_Leases_Dates2]
+ALTER TABLE [dbo].[LeasesFact] CHECK CONSTRAINT [FK_Leases_Dates2]
 GO
-ALTER TABLE [dbo].[Leases]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Dates3] FOREIGN KEY([LeaseEndDateId])
-REFERENCES [dbo].[Dates] ([Id])
+ALTER TABLE [dbo].[LeasesFact]  WITH CHECK ADD  CONSTRAINT [FK_Leases_Dates3] FOREIGN KEY([LeaseEndDateId])
+REFERENCES [dbo].[DatesDim] ([Id])
 GO
-ALTER TABLE [dbo].[Leases] CHECK CONSTRAINT [FK_Leases_Dates3]
+ALTER TABLE [dbo].[LeasesFact] CHECK CONSTRAINT [FK_Leases_Dates3]
 GO
 /****** Object:  StoredProcedure [dbo].[UpdateFromMainFull]    Script Date: 4/30/2024 1:43:57 PM ******/
 SET ANSI_NULLS ON
@@ -170,30 +170,30 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-TRUNCATE TABLE AutoDealershipStaging.dbo.AutoDealerships
-TRUNCATE TABLE AutoDealershipStaging.dbo.Brands
-TRUNCATE TABLE AutoDealershipStaging.dbo.Cars
-TRUNCATE TABLE AutoDealershipStaging.dbo.CarSales
-TRUNCATE TABLE AutoDealershipStaging.dbo.DealershipCars
-TRUNCATE TABLE AutoDealershipStaging.dbo.Leases
+TRUNCATE TABLE AutoDealershipsDimtaging.dbo.AutoDealershipsDim
+TRUNCATE TABLE AutoDealershipsDimtaging.dbo.BrandsDim
+TRUNCATE TABLE AutoDealershipsDimtaging.dbo.CarsDim
+TRUNCATE TABLE AutoDealershipsDimtaging.dbo.CarSalesFact
+TRUNCATE TABLE AutoDealershipsDimtaging.dbo.DealershipCars
+TRUNCATE TABLE AutoDealershipsDimtaging.dbo.LeasesFact
 
-DELETE FROM AutoDealershipOlap.dbo.CarSales
-DELETE FROM AutoDealershipOlap.dbo.Leases
-DELETE FROM AutoDealershipOlap.dbo.AutoDealerships
-DELETE FROM AutoDealershipOlap.dbo.Cars
-DELETE FROM AutoDealershipOlap.dbo.Dates
-DELETE FROM AutoDealershipOlap.dbo.Brands
+DELETE FROM AutoDealershipOlap.dbo.CarSalesFact
+DELETE FROM AutoDealershipOlap.dbo.LeasesFact
+DELETE FROM AutoDealershipOlap.dbo.AutoDealershipsDim
+DELETE FROM AutoDealershipOlap.dbo.CarsDim
+DELETE FROM AutoDealershipOlap.dbo.DatesDim
+DELETE FROM AutoDealershipOlap.dbo.BrandsDim
 
 
 
 DECLARE @CurrentMaxId INT;
---Car brands
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Brands;
+--Car BrandsDim
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.BrandsDim;
 
-INSERT INTO AutoDealershipStaging.dbo.Brands
-SELECT * FROM AutoDealership.dbo.Brands;
+INSERT INTO AutoDealershipsDimtaging.dbo.BrandsDim
+SELECT * FROM AutoDealership.dbo.BrandsDim;
 
-INSERT INTO AutoDealershipOLAP.dbo.Brands(
+INSERT INTO AutoDealershipOLAP.dbo.BrandsDim(
     Id,
     Name
 )
@@ -201,13 +201,13 @@ SELECT
     @CurrentMaxId + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS Id,
     b.Name
 FROM 
-    AutoDealershipStaging.dbo.Brands b
+    AutoDealershipsDimtaging.dbo.BrandsDim b
 GROUP BY b.Name
--- Cars
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Cars;
+-- CarsDim
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarsDim;
 
-SET IDENTITY_INSERT AutoDealershipStaging.dbo.Cars ON;
-INSERT INTO AutoDealershipStaging.dbo.Cars
+SET IDENTITY_INSERT AutoDealershipsDimtaging.dbo.CarsDim ON;
+INSERT INTO AutoDealershipsDimtaging.dbo.CarsDim
 ([Id]
       ,[CarTypeId]
       ,[Doors]
@@ -253,11 +253,11 @@ SELECT [Id]
       ,[FuelTankCapacity]
       ,[WheelsCount]
       ,[CreateDate]
-      ,[UpdateDate] FROM AutoDealership.dbo.Cars;
-SET IDENTITY_INSERT AutoDealershipStaging.dbo.Cars OFF;
+      ,[UpdateDate] FROM AutoDealership.dbo.CarsDim;
+SET IDENTITY_INSERT AutoDealershipsDimtaging.dbo.CarsDim OFF;
 
 
-INSERT INTO AutoDealershipOLAP.dbo.Cars(
+INSERT INTO AutoDealershipOLAP.dbo.CarsDim(
     Id,
     Model,
     BrandId,
@@ -266,16 +266,16 @@ INSERT INTO AutoDealershipOLAP.dbo.Cars(
 SELECT
     @CurrentMaxId + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS Id,
     ISNULL(ds.Model,'NULL'),
-    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Brands d WHERE d.Name=b.Name) AS BrandId,
+    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.BrandsDim d WHERE d.Name=b.Name) AS BrandId,
     ds.Generation
 FROM 
-    AutoDealershipStaging.dbo.Cars ds JOIN
-    AutoDealershipStaging.dbo.Brands b on b.Id=ds.BrandId
+    AutoDealershipsDimtaging.dbo.CarsDim ds JOIN
+    AutoDealershipsDimtaging.dbo.BrandsDim b on b.Id=ds.BrandId
 
---Dates
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Dates;
+--DatesDim
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.DatesDim;
 
-INSERT INTO AutoDealershipOLAP.dbo.Dates(
+INSERT INTO AutoDealershipOLAP.dbo.DatesDim(
     Id,
     [Year],
     [Month],
@@ -289,11 +289,11 @@ SELECT
     DAY(CombinedDates.Date) AS [Day]
 FROM (
 
-    SELECT LeaseSignDate AS Date FROM AutoDealership.dbo.Leases
+    SELECT LeaseSignDate AS Date FROM AutoDealership.dbo.LeasesFact
     UNION
-    SELECT LeaseStartDate AS Date FROM AutoDealership.dbo.Leases
+    SELECT LeaseStartDate AS Date FROM AutoDealership.dbo.LeasesFact
     UNION
-    SELECT LeaseEndDate AS Date FROM AutoDealership.dbo.Leases
+    SELECT LeaseEndDate AS Date FROM AutoDealership.dbo.LeasesFact
     UNION
   SELECT Date FROM (
         SELECT FirstDayOfMonth AS Date 
@@ -305,7 +305,7 @@ FROM (
                 SELECT
                     MIN(CAST(SaleDate AS DATE)) AS MinDate,
                     MAX(CAST(SaleDate AS DATE)) AS MaxDate
-                FROM AutoDealership.dbo.CarSales
+                FROM AutoDealership.dbo.CarSalesFact
             ) AS DateRange
             CROSS JOIN master.dbo.spt_values v
             WHERE
@@ -322,7 +322,7 @@ FROM (
                 SELECT
                     MIN(CAST(SaleDate AS DATE)) AS MinDate,
                     MAX(CAST(SaleDate AS DATE)) AS MaxDate
-                FROM AutoDealership.dbo.CarSales
+                FROM AutoDealership.dbo.CarSalesFact
             ) AS DateRange
             CROSS JOIN master.dbo.spt_values v
             WHERE
@@ -334,12 +334,12 @@ FROM (
 
 
 --Dealerships
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.AutoDealerships;
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.AutoDealershipsDim;
 
-INSERT INTO AutoDealershipStaging.dbo.AutoDealerships
-SELECT * FROM AutoDealership.dbo.AutoDealerships;
+INSERT INTO AutoDealershipsDimtaging.dbo.AutoDealershipsDim
+SELECT * FROM AutoDealership.dbo.AutoDealershipsDim;
 
-INSERT INTO AutoDealershipOLAP.dbo.AutoDealerships(
+INSERT INTO AutoDealershipOLAP.dbo.AutoDealershipsDim(
     Id,
     Name
 )
@@ -347,13 +347,13 @@ SELECT
     @CurrentMaxId + ROW_NUMBER() OVER(ORDER BY (SELECT NULL)) AS Id,
     ds.Name
 FROM 
-    AutoDealershipStaging.dbo.AutoDealerships ds
+    AutoDealershipsDimtaging.dbo.AutoDealershipsDim ds
 
 
---Leases
+--LeasesFact
 
-SET IDENTITY_INSERT AutoDealershipStaging.dbo.Leases ON
-INSERT INTO AutoDealershipStaging.dbo.Leases
+SET IDENTITY_INSERT AutoDealershipsDimtaging.dbo.LeasesFact ON
+INSERT INTO AutoDealershipsDimtaging.dbo.LeasesFact
 ([Id]
       ,[EmployeeId]
       ,[ProposalId]
@@ -379,13 +379,13 @@ SELECT [Id]
       ,[TotalPrice]
       ,[Description]
       ,[CreateDate]
-      ,[UpdateDate] FROM AutoDealership.dbo.Leases;
-SET IDENTITY_INSERT AutoDealershipStaging.dbo.Leases OFF
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.Leases;
+      ,[UpdateDate] FROM AutoDealership.dbo.LeasesFact;
+SET IDENTITY_INSERT AutoDealershipsDimtaging.dbo.LeasesFact OFF
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.LeasesFact;
 DECLARE @iterator INT;
 SET @iterator = 0;
--- Insert data into the Leases table
-INSERT INTO AutoDealershipOLAP.dbo.Leases (
+-- Insert data into the LeasesFact table
+INSERT INTO AutoDealershipOLAP.dbo.LeasesFact (
     Id, 
     CarId, 
     Price, 
@@ -400,15 +400,15 @@ SELECT
 DealershipCarId as CarId,
 ISNULL(TotalPrice,0) AS Price,
 ISNULL(TotalPrice/(LAG(TotalPrice, 1) OVER (PARTITION BY DealershipCarId ORDER BY LeaseSignDate))*100-100,0) as PreviousLeaseModifyPercent, 
-(SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Dates d WHERE d.Year=YEAR(LeaseSignDate) AND d.Month=MONTH(LeaseSignDate) AND d.[Day]=DAY(LeaseSignDate)) as LeaseSignDateId,
-(SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Dates d WHERE d.Year=YEAR(LeaseStartDate) AND d.Month=MONTH(LeaseStartDate) AND d.[Day]=DAY(LeaseStartDate)) as LeaseStartDateId,
-(SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Dates d WHERE d.Year=YEAR(LeaseEndDate) AND d.Month=MONTH(LeaseEndDate) AND d.[Day]=DAY(LeaseEndDate)) as LeaseEndDateId,
+(SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.DatesDim d WHERE d.Year=YEAR(LeaseSignDate) AND d.Month=MONTH(LeaseSignDate) AND d.[Day]=DAY(LeaseSignDate)) as LeaseSignDateId,
+(SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.DatesDim d WHERE d.Year=YEAR(LeaseStartDate) AND d.Month=MONTH(LeaseStartDate) AND d.[Day]=DAY(LeaseStartDate)) as LeaseStartDateId,
+(SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.DatesDim d WHERE d.Year=YEAR(LeaseEndDate) AND d.Month=MONTH(LeaseEndDate) AND d.[Day]=DAY(LeaseEndDate)) as LeaseEndDateId,
 CASE 
     WHEN ISNULL(TotalPrice - (LAG(TotalPrice, 1) OVER (PARTITION BY DealershipCarId ORDER BY LeaseSignDate)),0) = 0 THEN NULL
         ELSE @iterator
     END AS LastLeaseId
 FROM
-AutoDealershipStaging.dbo.Leases
+AutoDealershipsDimtaging.dbo.LeasesFact
 GROUP BY 
 LeaseSignDate,
 DealershipCarId,
@@ -421,7 +421,7 @@ DealershipCarId,LeaseSignDate
 
 -- Sales
 
-INSERT INTO AutoDealershipStaging.dbo.DealershipCars([Id]
+INSERT INTO AutoDealershipsDimtaging.dbo.DealershipCars([Id]
       ,[CarId]
       ,[DealershipId]
       ,[CarsCount]
@@ -437,8 +437,8 @@ SELECT [Id]
       ,[UpdateDate]
   FROM [AutoDealership].[dbo].[DealershipCars]
 
-SET IDENTITY_INSERT AutoDealershipStaging.dbo.CarSales ON
-INSERT INTO AutoDealershipStaging.dbo.CarSales([Id]
+SET IDENTITY_INSERT AutoDealershipsDimtaging.dbo.CarSalesFact ON
+INSERT INTO AutoDealershipsDimtaging.dbo.CarSalesFact([Id]
       ,[DealershipCarId]
       ,[CustomerId]
       ,[SaleDate]
@@ -458,9 +458,9 @@ SELECT [Id]
       ,[PaymentMethodId]
       ,[CreateDate]
       ,[UpdateDate]
-  FROM [AutoDealership].[dbo].[CarSales]
-SET IDENTITY_INSERT AutoDealershipStaging.dbo.CarSales OFF
-SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarSales;
+  FROM [AutoDealership].[dbo].[CarSalesFact]
+SET IDENTITY_INSERT AutoDealershipsDimtaging.dbo.CarSalesFact OFF
+SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarSalesFact;
 ;WITH SalesData AS (
     SELECT 
         dc.DealershipId AS DealershipId,
@@ -469,9 +469,9 @@ SELECT @CurrentMaxId = ISNULL(MAX(Id), 0) FROM AutoDealershipOLAP.dbo.CarSales;
         SUM(c.Price) AS TotalPrice,
         COUNT(c.Price) as SalesCount
     FROM
-        AutoDealershipStaging.dbo.CarSales cs 
-        JOIN AutoDealershipStaging.dbo.DealershipCars dc ON cs.DealershipCarId = dc.Id
-        JOIN AutoDealershipStaging.dbo.Cars c ON dc.CarId = c.Id
+        AutoDealershipsDimtaging.dbo.CarSalesFact cs 
+        JOIN AutoDealershipsDimtaging.dbo.DealershipCars dc ON cs.DealershipCarId = dc.Id
+        JOIN AutoDealershipsDimtaging.dbo.CarsDim c ON dc.CarId = c.Id
     GROUP BY
         dc.DealershipId,
         c.BrandId,
@@ -491,7 +491,7 @@ RankedSalesData AS (
     FROM
         SalesData
 )
-INSERT INTO AutoDealershipOLAP.dbo.CarSales (
+INSERT INTO AutoDealershipOLAP.dbo.CarSalesFact (
     Id,
     AutoDealershipId,
     BrandId,
@@ -509,8 +509,8 @@ SELECT
     DealershipId,
     BrandId,
     TotalIncomeLastMonth,
-    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=1) AS StartDateId,
-    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.Dates d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=DAY(EOMONTH(SaleDate))) AS EndDateId,
+    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.DatesDim d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=1) AS StartDateId,
+    (SELECT TOP 1 id FROM AutoDealershipOLAP.dbo.DatesDim d WHERE d.Year=YEAR(SaleDate) AND d.Month=MONTH(SaleDate) AND d.[Day]=DAY(EOMONTH(SaleDate))) AS EndDateId,
     TotalIncomeForCurrentMonth,
     (TotalIncomeForCurrentMonth - TotalIncomeLastMonth) / ((TotalIncomeForCurrentMonth + TotalIncomeLastMonth) /2 ) * 100 - 100 AS MonthTotalIncomeModifyPercent,
     SalesCountForLastMonth,
