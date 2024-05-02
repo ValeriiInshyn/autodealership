@@ -280,9 +280,3 @@ values(GETDATE(), CONVERT(TIME(7), GETDATE()),@rowcount,@dwtablecount,@dbtableco
 EXEC(@metastring)
 GO
 
-TRUNCATE TABLE [AutoDealershipStaging].[dbo].[AutoDealerships]
-TRUNCATE TABLE [AutoDealershipStaging].[dbo].[Brands]
-TRUNCATE TABLE [AutoDealershipStaging].[dbo].[Cars]
-TRUNCATE TABLE [AutoDealershipStaging].[dbo].[CarSales]
-TRUNCATE TABLE [AutoDealershipStaging].[dbo].[DealershipCars]
-TRUNCATE TABLE [AutoDealershipStaging].[dbo].[Leases]

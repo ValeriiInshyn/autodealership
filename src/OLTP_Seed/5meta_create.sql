@@ -201,7 +201,7 @@ select
 		where name = t.table_name)
 	as dw_table_id
 from AutoDealershipOLAP.INFORMATION_SCHEMA.tables t
-where t.table_name LIKE '%fact'
+where t.table_name LIKE '%Fact'
 
 insert into AutoDealershipMetadata.dbo.dimension([key_name], dw_table_id)
 select
@@ -223,7 +223,7 @@ select
 		where name = t.table_name)
 	as dw_table_id
 from AutoDealershipOLAP.INFORMATION_SCHEMA.tables t
-where t.table_name LIKE '%dim'
+where t.table_name LIKE '%Dim'
 
 insert into AutoDealershipMetadata.dbo.dimension_attributes(dimension_id, dw_attribute_column_id)
 select
@@ -233,7 +233,7 @@ select
 		(select TOP(1) id from AutoDealershipMetadata.dbo.dw_attribute_column da
 		where da.name = t.column_name)
 from AutoDealershipOLAP.INFORMATION_SCHEMA.columns t
-where t.table_name LIKE '%dim'
+where t.table_name LIKE '%Dim'
 
 insert into AutoDealershipMetadata.dbo.fact_metric(fact_id, dw_attribute_column_id)
 select
@@ -243,7 +243,7 @@ select
 		(select TOP(1) id from AutoDealershipMetadata.dbo.dw_attribute_column
 		where name = t.column_name)
 from AutoDealershipOLAP.INFORMATION_SCHEMA.columns t
-where t.table_name LIKE '%fact'
+where t.table_name LIKE '%Fact'
 
 insert into AutoDealershipMetadata.dbo.transformation(dw_attribute_column_id,source_column_id)
 select
